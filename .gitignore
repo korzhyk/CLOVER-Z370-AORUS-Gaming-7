@@ -1,0 +1,5 @@
+# Do not share SMBIOS.plist to public
+SMBIOS.plist
+
+# macOS related
+.DS_Store
