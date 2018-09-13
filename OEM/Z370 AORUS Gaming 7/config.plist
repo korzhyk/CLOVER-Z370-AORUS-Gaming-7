@@ -169,27 +169,6 @@
 			<false/>
 		</dict>
 	</dict>
-	<key>KernelAndKextPatches</key>
-	<array>
-		<dict>
-			<key>Comment</key>
-			<string>TRIM function for non-Apple SSDs 10.14.x</string>
-			<key>Disabled</key>
-			<true/>
-			<key>Find</key>
-			<data>
-			QVBQTEUgU1NEAA==
-			</data>
-			<key>MatchOS</key>
-			<string>10.14.x</string>
-			<key>Name</key>
-			<string>IOAHCIBlockStorage</string>
-			<key>Replace</key>
-			<data>
-			AAAAAAAAAAAAAA==
-			</data>
-		</dict>
-	</array>
 	<key>RtVariables</key>
 	<dict>
 		<key>BooterConfig</key>
