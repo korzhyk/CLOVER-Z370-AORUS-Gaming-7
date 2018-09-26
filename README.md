@@ -50,7 +50,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 # Issues
 
 1. There an issue with USB drives after sleep, system warning about not properly unmounted storage device. This happens when I'm overclock memory modules. And need two times mouse clicks to get the desktop (but this resolved by boot arg `darkwake=0`).
-2. The limit of USB ports is `15` but there counts not only physical but also protocol based. So if one physical port can be used by two protocols such as 3.0 (SS) and 2.0 (HS) in this way in system he actually own two of fiveteen addresses (eg. HS01/SS01). The real USB mapping you can see on this [picture][102]. Due this limits I didn't describe a `HS08` port in `Legacy_USB3.kext` but if you need this USB 2.0 header to work you can drop USB 3.0 protocol on another port. And keep in mind USB 3.1 ports such as Type-C, Type-A and header provided by ASMedia controller and discovered like independent device by system without problems.
+2. The limit of USB ports is `15` but there counts not only physical but also protocol based. So if one physical port can be used by two protocols such as 3.0 (SS) and 2.0 (HS) in this way in system he actually own two of fifteen addresses (eg. HS01/SS01). The real USB mapping you can see on this [picture][102]. Due this limits I didn't describe a `HS08` port in `Legacy_USB3.kext` but if you need this USB 2.0 header to work you can drop USB 3.0 protocol on another port. And keep in mind USB 3.1 ports such as Type-C, Type-A and header provided by ASMedia controller and discovered like independent device by system without problems.
 
 # USB ports mapping
 
