@@ -116,9 +116,17 @@
     <key>Audio</key>
     <dict>
       <key>Inject</key>
-      <string>1</string>
-      <key>ResetHDA</key>
-      <true/>
+      <string>NO</string>
+    </dict>
+    <key>Properties</key>
+    <dict>
+      <key>PciRoot(0x0)/Pci(0x1f,0x3)</key>
+      <dict>
+        <key>layout-id</key>
+        <data>
+        AQAAAA==
+        </data>
+      </dict>
     </dict>
     <key>USB</key>
     <dict>
