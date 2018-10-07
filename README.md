@@ -70,6 +70,8 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | ~HS08~    | ~8~      |           |          |
 
 # Chnagelog
+###### 7/10/2018
+* Rewrited audio `layout-id` injection.
 ###### 13/09/2018
 * The initial push to GitHub
 
