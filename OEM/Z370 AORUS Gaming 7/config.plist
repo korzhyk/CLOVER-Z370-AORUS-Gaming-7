@@ -23,7 +23,7 @@
       <array>
         <dict>
           <key>Comment</key>
-          <string>_DSM &gt; ZDSM</string>
+          <string>_DSM to ZDSM</string>
           <key>Find</key>
           <data>
           X0RTTQ==
@@ -35,7 +35,7 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>SAT0 &gt; SATA</string>
+          <string>SAT0 to SATA</string>
           <key>Find</key>
           <data>
           U0FUMA==
@@ -47,7 +47,7 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>PPMC &gt; PMCR</string>
+          <string>PPMC to PMCR</string>
           <key>Find</key>
           <data>
           UFBNQw==
@@ -59,7 +59,7 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>Set OSYS &gt; 0x07DA</string>
+          <string>Set OSYS to 0x07DA</string>
           <key>Find</key>
           <data>
           RXAL0AdPU1k=
@@ -78,7 +78,7 @@
         <string>DMAR</string>
       </dict>
       <dict>
-        <key>#TableId</key>
+        <key>TableId</key>
         <string>sensrhub</string>
         <key>Length</key>
         <string>671</string>
@@ -86,7 +86,7 @@
         <string>SSDT</string>
       </dict>
       <dict>
-        <key>#TableId</key>
+        <key>TableId</key>
         <string>Ther_Rvp</string>
         <key>Length</key>
         <string>4522</string>
@@ -105,7 +105,7 @@
   <key>Boot</key>
   <dict>
     <key>Arguments</key>
-    <string>ngfxcompat=1</string>
+    <string>ngfxcompat=1 -v</string>
     <key>DefaultVolume</key>
     <string>LastBootedVolume</string>
     <key>Timeout</key>
@@ -144,6 +144,10 @@
   </array>
   <key>GUI</key>
   <dict>
+    <key>ScreenResolution</key>
+		<string>1400x1050</string>
+		<key>Theme</key>
+		<string>embedded</string>
     <key>Hide</key>
     <array>
       <string>Preboot</string>
