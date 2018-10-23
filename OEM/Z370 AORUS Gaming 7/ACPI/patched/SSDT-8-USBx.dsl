@@ -21,18 +21,17 @@
 DefinitionBlock ("", "SSDT", 2, "ALASKA", "USBX", 0x00000000)
 {
     External (UMAP, IntObj)
+    External (HUBC, IntObj)
 
     Scope (_SB)
     {
-        Name (HUBC, Zero)
-        Name (UMAP, 0xFF)
         Device (USBX)
         {
             Name (_ADR, Zero)  // _ADR: Address
             Method (_INI, 0, NotSerialized)  // _INI: Initialize
             {
-                UMAP = 0xC3
-                HUBC = 0xE038
+                UMAP = 0x03F0
+                HUBC = 0xFC80
             }
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
@@ -41,7 +40,7 @@ DefinitionBlock ("", "SSDT", 2, "ALASKA", "USBX", 0x00000000)
                 {
                     Return (Buffer (One)
                     {
-                         0x03                                             // .
+                        0x03                                             // .
                     })
                 }
 
