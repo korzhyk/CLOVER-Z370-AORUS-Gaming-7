@@ -16,10 +16,13 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 # Before you start make sure you have
 
 * Working hardware 
-* Motherboard BIOS version F7
-* BIOS Setting EHCI Hand-Off must be enabled
+* Motherboard BIOS version [F11 RB][103]
 * Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own*
 
+# BIOS/UEFI Settings
+* MIT>Advanced Frequency Settings>Advanced CPU Core Settings>CFG Lock - *disabled*
+* EHCI Hand-Off - *enabled*
+ 
 # Installation
 
 1. Create bootable Clover media
@@ -70,6 +73,8 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | ~HS08~    | ~8~      |           |          |
 
 # Chnagelog
+###### 16/11/2018
+* Added new F11 BIOS version with `CFG Lock` option.
 ###### 7/10/2018
 * Rewrited audio `layout-id` injection.
 ###### 13/09/2018
@@ -84,3 +89,4 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 [101]: ./misc/system.png
 [102]: ./misc/physical-usb-ports.png
+[103]: ./misc/Z370AORUSGaming7_CFG-Lock.F11
