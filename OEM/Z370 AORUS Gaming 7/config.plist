@@ -23,7 +23,7 @@
       <array>
         <dict>
           <key>Comment</key>
-          <string>_DSM &gt; ZDSM</string>
+          <string>_DSM to ZDSM</string>
           <key>Find</key>
           <data>
           X0RTTQ==
@@ -35,7 +35,33 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>SAT0 &gt; SATA</string>
+          <string>XDSM to _DSM</string>
+          <key>Find</key>
+          <data>
+          WERTTQ==
+          </data>
+          <key>Replace</key>
+          <data>
+          X0RTTQ==
+          </data>
+        </dict>
+        <dict>
+          <key>Comment</key>
+          <string>XHC_ to XHC1</string>
+          <key>Disabled</key>
+          <false/>
+          <key>Find</key>
+          <data>
+          WEhDXw==
+          </data>
+          <key>Replace</key>
+          <data>
+          WEhDMQ==
+          </data>
+        </dict>
+        <dict>
+          <key>Comment</key>
+          <string>SAT0 to SATA</string>
           <key>Find</key>
           <data>
           U0FUMA==
@@ -47,7 +73,7 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>PPMC &gt; PMCR</string>
+          <string>PPMC to PMCR</string>
           <key>Find</key>
           <data>
           UFBNQw==
@@ -59,7 +85,7 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>Set OSYS &gt; 0x07DA</string>
+          <string>Set OSYS = 0x07DA</string>
           <key>Find</key>
           <data>
           RXAL0AdPU1k=
@@ -78,7 +104,7 @@
         <string>DMAR</string>
       </dict>
       <dict>
-        <key>#TableId</key>
+        <key>Comment</key>
         <string>sensrhub</string>
         <key>Length</key>
         <string>671</string>
@@ -86,7 +112,7 @@
         <string>SSDT</string>
       </dict>
       <dict>
-        <key>#TableId</key>
+        <key>Comment</key>
         <string>Ther_Rvp</string>
         <key>Length</key>
         <string>4522</string>

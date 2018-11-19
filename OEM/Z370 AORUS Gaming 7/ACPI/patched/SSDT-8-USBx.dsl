@@ -30,11 +30,11 @@ DefinitionBlock ("", "SSDT", 2, "ALASKA", "USBX", 0x00000000)
             Name (_ADR, Zero)  // _ADR: Address
             Method (_INI, 0, NotSerialized)  // _INI: Initialize
             {
-                UMAP = 0x03F0
-                HUBC = 0xFC80
+                UMAP = 0x3F
+                HUBC = 0x3C80
             }
 
-            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            Method (XDSM, 4, NotSerialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg2 == Zero))
                 {
