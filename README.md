@@ -9,9 +9,9 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 ## Hardware configuration
 
-* Intel Core i7 8700K (OC multiplier 50-50-49-49-48-48)
+* Intel Core i7 8700K
 * Gigabyte Z370 AORUS Gaming 7
-* 2×8GB Samsung M378A1K43BB2-CRC (OC 3600MHz)
+* 4×8GB Samsung M378A1K43CB2-CRC (OC 3200MHz)
 * M.2 NVME MyDigitalSSD SBX 120GB (macOS)
 * PCI-e Broadcom BCM4360 WiFi ac + USB Bluetooth 4.0
 
