@@ -44,6 +44,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * Legacy_USB3.kext - This one allows to describe a physical USB ports on MOBO without patching `AppleUSBXHCIPCI.kext` to increase port limit (15).
 * [Lilu.kext][3] - Just a f\*ckin great patcher, dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
 * SMCProcessor.kext - Kext for processor sensors, bundled with `VirtualSMC.kext`
+* SMCSuperIO.kext - Kext for reading SuperIO devices, bundled with `VirtualSMC.kext`
 * [VirtualSMC.kext][4] - A advanced replacement of FakeSMC, almost like native mac SMC.
 * [WhateverGreen.kext][5] - Need for GPU support
 
@@ -77,6 +78,9 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | HS10      | 10       |           |          |
 
 ## Chnagelog
+###### 20/11/2018
+* Added `SMCSuperIO.kext`
+* Updated kexts to newest versions
 ###### 19/11/2018
 * Updated ACPI-tables to [F11 BIOS][103] version
 * Use SSDT to define ~working~ ports
