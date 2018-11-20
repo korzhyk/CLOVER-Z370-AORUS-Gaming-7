@@ -73,9 +73,9 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 ## Chnagelog
 ###### 20/11/2018
-* Added `SMCSuperIO.kext`
 * Updated kexts to newest versions
 * Recompiled `DSDT` with external references
+* Config can be used with only iGPU card, external GPU is disabled via `WhateverGreen.kext`
 ###### 19/11/2018
 * Updated ACPI-tables to [F11 BIOS][103] version
 * Use SSDT to define ~working~ ports
