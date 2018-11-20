@@ -19,7 +19,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 * Working hardware 
 * Motherboard BIOS version [F11 RB][103]
-* Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own*
+* Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own, if you are using a external AMD GPU use mac Model 18,3 in another cases use 18,1*
 
  
 # Installation
@@ -27,7 +27,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 ## BIOS Settings
 * *MIT* → Advanced Frequency Settings → Advanced CPU Core Settings → CFG Lock : **Disabled**
 * *Peripherals* → USB Configuration → XHCI Hand-off : **Enabled**
-* *Peripherals* → Initial Display Output : **PCIe 1 Slot**
+* *Peripherals* → Initial Display Output : **PCIe 1 Slot** *(Only if using external AMD GPU)*
 
 ## What's behind the scenes
 

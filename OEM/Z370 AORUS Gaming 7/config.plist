@@ -131,7 +131,7 @@
   <key>Boot</key>
   <dict>
     <key>Arguments</key>
-    <string>-wegnoegpu</string>
+    <string>darkwake=0 -wegnoegpu</string>
     <key>DefaultVolume</key>
     <string>LastBootedVolume</string>
     <key>Timeout</key>
