@@ -29,11 +29,6 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * *Peripherals* → USB Configuration → XHCI Hand-off : **Enabled**
 * *Peripherals* → Initial Display Output : **PCIe 1 Slot**
 
-1. Create bootable Clover media
-2. Download repo or release (prefer) of working config
-3. Unpack to your Clover bootable media `/EFI/CLOVER` and also put generated `SMBIOS.plist`
-4. You are ready to install or run macOS on your Hackintosh 
-
 ## What's behind the scenes
 
 ### Kexts
@@ -41,7 +36,6 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * [AppleALC.kext][2] - Enabling audio, with layout inject `1`
 * AtherosE2200Ethernet.kext - Atheros driver for Ethernet
 * IntelMausiEthernet.kext - Another intel driver for Ethernet
-* Legacy_USB3.kext - This one allows to describe a physical USB ports on MOBO without patching `AppleUSBXHCIPCI.kext` to increase port limit (15).
 * [Lilu.kext][3] - Just a f\*ckin great patcher, dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
 * SMCProcessor.kext - Kext for processor sensors, bundled with `VirtualSMC.kext`
 * SMCSuperIO.kext - Kext for reading SuperIO devices, bundled with `VirtualSMC.kext`
