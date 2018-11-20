@@ -5,18 +5,18 @@
  *
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLGVTUVq.aml, Mon Nov 19 20:22:37 2018
+ * Disassembly of iASLoFsqYx.aml, Tue Nov 20 01:12:56 2018
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0002973B (169787)
+ *     Length           0x00029A77 (170615)
  *     Revision         0x02
- *     Checksum         0x70
+ *     Checksum         0xFF
  *     OEM ID           "ALASKA"
  *     OEM Table ID     "A M I"
  *     OEM Revision     0x01072009 (17244169)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20180810 (538445840)
+ *     Compiler Version 0x20160422 (538313762)
  */
 DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 {
@@ -47,6 +47,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     External (_PR_.PKGA, UnknownObj)
     External (_PR_.POWS, UnknownObj)
     External (_PR_.PR00, DeviceObj)
+    External (_PR_.PR00._PPC, MethodObj)    // 0 Arguments
+    External (_PR_.PR00._PSS, MethodObj)    // 0 Arguments
     External (_PR_.PR00.LPSS, PkgObj)
     External (_PR_.PR00.TPSS, PkgObj)
     External (_PR_.TRPD, UnknownObj)
@@ -127,7 +129,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     External (_TZ_.TZ00, DeviceObj)
     External (_TZ_.TZ01, DeviceObj)
     External (ALSE, UnknownObj)
-    External (BNUM, UnknownObj)
+    External (BNUM, UnknownObj)    // Conflicts with a later declaration
     External (BRTL, UnknownObj)
     External (CRBI, UnknownObj)
     External (DIDX, UnknownObj)
@@ -266,8 +268,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     Name (SS2, Zero)
     Name (SS3, One)
     Name (SS4, One)
-    Name (IOST, Zero)
-    Name (TOPM, Zero)
+    Name (IOST, 0x0000)
+    Name (TOPM, 0x00000000)
     Name (ROMS, 0xFFE00000)
     Name (VGAF, One)
     Name (UEMU, 0x5A5A)
@@ -5135,13 +5137,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         ENFG (CGLD (Arg0))
                         If (((DMCH < 0x04) && ((Local1 = (DMCH & 0x03)) != Zero)))
                         {
-                            Local1++
+                            RDMA (Arg0, Arg1, Local1++)
                         }
 
                         ACTR = Arg1
                         Local1 = (IOAH << 0x08)
-                        Local1 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IOAL */
-                        RRIO (Arg0, Arg1, Local1)
+                        Local1 |= IOAL
+                        RRIO (Arg0, Arg1, Local1, 0x08)
                         EXFG ()
                     }
 
@@ -5194,7 +5196,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         ENFG (CGLD (Arg0))
                         IO11 = (IOAH << 0x08)
-                        IO11 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IOAL */
+                        IO11 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IO11 */
                         IO12 = IO11 /* \_SB_.PCI0.LPCB.SIO1.IO11 */
                         LEN1 = 0x08
                         If (INTR)
@@ -5224,11 +5226,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         ENFG (CGLD (Arg0))
                         IO21 = (IOAH << 0x08)
-                        IO21 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IOAL */
+                        IO21 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IO21 */
                         IO22 = IO21 /* \_SB_.PCI0.LPCB.SIO1.IO21 */
                         LEN2 = 0x08
                         IO31 = (IOH2 << 0x08)
-                        IO31 |= IOL2 /* \_SB_.PCI0.LPCB.SIO1.IOL2 */
+                        IO31 |= IOL2 /* \_SB_.PCI0.LPCB.SIO1.IO31 */
                         IO32 = IO31 /* \_SB_.PCI0.LPCB.SIO1.IO31 */
                         LEN3 = 0x08
                         If (INTR)
@@ -12072,11 +12074,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                     }
                 }
-
+               
                 Arg3 = Buffer (One)
-                    {
-                         0x00                                             // .
-                    }
+                {
+                     0x00                                             // .
+                }
+
                 Return (Arg3)
             }
         }
@@ -12547,7 +12550,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Method (GADR, 2, NotSerialized)
         {
-            Local0 = (GINF (Arg0, Zero) + SBRG) /* \SBRG */
+            Local0 = (GINF (Arg0, Zero) + SBRG)
             Local1 = GINF (Arg0, Arg1)
             Return ((Local0 + Local1))
         }
@@ -12830,8 +12833,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 TEMP,   32
             }
 
-            Return (((TEMP >> ((Local1 & 0x07) * 0x04)) &
-                0x03))
+            Return (((TEMP >> ((Local1 & 0x07) * 0x04)) & 0x03))
         }
 
         Method (SGRA, 2, Serialized)
@@ -13076,7 +13078,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
 
             DO30 = Zero
-            Return (DO30) /* \THDS.DO30 */
+           
+            Return (DO30)
         }
 
         Method (THDH, 1, Serialized)
@@ -13717,7 +13720,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Method (PCRR, 2, Serialized)
         {
             Local0 = ((Arg0 << 0x10) + Arg1)
-            Local0 += SBRG /* \SBRG */
+            Local0 += SBRG
             OperationRegion (PCR0, SystemMemory, Local0, 0x04)
             Field (PCR0, DWordAcc, Lock, Preserve)
             {
@@ -13730,7 +13733,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Method (PCRW, 3, Serialized)
         {
             Local0 = ((Arg0 << 0x10) + Arg1)
-            Local0 += SBRG /* \SBRG */
+            Local0 += SBRG
             OperationRegion (PCR0, SystemMemory, Local0, 0x04)
             Field (PCR0, DWordAcc, Lock, Preserve)
             {
@@ -13879,7 +13882,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     PMES = One
                     Notify (GLAN, 0x02) // Device Wake
                 }
-
+               
                 Return (Zero)
             }
         }
@@ -14037,7 +14040,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Notify (XHC, 0x02) // Device Wake
                 }
-
+               
                 Return (Zero)
             }
 
@@ -14115,7 +14118,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Sleep (0x0A)
                     }
                 }
-
+               
                 Return (Zero)
             }
 
@@ -14233,42 +14236,42 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If (((PLS1 == 0x03) && PLC1))
                 {
                     PSCO = (0xFFFFFFFD & PSC1) /* \_SB_.PCI0.XHC_._PS3.PSC1 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC1 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS2 == 0x03) && PLC2))
                 {
                     PSCO = (0xFFFFFFFD & PSC2) /* \_SB_.PCI0.XHC_._PS3.PSC2 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC2 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS3 == 0x03) && PLC3))
                 {
                     PSCO = (0xFFFFFFFD & PSC3) /* \_SB_.PCI0.XHC_._PS3.PSC3 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC3 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS4 == 0x03) && PLC4))
                 {
                     PSCO = (0xFFFFFFFD & PSC4) /* \_SB_.PCI0.XHC_._PS3.PSC4 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC4 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS5 == 0x03) && PLC5))
                 {
                     PSCO = (0xFFFFFFFD & PSC5) /* \_SB_.PCI0.XHC_._PS3.PSC5 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC5 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS6 == 0x03) && PLC6))
                 {
                     PSCO = (0xFFFFFFFD & PSC6) /* \_SB_.PCI0.XHC_._PS3.PSC6 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC6 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
@@ -14303,7 +14306,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Sleep (0x0A)
                     }
                 }
-
+               
                 Return (Zero)
             }
 
@@ -14331,7 +14334,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS0X ()
                     }
-
+               
                     Return (Zero)
                 }
 
@@ -14346,7 +14349,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS2X ()
                     }
-
+               
                     Return (Zero)
                 }
 
@@ -14361,7 +14364,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS3X ()
                     }
-
+               
                     Return (Zero)
                 }
 
@@ -14477,6 +14480,64 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         Return ((SSPA () + 0x05))
                     }
+                }
+            }
+        }
+    }
+
+    If ((PCHV () == SPTH))
+    {
+        Scope (_SB.PCI0.XHC.RHUB)
+        {
+            Device (HS11)
+            {
+                Name (_ADR, 0x0B)  // _ADR: Address
+            }
+
+            Device (HS12)
+            {
+                Name (_ADR, 0x0C)  // _ADR: Address
+            }
+
+            Device (HS13)
+            {
+                Name (_ADR, 0x0D)  // _ADR: Address
+            }
+
+            Device (HS14)
+            {
+                Name (_ADR, 0x0E)  // _ADR: Address
+            }
+
+            Device (SS07)
+            {
+                Method (_ADR, 0, NotSerialized)  // _ADR: Address
+                {
+                    Return ((SSPA () + 0x06))
+                }
+            }
+
+            Device (SS08)
+            {
+                Method (_ADR, 0, NotSerialized)  // _ADR: Address
+                {
+                    Return ((SSPA () + 0x07))
+                }
+            }
+
+            Device (SS09)
+            {
+                Method (_ADR, 0, NotSerialized)  // _ADR: Address
+                {
+                    Return ((SSPA () + 0x08))
+                }
+            }
+
+            Device (SS10)
+            {
+                Method (_ADR, 0, NotSerialized)  // _ADR: Address
+                {
+                    Return ((SSPA () + 0x09))
                 }
             }
         }
@@ -14721,7 +14782,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Notify (XDCI, 0x02) // Device Wake
                 }
-
+               
                 Return (Zero)
             }
         }
@@ -14771,7 +14832,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     PMES = One
                     Notify (HDAS, 0x02) // Device Wake
                 }
-
+               
                 Return (Zero)
             }
 
@@ -15240,6 +15301,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
+               
                     Return (Zero)
                 }
 
@@ -15277,6 +15339,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
+               
                     Return (Zero)
                 }
 
@@ -15340,9 +15403,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         RDCA (NCRN, TCSO, 0xFFFFFFFF, (MXIE & 0x80000000), 0x03)
                         ADBG ("NVD0:  MSIXe")
                     }
-                    Else
-                    {
-                    }
 
                     Return (One)
                 }
@@ -15404,6 +15464,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
+               
                     Return (Zero)
                 }
             }
@@ -15538,6 +15599,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
+               
                     Return (Zero)
                 }
 
@@ -15575,6 +15637,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
+               
                     Return (Zero)
                 }
 
@@ -15638,6 +15701,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         RDCA (NCRN, TCSO, 0xFFFFFFFF, (MXIE & 0x80000000), 0x03)
                         ADBG ("NVD0:  MSIXe")
                     }
+                    Else
+                    {
+                    }
 
                     Return (One)
                 }
@@ -15699,6 +15765,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
+               
                     Return (Zero)
                 }
             }
@@ -15833,6 +15900,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
+               
                     Return (Zero)
                 }
 
@@ -15870,6 +15938,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
+               
                     Return (Zero)
                 }
 
@@ -15933,9 +16002,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         RDCA (NCRN, TCSO, 0xFFFFFFFF, (MXIE & 0x80000000), 0x03)
                         ADBG ("NVD0:  MSIXe")
                     }
-                    Else
-                    {
-                    }
 
                     Return (One)
                 }
@@ -15997,6 +16063,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
+               
                     Return (Zero)
                 }
             }
@@ -16059,7 +16126,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     If ((DerefOf (Arg0 [Zero]) == One))
                     {
                         ADBG (Concatenate ("POFF GPIO=", ToHexString (DerefOf (Arg0 [0x02]))))
-                        SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^ One))
+                        SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^
+                            One))
                     }
 
                     If ((DerefOf (Arg0 [Zero]) == 0x02))
@@ -16195,7 +16263,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 SLS0 = Zero
                 VMOF ()
             }
-
+               
             Return (Zero)
         }
     }
@@ -17152,11 +17220,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (Arg4)
                 }
             }
-
+           
             Arg3 = Buffer (One)
-                {
-                     0x00                                             // .
-                }
+            {
+                 0x00                                             // .
+            }
+
             Return (Arg3)
         }
 
@@ -17182,9 +17251,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
 
             Arg3 = Buffer (One)
-                {
-                     0x00                                             // .
-                }
+            {
+                 0x00                                             // .
+            }
+
             Return (Arg3)
         }
     }
@@ -17277,7 +17347,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         SPED = 0x000F4240
                     }
                 }
-
+               
                 Return (Zero)
             }
 
@@ -17352,7 +17422,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     _CID = "INT343B"
                     CADR = 0x34
                 }
-
+               
                 Return (Zero)
             }
 
@@ -17601,7 +17671,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         SPED = 0x000F4240
                     }
                 }
-
+               
                 Return (Zero)
             }
 
@@ -18396,8 +18466,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     W3DC (Arg1, Arg2, Zero, 0x02)
                 }
 
-                Arg0 = Zero
-                Return (Arg0)
+                Return (Zero)
             }
 
             Method (RREG, 3, Serialized)
@@ -18430,7 +18499,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
 
                 DATA = Arg2
-                DATA = (END + READ) /* \_SB_.PCI0.GEXP.READ */
+                DATA = (END + READ)
                 While ((ACTV != Zero))
                 {
                     If ((Timer > Local1))
@@ -18439,7 +18508,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Arg0 = DATA /* \_SB_.PCI0.GEXP.DATA */
+                Local0 = DATA /* \_SB_.PCI0.GEXP.DATA */
                 ENB = Zero
                 While ((ENSB != Zero))
                 {
@@ -18449,7 +18518,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Return (Arg0)
+                Return (Local0)
             }
 
             Method (PS0, 1, Serialized)
@@ -18597,7 +18666,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Else
                 {
                     NEWV = (OLDV & ~(One << PINN))
-                    NEWV |= (Arg3 << PINN)
+                    NEWV |= (Arg3 << PINN) /* \_SB_.PCI0.GEXP.CSER.NEWV */
                     If ((NEWV != OLDV))
                     {
                         WREG (SB0X, Arg1, REGA, NEWV)
@@ -19478,8 +19547,27 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
         }
 
+        If ((Arg0 == 0x03))
+        {
+            If ((Zero == ACTT))
+            {
+                If ((ECON == One))
+                {
+                    \_SB.PCI0.LPCB.H_EC.ECWT (Zero, RefOf (\_SB.PCI0.LPCB.H_EC.CFAN))
+                }
+            }
+        }
+
         If (((Arg0 == 0x03) || (Arg0 == 0x04)))
         {
+            If ((CondRefOf (\_SB.PCI0.LPCB.H_EC.PB10) && ECON))
+            {
+                If ((PB1E & 0x80))
+                {
+                    \_SB.PCI0.LPCB.H_EC.ECWT (One, RefOf (\_SB.PCI0.LPCB.H_EC.PB10))
+                }
+            }
+
             If ((GBSX & 0x40))
             {
                 \_SB.PCI0.GFX0.IUEH (0x06)
@@ -19501,12 +19589,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((TBTS == One))
             {
                 Acquire (OSUM, 0xFFFF)
-                \_GPE.TINI (TBSE)
+                \_GPE.TINI (TBSE, Arg0)
                 Release (OSUM)
                 If ((T2SE != Zero))
                 {
                     Acquire (OSUM, 0xFFFF)
-                    \_GPE.TINI (T2SE)
+                    \_GPE.TINI (T2SE, Arg0)
                     Release (OSUM)
                 }
             }
@@ -19910,6 +19998,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         PPL1 = Local1
         PL1E = One
         CLP1 = One
+
         Return (Zero)
     }
 
@@ -19936,6 +20025,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     P8XH (One, 0xAB)
                     ADBG ("Exit Resiliency")
                     \_SB.DION ()
+                    If ((OSYS < 0x07DF))
+                    {
+                        \_SB.PCI0.LPCB.H_EC.ECNT (Zero)
+                    }
+
                     If (PSCP)
                     {
                         If (CondRefOf (\_PR.PR00._PPC))
@@ -19960,6 +20054,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     P8XH (One, Zero)
                     ADBG ("Enter Resiliency")
                     \_SB.DIOF ()
+                    If ((OSYS < 0x07DF))
+                    {
+                        \_SB.PCI0.LPCB.H_EC.ECNT (One)
+                    }
+
                     If (PSCP)
                     {
                         If ((CondRefOf (\_PR.PR00._PSS) && CondRefOf (\_PR.PR00._PPC)))
@@ -19992,6 +20091,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         UAMS = (Arg0 && !PWRS)
         P_CS ()
+       
         Return (Zero)
     }
 
@@ -20124,12 +20224,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             {
                 Acquire (OSUM, 0xFFFF)
                 P8XH (Zero, 0x51)
-                \_GPE.TINI (TBSE)
+                \_GPE.TINI (TBSE, Zero)
                 Release (OSUM)
                 If ((T2SE != Zero))
                 {
                     Acquire (OSUM, 0xFFFF)
-                    \_GPE.TINI (T2SE)
+                    \_GPE.TINI (T2SE, Zero)
                     Release (OSUM)
                 }
 
@@ -20399,12 +20499,19 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Return (Zero)
                 }
+
+                If ((RTVM == One))
+                {
+                    ^PCI0.LPCB.H_EC.ECWT (0x7A, RefOf (^PCI0.LPCB.H_EC.PVOL))
+                    ^PCI0.LPCB.H_EC.ECMD (0x1C)
+                }
                 ElseIf ((RTVM == 0x02))
                 {
                     SGOV (VRGP, Zero)
                 }
 
                 VMEN = One
+               
                 Return (Zero)
             }
 
@@ -20414,13 +20521,20 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Return (Zero)
                 }
+
+                If ((RTVM == One))
+                {
+                    ^PCI0.LPCB.H_EC.ECWT (0x3A, RefOf (^PCI0.LPCB.H_EC.PVOL))
+                    ^PCI0.LPCB.H_EC.ECMD (0x1C)
+                }
                 ElseIf ((RTVM == 0x02))
                 {
                     SGOV (VRGP, One)
                 }
 
                 VMEN = Zero
-                Return (VMEN) /* \_SB_.VMEN */
+               
+                Return (Zero)
             }
         }
     }
@@ -20449,7 +20563,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             P2TB = 0x0D
             While ((Local1 > Zero))
             {
-                Local1 -= One
+                Local1 = (Local1 - One)
                 Local2 = TB2P /* \_GPE.OSUP.TB2P */
                 If ((Local2 == 0xFFFFFFFF))
                 {
@@ -20952,6 +21066,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Sleep (0x10)
             Release (OSUM)
             ADBG ("TBT2 Exit")
+
             Return (Zero)
         }
 
@@ -21017,6 +21132,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Sleep (0x10)
             Release (OSUM)
             ADBG ("End-of-XTBT")
+
             Return (Zero)
         }
 
@@ -21026,16 +21142,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             ADBG ("End-of-YTBT")
         }
 
-        Method (TINI, 1, Serialized)
+        Method (TINI, 2, Serialized)
         {
-            Local0 = MMTB (Arg0)
-            OSUP (Local0)
+            Arg1 = MMTB (Arg0)
+            OSUP (Arg1)
         }
     }
 
     Scope (_SB)
     {
-        Method (THDR, 0, Serialized)
+        Method (THDR, 2, Serialized)
         {
             ADBG ("THDR")
         }
@@ -21157,16 +21273,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             })
             Method (WMTF, 3, NotSerialized)
             {
-                Arg0 = Zero
-                Arg1 = One
                 CreateByteField (Arg2, Zero, FP)
                 If (FP)
                 {
-                    TBFP (Arg1)
+                    TBFP (One)
                 }
                 Else
                 {
-                    TBFP (Arg0)
+                    TBFP (Zero)
                 }
             }
         }
@@ -21682,7 +21796,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Return (Local0)
     }
 
-    Method (RRIO, 3, Serialized)
+    Method (RRIO, 4, Serialized)
     {
         Switch ((Arg0 + Zero))
         {
@@ -21889,6 +22003,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
 
         }
+    }
+
+    Method (RDMA, 3, NotSerialized)
+    {
     }
 
     Scope (_GPE)
@@ -35103,6 +35221,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             GUAM (One)
                         }
+
+                        ^^PCI0.LPCB.H_EC.ECNT (One)
                     }
 
                     If ((Arg2 == 0x06))
@@ -35111,6 +35231,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             GUAM (Zero)
                         }
+
+                        ^^PCI0.LPCB.H_EC.ECNT (Zero)
                     }
                 }
 
@@ -39244,6 +39366,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If (^^PCI0.LPCB.H_EC.ECAV)
                 {
                     ^^PCI0.LPCB.H_EC.IWCW = Arg0
+                    ^^PCI0.LPCB.H_EC.ECMD (0xE1)
                 }
             }
 
@@ -39252,6 +39375,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If (^^PCI0.LPCB.H_EC.ECAV)
                 {
                     ^^PCI0.LPCB.H_EC.IWCW = Arg0
+                    ^^PCI0.LPCB.H_EC.ECMD (0xE1)
                 }
             }
 
@@ -40425,20 +40549,17 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (Zero)
             }
 
+            Method (ECWT, 2, Serialized)
+            {
+            }
+
             Method (ECMD, 1, Serialized)
             {
-             
             }
 
             Method (ECNT, 1, Serialized)
             {
-
             }
-
-            Method (ECWT, 2, Serialized)
-            {
-
-            }           
 
             Device (BAT0)
             {
@@ -40572,7 +40693,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Method (TEST, 1, NotSerialized)
         {
             Arg0 = (GPC0 (0x01030006) & 0x0001FCFE)
-            Return (Arg0)
         }
 
         Method (MPTS, 1, NotSerialized)
@@ -40617,15 +40737,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             })
             Method (WMMX, 3, NotSerialized)
             {
-                Arg0 = Zero
-                Arg1 = 0x41494C53
-                CreateDWordField (Arg2, Arg0, FUNC)
-                If ((FUNC == Arg1))
+                CreateDWordField (Arg2, Zero, FUNC)
+                If ((FUNC == 0x41494C53))
                 {
                     Return (SLIC) /* \_SB_.PCI0.SLIC */
                 }
 
-                Return (Arg0)
+                Return (Zero)
             }
         }
     }
@@ -40831,8 +40949,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             }
 
-            Arg2 = One
-            Return (Arg2)
+            Return (One)
         }
 
         Method (CRYF, 3, Serialized)
@@ -40871,11 +40988,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             }
 
-            Arg2 = Buffer (One)
-                {
-                     0x00                                             // .
-                }
-            Return (Arg2)
+            Return (Buffer (One)
+            {
+                 0x00                                             // .
+            })
         }
     }
 
