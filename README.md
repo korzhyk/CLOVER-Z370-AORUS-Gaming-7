@@ -80,7 +80,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * Updated ACPI-tables to [F11 BIOS][103] version
 * Use SSDT to define ~working~ ports
 * Removed `Legacy_USB3.kext`
-* Updated table of [USB mapping][#usb-ports-mapping]
+* Updated table of [USB mapping](#usb-ports-mapping)
 * Updated README
 ###### 16/11/2018
 * Added new F11 BIOS version with `CFG Lock` option.
