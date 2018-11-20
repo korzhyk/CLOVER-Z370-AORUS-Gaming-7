@@ -45,14 +45,14 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 ### EFI drivers
 
 * ApfsDriverLoader-64.efi - Must have to run 10.14+
-* AptioMemoryFix-64.efi - Must have to run macOS
+* AptioMemoryFix-64.efi - Must have to work with native NVRAM
 * VBoxHfs-64.efi - Must have to run 10.13-
 * VirtualSmc.efi - Bundled with `VirtualSMC.kext`. Disabled in Clover, needed if you use File Vault 2 or [authrestart][6].
 
 ## Issues
 
 1. There is an issue with USB drives after sleep: the system warns about not properly unmounted storage device. This happens when I overclock the memory modules. And, I need two times mouse clicks to get the desktop (but this resolved by boot arg `darkwake=0`).
-2. The limit of USB ports is `15` but it counts not only physical but also protocol based. So if one physical port can be used by two protocols such as 3.0 (SS) and 2.0 (HS), in this way in system he actually own two of fifteen addresses (eg. HS01/SS01). You can see the real USB mapping in this [picture][102]. Due to these limits I didn't enable a `HS08` port in `SSDT-8-USBx.aml` table, but if you need this USB 2.0 header to work, you can drop the USB 3.0 protocol on another port. And keep in mind USB 3.1 ports such as Type-C, Type-A and header provided by ASMedia are controller and discovered like independent devices by system without problems.
+2. The limit of USB ports is `15` but it counts not only physical but also protocol based. So if one physical port can be used by two protocols such as 3.0 (SS) and 2.0 (HS), in this way in system he actually own two of fifteen addresses (eg. HS01/SS01). You can see the real USB mapping in this [picture][102]. Due to these limits I didn't enable a `HS08` port in `SSDT-8-USBx.aml` table, but if you need this USB 2.0 header to work, you can drop the USB 3.0 protocol on another port. And keep in mind USB 3.1 ports such as Type-C, Type-A and header provided by ASMedia controller.
 
 ## USB ports mapping
 
@@ -78,9 +78,9 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * Config can be used with only iGPU card, external GPU is disabled via `WhateverGreen.kext`
 ###### 19/11/2018
 * Updated ACPI-tables to [F11 BIOS][103] version
-* Use SSDT to define ~working~ ports
+* Use SSDT to enable working ports
 * Removed `Legacy_USB3.kext`
-* Updated table of [USB mapping][#usb-ports-mapping]
+* Updated table of [USB mapping](#usb-ports-mapping)
 * Updated README
 ###### 16/11/2018
 * Added new F11 BIOS version with `CFG Lock` option.
