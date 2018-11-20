@@ -38,7 +38,6 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * IntelMausiEthernet.kext - Another intel driver for Ethernet
 * [Lilu.kext][3] - Just a f\*ckin great patcher, dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
 * SMCProcessor.kext - Kext for processor sensors, bundled with `VirtualSMC.kext`
-* SMCSuperIO.kext - Kext for reading SuperIO devices, bundled with `VirtualSMC.kext`
 * [VirtualSMC.kext][4] - A advanced replacement of FakeSMC, almost like native mac SMC.
 * [WhateverGreen.kext][5] - Need for GPU support
 
