@@ -78,7 +78,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * Recompiled `DSDT` with external references
 ###### 19/11/2018
 * Updated ACPI-tables to [F11 BIOS][103] version
-* Use SSDT to define ~working~ ports
+* Use SSDT to enable working ports
 * Removed `Legacy_USB3.kext`
 * Updated table of [USB mapping](#usb-ports-mapping)
 * Updated README
