@@ -45,7 +45,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 ### EFI drivers
 
 * ApfsDriverLoader-64.efi - Must have to run 10.14+
-* AptioMemoryFix-64.efi - Must have to run macOS
+* AptioMemoryFix-64.efi - Must have to work with native NVRAM
 * VBoxHfs-64.efi - Must have to run 10.13-
 * VirtualSmc.efi - Bundled with `VirtualSMC.kext`. Disabled in Clover, needed if you use File Vault 2 or [authrestart][6].
 
