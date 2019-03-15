@@ -1,22 +1,22 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20180810 (32-bit version)
+ * AML/ASL+ Disassembler version 20180810 (64-bit version)
  * Copyright (c) 2000 - 2018 Intel Corporation
  *
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of DSDT.aml, Sat Aug 25 12:11:52 2018
+ * Disassembly of iASLoFsqYx.aml, Tue Nov 20 01:12:56 2018
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x00029AF4 (170740)
+ *     Length           0x00029A77 (170615)
  *     Revision         0x02
- *     Checksum         0x03
+ *     Checksum         0xFF
  *     OEM ID           "ALASKA"
  *     OEM Table ID     "A M I"
  *     OEM Revision     0x01072009 (17244169)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20180810 (538445840)
+ *     Compiler Version 0x20160422 (538313762)
  */
 DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 {
@@ -129,7 +129,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     External (_TZ_.TZ00, DeviceObj)
     External (_TZ_.TZ01, DeviceObj)
     External (ALSE, UnknownObj)
-    External (BNUM, UnknownObj)
+    External (BNUM, UnknownObj)    // Conflicts with a later declaration
     External (BRTL, UnknownObj)
     External (CRBI, UnknownObj)
     External (DIDX, UnknownObj)
@@ -268,12 +268,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     Name (SS2, Zero)
     Name (SS3, One)
     Name (SS4, One)
-    Name (IOST, Zero)
-    Name (TOPM, Zero)
+    Name (IOST, 0x0000)
+    Name (TOPM, 0x00000000)
     Name (ROMS, 0xFFE00000)
     Name (VGAF, One)
     Name (UEMU, 0x5A5A)
-    OperationRegion (GNVS, SystemMemory, 0xBD9B9000, 0x0792)
+    OperationRegion (GNVS, SystemMemory, 0xBD9A0000, 0x0792)
     Field (GNVS, AnyAcc, Lock, Preserve)
     {
         OSYS,   16,
@@ -1587,7 +1587,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Alias (PRSA, PRSF)
         Alias (PRSA, PRSG)
         Alias (PRSA, PRSH)
-        Name (PR00, Package (0x2A)
+        Name (PD00, Package (0x2A)
         {
             Package (0x04)
             {
@@ -2287,7 +2287,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR01, Package (0x04)
+        Name (PD01, Package (0x04)
         {
             Package (0x04)
             {
@@ -2355,7 +2355,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x13
             }
         })
-        Name (PR02, Package (0x04)
+        Name (PD02, Package (0x04)
         {
             Package (0x04)
             {
@@ -2423,7 +2423,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR03, Package (0x04)
+        Name (PD03, Package (0x04)
         {
             Package (0x04)
             {
@@ -2491,7 +2491,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x11
             }
         })
-        Name (PR0C, Package (0x04)
+        Name (PD0C, Package (0x04)
         {
             Package (0x04)
             {
@@ -2559,7 +2559,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x13
             }
         })
-        Name (PR0D, Package (0x04)
+        Name (PD0D, Package (0x04)
         {
             Package (0x04)
             {
@@ -2627,7 +2627,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR0E, Package (0x04)
+        Name (PD0E, Package (0x04)
         {
             Package (0x04)
             {
@@ -2695,7 +2695,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x11
             }
         })
-        Name (PR0F, Package (0x04)
+        Name (PD0F, Package (0x04)
         {
             Package (0x04)
             {
@@ -2763,7 +2763,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x12
             }
         })
-        Name (PR10, Package (0x04)
+        Name (PD10, Package (0x04)
         {
             Package (0x04)
             {
@@ -2831,7 +2831,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x13
             }
         })
-        Name (PR04, Package (0x04)
+        Name (PD04, Package (0x04)
         {
             Package (0x04)
             {
@@ -2899,7 +2899,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x13
             }
         })
-        Name (PR05, Package (0x04)
+        Name (PD05, Package (0x04)
         {
             Package (0x04)
             {
@@ -2967,7 +2967,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR06, Package (0x04)
+        Name (PD06, Package (0x04)
         {
             Package (0x04)
             {
@@ -3035,7 +3035,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x11
             }
         })
-        Name (PR07, Package (0x04)
+        Name (PD07, Package (0x04)
         {
             Package (0x04)
             {
@@ -3103,7 +3103,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x12
             }
         })
-        Name (PR08, Package (0x04)
+        Name (PD08, Package (0x04)
         {
             Package (0x04)
             {
@@ -3171,7 +3171,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x13
             }
         })
-        Name (PR09, Package (0x04)
+        Name (PD09, Package (0x04)
         {
             Package (0x04)
             {
@@ -3239,7 +3239,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR0A, Package (0x04)
+        Name (PD0A, Package (0x04)
         {
             Package (0x04)
             {
@@ -3307,7 +3307,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x11
             }
         })
-        Name (PR0B, Package (0x04)
+        Name (PD0B, Package (0x04)
         {
             Package (0x04)
             {
@@ -3375,7 +3375,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x12
             }
         })
-        Name (PR14, Package (0x04)
+        Name (PD14, Package (0x04)
         {
             Package (0x04)
             {
@@ -3443,7 +3443,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x13
             }
         })
-        Name (PR15, Package (0x04)
+        Name (PD15, Package (0x04)
         {
             Package (0x04)
             {
@@ -3511,7 +3511,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR16, Package (0x04)
+        Name (PD16, Package (0x04)
         {
             Package (0x04)
             {
@@ -3579,7 +3579,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x11
             }
         })
-        Name (PR17, Package (0x04)
+        Name (PD17, Package (0x04)
         {
             Package (0x04)
             {
@@ -3647,7 +3647,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x12
             }
         })
-        Name (PR18, Package (0x04)
+        Name (PD18, Package (0x04)
         {
             Package (0x04)
             {
@@ -3715,7 +3715,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x13
             }
         })
-        Name (PR19, Package (0x04)
+        Name (PD19, Package (0x04)
         {
             Package (0x04)
             {
@@ -3783,7 +3783,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR1A, Package (0x04)
+        Name (PD1A, Package (0x04)
         {
             Package (0x04)
             {
@@ -3851,7 +3851,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x11
             }
         })
-        Name (PR1B, Package (0x04)
+        Name (PD1B, Package (0x04)
         {
             Package (0x04)
             {
@@ -3919,7 +3919,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x12
             }
         })
-        Name (PR11, Package (0x04)
+        Name (PD11, Package (0x04)
         {
             Package (0x04)
             {
@@ -3987,7 +3987,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x10
             }
         })
-        Name (PR12, Package (0x04)
+        Name (PD12, Package (0x04)
         {
             Package (0x04)
             {
@@ -4055,7 +4055,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 0x11
             }
         })
-        Name (PR13, Package (0x04)
+        Name (PD13, Package (0x04)
         {
             Package (0x04)
             {
@@ -4150,7 +4150,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (AR00) /* \_SB_.AR00 */
                 }
 
-                Return (PR00) /* \_SB_.PR00 */
+                Return (PD00) /* \_SB_.PD00 */
             }
 
             OperationRegion (HBUS, PCI_Config, Zero, 0x0100)
@@ -4684,7 +4684,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 Device (B0D4)
                 {
-                    Method (ZDSM, 4, Serialized)
+                    Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                     {
                         If (PCIC (Arg0))
                         {
@@ -4777,7 +4777,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR01) /* \_SB_.AR01 */
                     }
 
-                    Return (PR01) /* \_SB_.PR01 */
+                    Return (PD01) /* \_SB_.PD01 */
                 }
 
                 Device (PEGP)
@@ -4796,7 +4796,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR02) /* \_SB_.AR02 */
                     }
 
-                    Return (PR02) /* \_SB_.PR02 */
+                    Return (PD02) /* \_SB_.PD02 */
                 }
 
                 Device (PEGP)
@@ -4815,7 +4815,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR03) /* \_SB_.AR03 */
                     }
 
-                    Return (PR03) /* \_SB_.PR03 */
+                    Return (PD03) /* \_SB_.PD03 */
                 }
 
                 Device (PEGP)
@@ -5142,7 +5142,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                         ACTR = Arg1
                         Local1 = (IOAH << 0x08)
-                        Local1 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IOAL */
+                        Local1 |= IOAL
                         RRIO (Arg0, Arg1, Local1, 0x08)
                         EXFG ()
                     }
@@ -5196,7 +5196,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         ENFG (CGLD (Arg0))
                         IO11 = (IOAH << 0x08)
-                        IO11 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IOAL */
+                        IO11 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IO11 */
                         IO12 = IO11 /* \_SB_.PCI0.LPCB.SIO1.IO11 */
                         LEN1 = 0x08
                         If (INTR)
@@ -5226,11 +5226,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         ENFG (CGLD (Arg0))
                         IO21 = (IOAH << 0x08)
-                        IO21 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IOAL */
+                        IO21 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IO21 */
                         IO22 = IO21 /* \_SB_.PCI0.LPCB.SIO1.IO21 */
                         LEN2 = 0x08
                         IO31 = (IOH2 << 0x08)
-                        IO31 |= IOL2 /* \_SB_.PCI0.LPCB.SIO1.IOL2 */
+                        IO31 |= IOL2 /* \_SB_.PCI0.LPCB.SIO1.IO31 */
                         IO32 = IO31 /* \_SB_.PCI0.LPCB.SIO1.IO31 */
                         LEN3 = 0x08
                         If (INTR)
@@ -5659,7 +5659,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -5699,7 +5699,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP09.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP09._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -5837,7 +5837,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR0C) /* \_SB_.AR0C */
                     }
 
-                    Return (PR0C) /* \_SB_.PR0C */
+                    Return (PD0C) /* \_SB_.PD0C */
                 }
             }
 
@@ -5905,7 +5905,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -5945,7 +5945,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP10.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP10._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -6083,7 +6083,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR0D) /* \_SB_.AR0D */
                     }
 
-                    Return (PR0D) /* \_SB_.PR0D */
+                    Return (PD0D) /* \_SB_.PD0D */
                 }
             }
 
@@ -6151,7 +6151,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -6191,7 +6191,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP11.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP11._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -6329,7 +6329,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR0E) /* \_SB_.AR0E */
                     }
 
-                    Return (PR0E) /* \_SB_.PR0E */
+                    Return (PD0E) /* \_SB_.PD0E */
                 }
             }
 
@@ -6397,7 +6397,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -6437,7 +6437,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP12.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP12._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -6575,7 +6575,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR0F) /* \_SB_.AR0F */
                     }
 
-                    Return (PR0F) /* \_SB_.PR0F */
+                    Return (PD0F) /* \_SB_.PD0F */
                 }
             }
 
@@ -6643,7 +6643,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -6683,7 +6683,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP13.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP13._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -6821,7 +6821,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR10) /* \_SB_.AR10 */
                     }
 
-                    Return (PR10) /* \_SB_.PR10 */
+                    Return (PD10) /* \_SB_.PD10 */
                 }
             }
 
@@ -6889,7 +6889,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -6929,7 +6929,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP01.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP01._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -7067,7 +7067,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR04) /* \_SB_.AR04 */
                     }
 
-                    Return (PR04) /* \_SB_.PR04 */
+                    Return (PD04) /* \_SB_.PD04 */
                 }
             }
 
@@ -7135,7 +7135,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -7175,7 +7175,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP02.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP02._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -7313,7 +7313,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR05) /* \_SB_.AR05 */
                     }
 
-                    Return (PR05) /* \_SB_.PR05 */
+                    Return (PD05) /* \_SB_.PD05 */
                 }
             }
 
@@ -7381,7 +7381,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -7421,7 +7421,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP03.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP03._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -7559,7 +7559,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR06) /* \_SB_.AR06 */
                     }
 
-                    Return (PR06) /* \_SB_.PR06 */
+                    Return (PD06) /* \_SB_.PD06 */
                 }
 
                 Device (D05E)
@@ -7632,7 +7632,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -7672,7 +7672,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP04.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP04._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -7810,7 +7810,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR07) /* \_SB_.AR07 */
                     }
 
-                    Return (PR07) /* \_SB_.PR07 */
+                    Return (PD07) /* \_SB_.PD07 */
                 }
             }
 
@@ -7878,7 +7878,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -7918,7 +7918,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP05.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP05._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -8056,7 +8056,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR08) /* \_SB_.AR08 */
                     }
 
-                    Return (PR08) /* \_SB_.PR08 */
+                    Return (PD08) /* \_SB_.PD08 */
                 }
             }
 
@@ -8124,7 +8124,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -8164,7 +8164,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP06.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP06._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -8302,7 +8302,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR09) /* \_SB_.AR09 */
                     }
 
-                    Return (PR09) /* \_SB_.PR09 */
+                    Return (PD09) /* \_SB_.PD09 */
                 }
             }
 
@@ -8370,7 +8370,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -8410,7 +8410,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP07.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP07._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -8548,7 +8548,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR0A) /* \_SB_.AR0A */
                     }
 
-                    Return (PR0A) /* \_SB_.PR0A */
+                    Return (PD0A) /* \_SB_.PD0A */
                 }
             }
 
@@ -8616,7 +8616,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -8656,7 +8656,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP08.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP08._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -8794,7 +8794,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR0B) /* \_SB_.AR0B */
                     }
 
-                    Return (PR0B) /* \_SB_.PR0B */
+                    Return (PD0B) /* \_SB_.PD0B */
                 }
             }
 
@@ -8862,7 +8862,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -8902,7 +8902,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP17.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP17._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -9040,7 +9040,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR14) /* \_SB_.AR14 */
                     }
 
-                    Return (PR14) /* \_SB_.PR14 */
+                    Return (PD14) /* \_SB_.PD14 */
                 }
             }
 
@@ -9108,7 +9108,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -9148,7 +9148,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP18.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP18._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -9286,7 +9286,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR15) /* \_SB_.AR15 */
                     }
 
-                    Return (PR15) /* \_SB_.PR15 */
+                    Return (PD15) /* \_SB_.PD15 */
                 }
             }
 
@@ -9354,7 +9354,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -9394,7 +9394,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP19.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP19._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -9532,7 +9532,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR16) /* \_SB_.AR16 */
                     }
 
-                    Return (PR16) /* \_SB_.PR16 */
+                    Return (PD16) /* \_SB_.PD16 */
                 }
             }
 
@@ -9600,7 +9600,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -9640,7 +9640,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP20.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP20._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -9778,7 +9778,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR17) /* \_SB_.AR17 */
                     }
 
-                    Return (PR17) /* \_SB_.PR17 */
+                    Return (PD17) /* \_SB_.PD17 */
                 }
             }
 
@@ -9846,7 +9846,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -9886,7 +9886,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP21.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP21._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -10024,7 +10024,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR18) /* \_SB_.AR18 */
                     }
 
-                    Return (PR18) /* \_SB_.PR18 */
+                    Return (PD18) /* \_SB_.PD18 */
                 }
             }
 
@@ -10092,7 +10092,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -10132,7 +10132,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP22.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP22._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -10270,7 +10270,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR19) /* \_SB_.AR19 */
                     }
 
-                    Return (PR19) /* \_SB_.PR19 */
+                    Return (PD19) /* \_SB_.PD19 */
                 }
             }
 
@@ -10338,7 +10338,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -10378,7 +10378,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP23.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP23._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -10516,7 +10516,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR1A) /* \_SB_.AR1A */
                     }
 
-                    Return (PR1A) /* \_SB_.PR1A */
+                    Return (PD1A) /* \_SB_.PD1A */
                 }
             }
 
@@ -10584,7 +10584,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -10624,7 +10624,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP24.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP24._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -10762,7 +10762,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR1B) /* \_SB_.AR1B */
                     }
 
-                    Return (PR1B) /* \_SB_.PR1B */
+                    Return (PD1B) /* \_SB_.PD1B */
                 }
             }
 
@@ -10830,7 +10830,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -10870,7 +10870,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP14.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP14._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -11008,7 +11008,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR11) /* \_SB_.AR11 */
                     }
 
-                    Return (PR11) /* \_SB_.PR11 */
+                    Return (PD11) /* \_SB_.PD11 */
                 }
             }
 
@@ -11076,7 +11076,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -11116,7 +11116,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP15.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP15._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -11254,7 +11254,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR12) /* \_SB_.AR12 */
                     }
 
-                    Return (PR12) /* \_SB_.PR12 */
+                    Return (PD12) /* \_SB_.PD12 */
                 }
             }
 
@@ -11322,7 +11322,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Zero,
                     Zero
                 })
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("e5c937d0-3553-4d7a-9117-ea4d19c3434d") /* Device Labeling Interface */))
                     {
@@ -11362,7 +11362,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     }
                                 }
 
-                                Return (OPTS) /* \_SB_.PCI0.RP16.ZDSM.OPTS */
+                                Return (OPTS) /* \_SB_.PCI0.RP16._DSM.OPTS */
                             }
                             Case (0x04)
                             {
@@ -11500,7 +11500,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Return (AR13) /* \_SB_.AR13 */
                     }
 
-                    Return (PR13) /* \_SB_.PR13 */
+                    Return (PD13) /* \_SB_.PD13 */
                 }
             }
         }
@@ -12035,7 +12035,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         }
     }
 
-    Name (PNVB, 0xBD9BD018)
+    Name (PNVB, 0xBD9A4018)
     Name (PNVL, 0x0287)
     If ((ECR1 == One))
     {
@@ -12074,11 +12074,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                     }
                 }
-
-                Return (Buffer (One)
+               
+                Arg3 = Buffer (One)
                 {
                      0x00                                             // .
-                })
+                }
+
+                Return (Arg3)
             }
         }
     }
@@ -12548,7 +12550,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Method (GADR, 2, NotSerialized)
         {
-            Local0 = (GINF (Arg0, Zero) + SBRG) /* \SBRG */
+            Local0 = (GINF (Arg0, Zero) + SBRG)
             Local1 = GINF (Arg0, Arg1)
             Return ((Local0 + Local1))
         }
@@ -12831,8 +12833,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 TEMP,   32
             }
 
-            Return (((TEMP >> ((Local1 & 0x07) * 0x04)) &
-                0x03))
+            Return (((TEMP >> ((Local1 & 0x07) * 0x04)) & 0x03))
         }
 
         Method (SGRA, 2, Serialized)
@@ -13077,7 +13078,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
 
             DO30 = Zero
-            Return (DO30) /* \THDS.DO30 */
+           
+            Return (DO30)
         }
 
         Method (THDH, 1, Serialized)
@@ -13257,7 +13259,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
     Scope (_SB.PCI0.LPCB)
     {
-        Method (ZDSM, 4, Serialized)
+        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
         {
             If (PCIC (Arg0))
             {
@@ -13294,7 +13296,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Device (PPMC)
         {
             Name (_ADR, 0x001F0002)  // _ADR: Address
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If (PCIC (Arg0))
                 {
@@ -13311,7 +13313,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Device (SBUS)
         {
             Name (_ADR, 0x001F0004)  // _ADR: Address
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If (PCIC (Arg0))
                 {
@@ -13718,7 +13720,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Method (PCRR, 2, Serialized)
         {
             Local0 = ((Arg0 << 0x10) + Arg1)
-            Local0 += SBRG /* \SBRG */
+            Local0 += SBRG
             OperationRegion (PCR0, SystemMemory, Local0, 0x04)
             Field (PCR0, DWordAcc, Lock, Preserve)
             {
@@ -13731,7 +13733,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Method (PCRW, 3, Serialized)
         {
             Local0 = ((Arg0 << 0x10) + Arg1)
-            Local0 += SBRG /* \SBRG */
+            Local0 += SBRG
             OperationRegion (PCR0, SystemMemory, Local0, 0x04)
             Field (PCR0, DWordAcc, Lock, Preserve)
             {
@@ -13830,7 +13832,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Device (GLAN)
         {
             Name (_ADR, 0x001F0006)  // _ADR: Address
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If (PCIC (Arg0))
                 {
@@ -13880,7 +13882,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     PMES = One
                     Notify (GLAN, 0x02) // Device Wake
                 }
-
+               
                 Return (Zero)
             }
         }
@@ -13917,7 +13919,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
 
             Name (XFLT, Zero)
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 ADBG ("_DSM")
                 Local0 = (XADH << 0x20)
@@ -14038,7 +14040,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Notify (XHC, 0x02) // Device Wake
                 }
-
+               
                 Return (Zero)
             }
 
@@ -14116,7 +14118,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Sleep (0x0A)
                     }
                 }
-
+               
                 Return (Zero)
             }
 
@@ -14234,42 +14236,42 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If (((PLS1 == 0x03) && PLC1))
                 {
                     PSCO = (0xFFFFFFFD & PSC1) /* \_SB_.PCI0.XHC_._PS3.PSC1 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC1 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS2 == 0x03) && PLC2))
                 {
                     PSCO = (0xFFFFFFFD & PSC2) /* \_SB_.PCI0.XHC_._PS3.PSC2 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC2 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS3 == 0x03) && PLC3))
                 {
                     PSCO = (0xFFFFFFFD & PSC3) /* \_SB_.PCI0.XHC_._PS3.PSC3 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC3 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS4 == 0x03) && PLC4))
                 {
                     PSCO = (0xFFFFFFFD & PSC4) /* \_SB_.PCI0.XHC_._PS3.PSC4 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC4 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS5 == 0x03) && PLC5))
                 {
                     PSCO = (0xFFFFFFFD & PSC5) /* \_SB_.PCI0.XHC_._PS3.PSC5 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC5 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
                 If (((PLS6 == 0x03) && PLC6))
                 {
                     PSCO = (0xFFFFFFFD & PSC6) /* \_SB_.PCI0.XHC_._PS3.PSC6 */
-                    PSCO |= 0x00400000
+                    PSCO |= 0x00400000 /* \_SB_.PCI0.XHC_._PS3.PSCO */
                     PSC6 = PSCO /* \_SB_.PCI0.XHC_._PS3.PSCO */
                 }
 
@@ -14304,7 +14306,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Sleep (0x0A)
                     }
                 }
-
+               
                 Return (Zero)
             }
 
@@ -14332,7 +14334,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS0X ()
                     }
-
+               
                     Return (Zero)
                 }
 
@@ -14347,7 +14349,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS2X ()
                     }
-
+               
                     Return (Zero)
                 }
 
@@ -14362,7 +14364,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS3X ()
                     }
-
+               
                     Return (Zero)
                 }
 
@@ -14569,7 +14571,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return ((XDCB & 0xFFFFFFFFFFFFFF00))
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If (PCIC (Arg0))
                 {
@@ -14724,7 +14726,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                                     Offset (0x10F81A)
                                 }
 
-                                Local0 = P2PS /* \_SB_.PCI0.XDCI.ZDSM.P2PS */
+                                Local0 = P2PS /* \_SB_.PCI0.XDCI._DSM.P2PS */
                                 Return (Local0)
                             }
 
@@ -14780,8 +14782,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Notify (XDCI, 0x02) // Device Wake
                 }
-
-                Return (0x02)
+               
+                Return (Zero)
             }
         }
     }
@@ -14830,8 +14832,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     PMES = One
                     Notify (HDAS, 0x02) // Device Wake
                 }
-
-                Return (0x02)
+               
+                Return (Zero)
             }
 
             Method (_PS0, 0, Serialized)  // _PS0: Power State 0
@@ -14888,7 +14890,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 ADBG ("HDAS _DSM")
                 If (PCIC (Arg0))
@@ -14961,7 +14963,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Device (SAT0)
         {
             Name (_ADR, 0x00170000)  // _ADR: Address
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If (PCIC (Arg0))
                 {
@@ -15299,7 +15301,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
-                    Return (Local0)
+               
+                    Return (Zero)
                 }
 
                 Method (RPOF, 0, Serialized)
@@ -15336,7 +15339,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
-                    Return (Local0)
+               
+                    Return (Zero)
                 }
 
                 Method (NVD3, 0, Serialized)
@@ -15399,9 +15403,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         RDCA (NCRN, TCSO, 0xFFFFFFFF, (MXIE & 0x80000000), 0x03)
                         ADBG ("NVD0:  MSIXe")
                     }
-                    Else
-                    {
-                    }
 
                     Return (One)
                 }
@@ -15463,6 +15464,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
+               
                     Return (Zero)
                 }
             }
@@ -15597,7 +15599,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
-                    Return (Local0)
+               
+                    Return (Zero)
                 }
 
                 Method (RPOF, 0, Serialized)
@@ -15634,7 +15637,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
-                    Return (Local0)
+               
+                    Return (Zero)
                 }
 
                 Method (NVD3, 0, Serialized)
@@ -15761,6 +15765,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
+               
                     Return (Zero)
                 }
             }
@@ -15895,7 +15900,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
-                    Return (Local0)
+               
+                    Return (Zero)
                 }
 
                 Method (RPOF, 0, Serialized)
@@ -15932,7 +15938,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
-                    Return (Local0)
+               
+                    Return (Zero)
                 }
 
                 Method (NVD3, 0, Serialized)
@@ -15995,9 +16002,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         RDCA (NCRN, TCSO, 0xFFFFFFFF, (MXIE & 0x80000000), 0x03)
                         ADBG ("NVD0:  MSIXe")
                     }
-                    Else
-                    {
-                    }
 
                     Return (One)
                 }
@@ -16059,6 +16063,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
+               
                     Return (Zero)
                 }
             }
@@ -16121,7 +16126,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     If ((DerefOf (Arg0 [Zero]) == One))
                     {
                         ADBG (Concatenate ("POFF GPIO=", ToHexString (DerefOf (Arg0 [0x02]))))
-                        SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^ One))
+                        SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^
+                            One))
                     }
 
                     If ((DerefOf (Arg0 [Zero]) == 0x02))
@@ -16257,7 +16263,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 SLS0 = Zero
                 VMOF ()
             }
-
+               
             Return (Zero)
         }
     }
@@ -16551,7 +16557,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD0 == 0x02))
             {
                 Name (_ADR, 0x00150000)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -16609,7 +16615,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD1 == 0x02))
             {
                 Name (_ADR, 0x00150001)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -16667,7 +16673,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD2 == 0x02))
             {
                 Name (_ADR, 0x00150002)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -16725,7 +16731,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD3 == 0x02))
             {
                 Name (_ADR, 0x00150003)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -16783,7 +16789,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD4 == 0x02))
             {
                 Name (_ADR, 0x00190002)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -16841,7 +16847,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD5 == 0x02))
             {
                 Name (_ADR, 0x00190001)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -16898,7 +16904,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD6 == 0x02))
             {
                 Name (_ADR, 0x001E0002)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -16955,7 +16961,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD7 == 0x02))
             {
                 Name (_ADR, 0x001E0003)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -17010,7 +17016,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD8 == 0x02))
             {
                 Name (_ADR, 0x001E0000)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -17083,7 +17089,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMD9 == 0x02))
             {
                 Name (_ADR, 0x001E0001)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -17156,7 +17162,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((SMDA == 0x02))
             {
                 Name (_ADR, 0x00190000)  // _ADR: Address
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -17194,7 +17200,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     {
         Name (HIDG, ToUUID ("3cdff6f7-4267-4555-ad05-b30a3d8938de") /* HID I2C Device */)
         Name (TP7G, ToUUID ("ef87eb82-f951-46da-84ec-14871ac6f84b"))
-        Method (HIDD, 4, Serialized)
+        Method (HIDD, 5, Serialized)
         {
             If ((Arg0 == HIDG))
             {
@@ -17211,17 +17217,19 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((Arg2 == One))
                 {
-                    Return (Arg3)
+                    Return (Arg4)
                 }
             }
-
-            Return (Buffer (One)
+           
+            Arg3 = Buffer (One)
             {
                  0x00                                             // .
-            })
+            }
+
+            Return (Arg3)
         }
 
-        Method (TP7D, 5, Serialized)
+        Method (TP7D, 6, Serialized)
         {
             If ((Arg0 == TP7G))
             {
@@ -17238,14 +17246,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((Arg2 == One))
                 {
-                    Return (ConcatenateResTemplate (Arg3, Arg4))
+                    Return (ConcatenateResTemplate (Arg4, Arg5))
                 }
             }
 
-            Return (Buffer (One)
+            Arg3 = Buffer (One)
             {
                  0x00                                             // .
-            })
+            }
+
+            Return (Arg3)
         }
     }
 
@@ -17336,26 +17346,24 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         SPED = 0x000F4240
                     }
-
-                    Return (Zero)
                 }
-
+               
                 Return (Zero)
             }
 
             Name (_HID, "XXXX0000")  // _HID: Hardware ID
             Name (_CID, "PNP0C50" /* HID Protocol Device (I2C bus) */)  // _CID: Compatible ID
             Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == HIDG))
                 {
-                    Return (HIDD (Arg0, Arg1, Arg2, HID2))
+                    Return (HIDD (Arg0, Arg1, Arg2, Arg3, HID2))
                 }
 
                 If ((Arg0 == TP7G))
                 {
-                    Return (TP7D (Arg0, Arg1, Arg2, SBFB, SBFG))
+                    Return (TP7D (Arg0, Arg1, Arg2, Arg3, SBFB, SBFG))
                 }
 
                 Return (Buffer (One)
@@ -17413,9 +17421,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     _HID = "INT343B"
                     _CID = "INT343B"
                     CADR = 0x34
-                    Return (Zero)
                 }
-
+               
                 Return (Zero)
             }
 
@@ -17663,26 +17670,24 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         SPED = 0x000F4240
                     }
-
-                    Return (Zero)
                 }
-
+               
                 Return (Zero)
             }
 
             Name (_HID, "XXXX0000")  // _HID: Hardware ID
             Name (_CID, "PNP0C50" /* HID Protocol Device (I2C bus) */)  // _CID: Compatible ID
             Name (_S0W, 0x04)  // _S0W: S0 Device Wake State
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == HIDG))
                 {
-                    Return (HIDD (Arg0, Arg1, Arg2, HID2))
+                    Return (HIDD (Arg0, Arg1, Arg2, Arg3, HID2))
                 }
 
                 If ((Arg0 == TP7G))
                 {
-                    Return (TP7D (Arg0, Arg1, Arg2, SBFB, SBFG))
+                    Return (TP7D (Arg0, Arg1, Arg2, Arg3, SBFB, SBFG))
                 }
 
                 Return (Buffer (One)
@@ -18415,7 +18420,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Arg2]))
             }
 
-            Method (WREG, 3, Serialized)
+            Method (WREG, 4, Serialized)
             {
                 Local1 = (Timer + 0xC350)
                 RST = 0x07
@@ -18425,7 +18430,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 HOLD = 0x001C001C
                 HCNT = 0x0210
                 LCNT = 0x0280
-                TAR = (EXPA + Arg0)
+                TAR = (EXPA + Arg1)
                 ICON = 0x65
                 ENB = One
                 While ((ENSB != One))
@@ -18436,8 +18441,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                DATA = Arg1
-                DATA = (END + Arg2)
+                DATA = Arg2
+                DATA = (END + Arg3)
                 While ((ACTV != Zero))
                 {
                     If ((Timer > Local1))
@@ -18455,22 +18460,22 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                W3DC (Arg0, Arg1, One, Arg2)
-                If ((R3DC (Arg0, Arg1, Zero) == One))
+                W3DC (Arg1, Arg2, One, Arg3)
+                If ((R3DC (Arg1, Arg2, Zero) == One))
                 {
-                    W3DC (Arg0, Arg1, Zero, 0x02)
+                    W3DC (Arg1, Arg2, Zero, 0x02)
                 }
 
                 Return (Zero)
             }
 
-            Method (RREG, 2, Serialized)
+            Method (RREG, 3, Serialized)
             {
                 If ((UCCH == One))
                 {
-                    If ((R3DC (Arg0, Arg1, Zero) == 0x02))
+                    If ((R3DC (Arg1, Arg2, Zero) == 0x02))
                     {
-                        Return (R3DC (Arg0, Arg1, One))
+                        Return (R3DC (Arg1, Arg2, One))
                     }
                 }
 
@@ -18482,7 +18487,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 HOLD = 0x001C001C
                 HCNT = 0x0210
                 LCNT = 0x0280
-                TAR = (EXPA + Arg0)
+                TAR = (EXPA + Arg1)
                 ICON = 0x65
                 ENB = One
                 While ((ENSB != One))
@@ -18493,8 +18498,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                DATA = Arg1
-                DATA = (END + READ) /* \_SB_.PCI0.GEXP.READ */
+                DATA = Arg2
+                DATA = (END + READ)
                 While ((ACTV != Zero))
                 {
                     If ((Timer > Local1))
@@ -18653,7 +18658,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 PS0 (SB1X)
                 Divide (Arg2, PPR, PINN, REGN) /* \_SB_.PCI0.GEXP.CSER.REGN */
                 REGA = DerefOf (Local0 [REGN])
-                OLDV = RREG (Arg1, REGA)
+                OLDV = RREG (SB0X, Arg1, REGA)
                 If ((Arg4 == 0x02))
                 {
                     RETV = (One & (OLDV >> PINN))
@@ -18661,10 +18666,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Else
                 {
                     NEWV = (OLDV & ~(One << PINN))
-                    NEWV |= (Arg3 << PINN)
+                    NEWV |= (Arg3 << PINN) /* \_SB_.PCI0.GEXP.CSER.NEWV */
                     If ((NEWV != OLDV))
                     {
-                        WREG (Arg1, REGA, NEWV)
+                        WREG (SB0X, Arg1, REGA, NEWV)
                     }
                 }
 
@@ -18708,7 +18713,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     TEMP = PSTA /* \_SB_.PCI0.PEMC.PSTA */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -18831,7 +18836,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     TEMP = PSTA /* \_SB_.PCI0.PSDC.PSTA */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -19207,7 +19212,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (Zero)
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("1730e71d-e5dd-4a34-be57-4d76b6a2fe37")))
                 {
@@ -19548,7 +19553,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             {
                 If ((ECON == One))
                 {
-                    \_SB.PCI0.LPCB.H_EC.ECWT (RefOf (\_SB.PCI0.LPCB.H_EC.CFAN))
+                    \_SB.PCI0.LPCB.H_EC.ECWT (Zero, RefOf (\_SB.PCI0.LPCB.H_EC.CFAN))
                 }
             }
         }
@@ -19559,7 +19564,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             {
                 If ((PB1E & 0x80))
                 {
-                    \_SB.PCI0.LPCB.H_EC.ECWT (RefOf (\_SB.PCI0.LPCB.H_EC.PB10))
+                    \_SB.PCI0.LPCB.H_EC.ECWT (One, RefOf (\_SB.PCI0.LPCB.H_EC.PB10))
                 }
             }
 
@@ -19584,12 +19589,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((TBTS == One))
             {
                 Acquire (OSUM, 0xFFFF)
-                \_GPE.TINI (TBSE)
+                \_GPE.TINI (TBSE, Arg0)
                 Release (OSUM)
                 If ((T2SE != Zero))
                 {
                     Acquire (OSUM, 0xFFFF)
-                    \_GPE.TINI (T2SE)
+                    \_GPE.TINI (T2SE, Arg0)
                     Release (OSUM)
                 }
             }
@@ -19993,6 +19998,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         PPL1 = Local1
         PL1E = One
         CLP1 = One
+
         Return (Zero)
     }
 
@@ -20085,6 +20091,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         UAMS = (Arg0 && !PWRS)
         P_CS ()
+       
         Return (Zero)
     }
 
@@ -20217,12 +20224,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             {
                 Acquire (OSUM, 0xFFFF)
                 P8XH (Zero, 0x51)
-                \_GPE.TINI (TBSE)
+                \_GPE.TINI (TBSE, Zero)
                 Release (OSUM)
                 If ((T2SE != Zero))
                 {
                     Acquire (OSUM, 0xFFFF)
-                    \_GPE.TINI (T2SE)
+                    \_GPE.TINI (T2SE, Zero)
                     Release (OSUM)
                 }
 
@@ -20495,7 +20502,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((RTVM == One))
                 {
-                    ^PCI0.LPCB.H_EC.ECWT (RefOf (^PCI0.LPCB.H_EC.PVOL))
+                    ^PCI0.LPCB.H_EC.ECWT (0x7A, RefOf (^PCI0.LPCB.H_EC.PVOL))
                     ^PCI0.LPCB.H_EC.ECMD (0x1C)
                 }
                 ElseIf ((RTVM == 0x02))
@@ -20504,6 +20511,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
 
                 VMEN = One
+               
                 Return (Zero)
             }
 
@@ -20516,7 +20524,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((RTVM == One))
                 {
-                    ^PCI0.LPCB.H_EC.ECWT (RefOf (^PCI0.LPCB.H_EC.PVOL))
+                    ^PCI0.LPCB.H_EC.ECWT (0x3A, RefOf (^PCI0.LPCB.H_EC.PVOL))
                     ^PCI0.LPCB.H_EC.ECMD (0x1C)
                 }
                 ElseIf ((RTVM == 0x02))
@@ -20525,6 +20533,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
 
                 VMEN = Zero
+               
                 Return (Zero)
             }
         }
@@ -20554,7 +20563,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             P2TB = 0x0D
             While ((Local1 > Zero))
             {
-                Local1 -= One
+                Local1 = (Local1 - One)
                 Local2 = TB2P /* \_GPE.OSUP.TB2P */
                 If ((Local2 == 0xFFFFFFFF))
                 {
@@ -21057,38 +21066,15 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Sleep (0x10)
             Release (OSUM)
             ADBG ("TBT2 Exit")
+
             Return (Zero)
         }
 
-        Method (XTBT, 2, Serialized)
+        Method (XTBT, 0, Serialized)
         {
             ADBG ("XTBT")
-            If ((CF2T == One))
-            {
-                ADBG ("Clear")
-                ADBG ("GPI_GPE_STS")
-                \_SB.CAGS (Arg1)
-            }
-
-            If (TRDO)
-            {
-                ADBG ("Durng TBT_ON")
-                Return (Zero)
-            }
-
-            If (TRD3)
-            {
-                ADBG ("During TBT_OFF")
-                Return (Zero)
-            }
-
             WWAK ()
-            WSUB (Arg0)
-            If (GNIS (Arg0))
-            {
-                Return (Zero)
-            }
-
+            WSUB (TBSE)
             OperationRegion (SPRT, SystemIO, 0xB2, 0x02)
             Field (SPRT, ByteAcc, Lock, Preserve)
             {
@@ -21096,10 +21082,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
 
             ADBG ("TBT-HP-Handler")
-            ADBG ("PEG WorkAround")
-            PGWA (Arg0)
             Acquire (OSUM, 0xFFFF)
-            Local1 = TBFF (Arg0)
+            Local1 = TBFF (TBSE)
             If ((Local1 == One))
             {
                 Sleep (0x10)
@@ -21113,7 +21097,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 ADBG ("Disconnect")
                 If ((OHPN == One))
                 {
-                    NTFY (Arg0)
+                    NTFY (TBSE)
                 }
 
                 If ((GHPN == One))
@@ -21137,7 +21121,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             If ((OHPN == One))
             {
-                NTFY (Arg0)
+                NTFY (TBSE)
             }
 
             If ((GHPN == One))
@@ -21148,20 +21132,20 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Sleep (0x10)
             Release (OSUM)
             ADBG ("End-of-XTBT")
+
             Return (Zero)
         }
 
         Method (YTBT, 0, NotSerialized)
         {
             ADBG ("YTBT")
-            XTBT (TBSE, CPGN)
             ADBG ("End-of-YTBT")
         }
 
-        Method (TINI, 1, Serialized)
+        Method (TINI, 2, Serialized)
         {
-            Local0 = MMTB (Arg0)
-            OSUP (Local0)
+            Arg1 = MMTB (Arg0)
+            OSUP (Arg1)
         }
     }
 
@@ -21170,7 +21154,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Method (THDR, 2, Serialized)
         {
             ADBG ("THDR")
-            \_GPE.XTBT (Arg0, Arg1)
         }
     }
 
@@ -21280,7 +21263,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Device (WTBT)
         {
-            Name (_HID, EisaId ("PNP0C14") /* Windows Management Instrumentation Device */)  // _HID: Hardware ID
+            Name (_HID, "PNP0C14" /* Windows Management Instrumentation Device */)  // _HID: Hardware ID
             Name (_UID, "TBFP")  // _UID: Unique ID
             Name (_WDG, Buffer (0x14)
             {
@@ -21288,9 +21271,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 /* 0008 */  0x9C, 0x48, 0x20, 0x21, 0xCB, 0xED, 0xE3, 0x41,  // .H !...A
                 /* 0010 */  0x54, 0x46, 0x01, 0x02                           // TF..
             })
-            Method (WMTF, 1, NotSerialized)
+            Method (WMTF, 3, NotSerialized)
             {
-                CreateByteField (Arg0, Zero, FP)
+                CreateByteField (Arg2, Zero, FP)
                 If (FP)
                 {
                     TBFP (One)
@@ -21886,7 +21869,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     FDLE = One
                 }
             }
-            Case (ToInteger (Arg3))
+            Case (0x08)
             {
                 If ((Arg2 == 0x0200))
                 {
@@ -22024,7 +22007,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
     Method (RDMA, 3, NotSerialized)
     {
-        Return (((Arg0 || Arg1) || Arg2))
     }
 
     Scope (_GPE)
@@ -22659,7 +22641,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (Zero)
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If ((Arg0 == ToUUID ("f5cf0ff7-5d60-4842-82c0-fa1a61d873f2")))
                     {
@@ -23081,7 +23063,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -23493,7 +23475,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -23905,7 +23887,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -24317,7 +24299,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -24729,7 +24711,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -25141,7 +25123,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -25553,7 +25535,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -25965,7 +25947,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -26377,7 +26359,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -26789,7 +26771,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -27201,7 +27183,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -27613,7 +27595,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -28025,7 +28007,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -28437,7 +28419,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -28849,7 +28831,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -29261,7 +29243,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -29673,7 +29655,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -30085,7 +30067,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -30497,7 +30479,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -30909,7 +30891,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
-                Method (ZDSM, 4, Serialized)
+                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
                     {
@@ -34523,7 +34505,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (Zero)
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("c4eb40a0-6cd2-11e2-bcfd-0800200c9a66")))
                 {
@@ -36479,7 +36461,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PLDB) /* \_SB_.PCI0.CLP0._PLD.PLDB */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("26257549-9271-4ca4-bb43-c4899d5a4881")))
                 {
@@ -36539,7 +36521,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         CreateDWordField (DSMB, 0x04, DEV0)
                         I2CC = One
                         DEV0 = DSMI (0x0B, C0IA, Zero, C0IB)
-                        Return (DSMB) /* \_SB_.PCI0.CLP0.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.CLP0._DSM.DSMB */
                     }
                 }
 
@@ -36645,7 +36627,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PLDB) /* \_SB_.PCI0.CLP1._PLD.PLDB */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("26257549-9271-4ca4-bb43-c4899d5a4881")))
                 {
@@ -36705,7 +36687,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         CreateDWordField (DSMB, 0x04, DEV0)
                         I2CC = One
                         DEV0 = DSMI (0x0B, C1IA, Zero, C1IB)
-                        Return (DSMB) /* \_SB_.PCI0.CLP1.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.CLP1._DSM.DSMB */
                     }
                 }
 
@@ -36811,7 +36793,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PLDB) /* \_SB_.PCI0.CLP2._PLD.PLDB */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("26257549-9271-4ca4-bb43-c4899d5a4881")))
                 {
@@ -36871,7 +36853,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         CreateDWordField (DSMB, 0x04, DEV0)
                         I2CC = One
                         DEV0 = DSMI (0x0B, C2IA, Zero, C2IB)
-                        Return (DSMB) /* \_SB_.PCI0.CLP2.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.CLP2._DSM.DSMB */
                     }
                 }
 
@@ -36977,7 +36959,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PLDB) /* \_SB_.PCI0.CLP3._PLD.PLDB */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("26257549-9271-4ca4-bb43-c4899d5a4881")))
                 {
@@ -37037,7 +37019,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         CreateDWordField (DSMB, 0x04, DEV0)
                         I2CC = One
                         DEV0 = DSMI (0x0B, C3IA, Zero, C3IB)
-                        Return (DSMB) /* \_SB_.PCI0.CLP3.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.CLP3._DSM.DSMB */
                     }
                 }
 
@@ -37259,7 +37241,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PAR) /* \_SB_.PCI0.LNK0.SSDB.PAR_ */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("822ace8f-2814-4174-a56b-5f029fe079ee")))
                 {
@@ -37353,7 +37335,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         DEV9 = DSMI (L0D9, L0A9, Zero, L0BS)
                         DEVA = DSMI (L0DA, L0AA, Zero, L0BS)
                         DEVB = DSMI (L0DB, L0AB, Zero, L0BS)
-                        Return (DSMB) /* \_SB_.PCI0.LNK0.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.LNK0._DSM.DSMB */
                     }
 
                     Return (Buffer (One)
@@ -37740,7 +37722,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PAR) /* \_SB_.PCI0.LNK1.SSDB.PAR_ */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("822ace8f-2814-4174-a56b-5f029fe079ee")))
                 {
@@ -37834,7 +37816,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         DEV9 = DSMI (L1D9, L1A9, Zero, L1BS)
                         DEVA = DSMI (L1DA, L1AA, Zero, L1BS)
                         DEVB = DSMI (L1DB, L1AB, Zero, L1BS)
-                        Return (DSMB) /* \_SB_.PCI0.LNK1.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.LNK1._DSM.DSMB */
                     }
 
                     Return (Buffer (One)
@@ -38221,7 +38203,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PAR) /* \_SB_.PCI0.LNK2.SSDB.PAR_ */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("822ace8f-2814-4174-a56b-5f029fe079ee")))
                 {
@@ -38315,7 +38297,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         DEV9 = DSMI (L2D9, L2A9, Zero, L2BS)
                         DEVA = DSMI (L2DA, L2AA, Zero, L2BS)
                         DEVB = DSMI (L2DB, L2AB, Zero, L2BS)
-                        Return (DSMB) /* \_SB_.PCI0.LNK2.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.LNK2._DSM.DSMB */
                     }
 
                     Return (Buffer (One)
@@ -38702,7 +38684,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (PAR) /* \_SB_.PCI0.LNK3.SSDB.PAR_ */
             }
 
-            Method (ZDSM, 4, Serialized)
+            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
                 If ((Arg0 == ToUUID ("822ace8f-2814-4174-a56b-5f029fe079ee")))
                 {
@@ -38796,7 +38778,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         DEV9 = DSMI (L3D9, L3A9, Zero, L3BS)
                         DEVA = DSMI (L3DA, L3AA, Zero, L3BS)
                         DEVB = DSMI (L3DB, L3AB, Zero, L3BS)
-                        Return (DSMB) /* \_SB_.PCI0.LNK3.ZDSM.DSMB */
+                        Return (DSMB) /* \_SB_.PCI0.LNK3._DSM.DSMB */
                     }
 
                     Return (Buffer (One)
@@ -40567,104 +40549,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Return (Zero)
             }
 
-            Method (ECWT, 1, Serialized)
+            Method (ECWT, 2, Serialized)
             {
-                Local0 = DerefOf (Arg0)
-                Switch (ToInteger (Local0))
-                {
-                    Case (0x32)
-                    {
-                    }
-                    Case (0x36)
-                    {
-                    }
-                    Case (0x03)
-                    {
-                    }
-                    Case (0x3A)
-                    {
-                    }
-                    Case (0x30)
-                    {
-                    }
-                    Case (One)
-                    {
-                    }
-                    Case (0x83)
-                    {
-                    }
-                    Case (0x82)
-                    {
-                    }
-                    Case (0x44)
-                    {
-                    }
-                    Case (0x43)
-                    {
-                    }
-                    Case (0x42)
-                    {
-                    }
-                    Case (0x41)
-                    {
-                    }
-                    Case (0x45)
-                    {
-                    }
-                    Case (0x03)
-                    {
-                    }
-                    Case (0x03)
-                    {
-                    }
-                    Case (0x30)
-                    {
-                    }
-                    Case (0xC4)
-                    {
-                    }
-                    Case (0xC5)
-                    {
-                    }
-                    Case (0xC6)
-                    {
-                    }
-                    Case (0xC7)
-                    {
-                    }
-                    Case (0x78)
-                    {
-                    }
-                    Case (0xC8)
-                    {
-                    }
-                    Case (0x78)
-                    {
-                    }
-                    Case (0xA0)
-                    {
-                    }
-                    Case (0xA0)
-                    {
-                    }
-                    Case (0xE8)
-                    {
-                    }
-                    Case (0x79)
-                    {
-                    }
-
-                }
             }
 
             Method (ECMD, 1, Serialized)
             {
-                Return (Arg0)
             }
 
             Method (ECNT, 1, Serialized)
             {
-                Return (Arg0)
             }
 
             Device (BAT0)
@@ -40796,6 +40690,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
     Scope (_SB)
     {
+        Method (TEST, 1, NotSerialized)
+        {
+            Arg0 = (GPC0 (0x01030006) & 0x0001FCFE)
+        }
+
         Method (MPTS, 1, NotSerialized)
         {
             \GSA1.MPTS (Arg0)
@@ -40828,7 +40727,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         })
         Device (WMI1)
         {
-            Name (_HID, EisaId ("PNP0C14") /* Windows Management Instrumentation Device */)  // _HID: Hardware ID
+            Name (_HID, "PNP0C14" /* Windows Management Instrumentation Device */)  // _HID: Hardware ID
             Name (_UID, "MXM2")  // _UID: Unique ID
             Name (_WDG, Buffer (0x14)
             {
@@ -40836,9 +40735,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 /* 0008 */  0xB5, 0x77, 0x93, 0x1E, 0xA3, 0x2A, 0x2C, 0xC0,  // .w...*,.
                 /* 0010 */  0x4D, 0x58, 0x01, 0x02                           // MX..
             })
-            Method (WMMX, 1, NotSerialized)
+            Method (WMMX, 3, NotSerialized)
             {
-                CreateDWordField (Arg0, Zero, FUNC)
+                CreateDWordField (Arg2, Zero, FUNC)
                 If ((FUNC == 0x41494C53))
                 {
                     Return (SLIC) /* \_SB_.PCI0.SLIC */
@@ -40998,7 +40897,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Return (Zero)
         }
 
-        Method (STRT, 2, Serialized)
+        Method (STRT, 3, Serialized)
         {
             OperationRegion (TPMR, SystemMemory, FTPM, 0x1000)
             Field (TPMR, AnyAcc, NoLock, Preserve)
@@ -41053,7 +40952,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Return (One)
         }
 
-        Method (CRYF, 2, Serialized)
+        Method (CRYF, 3, Serialized)
         {
             If ((ToInteger (Arg0) != One)){}
             Switch (ToInteger (Arg1))
@@ -41116,7 +41015,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             SRSP,   32
         }
 
-        Method (ZDSM, 4, Serialized)
+        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
         {
             If ((Arg0 == ToUUID ("3dddfaa6-361b-4eb4-a424-8d10089d1653") /* Physical Presence Interface */))
             {
@@ -41158,7 +41057,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Zero
                         })
                         PPI1 [One] = RQST /* \_SB_.TPM_.RQST */
-                        Return (PPI1) /* \_SB_.TPM_.ZDSM.PPI1 */
+                        Return (PPI1) /* \_SB_.TPM_._DSM.PPI1 */
                     }
                     Case (0x04)
                     {
@@ -41177,7 +41076,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         SMI = OFST /* \OFST */
                         PPI2 [One] = RCNT /* \_SB_.TPM_.RCNT */
                         PPI2 [0x02] = ERRO /* \_SB_.TPM_.ERRO */
-                        Return (PPI2) /* \_SB_.TPM_.ZDSM.PPI2 */
+                        Return (PPI2) /* \_SB_.TPM_._DSM.PPI2 */
                     }
                     Case (0x06)
                     {
@@ -41242,12 +41141,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             If ((Arg0 == ToUUID ("cf8e16a5-c1e8-4e25-b712-4f54a96702c8")))
             {
-                Return (CRYF (Arg1, Arg2))
+                Return (CRYF (Arg1, Arg2, Arg3))
             }
 
             If ((Arg0 == ToUUID ("6bbf6cab-5463-4714-b7cd-f0203c0368d4")))
             {
-                Return (STRT (Arg1, Arg2))
+                Return (STRT (Arg1, Arg2, Arg3))
             }
 
             Return (Buffer (One)

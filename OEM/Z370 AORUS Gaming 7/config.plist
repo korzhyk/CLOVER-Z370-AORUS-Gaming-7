@@ -35,6 +35,32 @@
         </dict>
         <dict>
           <key>Comment</key>
+          <string>XDSM to _DSM</string>
+          <key>Find</key>
+          <data>
+          WERTTQ==
+          </data>
+          <key>Replace</key>
+          <data>
+          X0RTTQ==
+          </data>
+        </dict>
+        <dict>
+          <key>Comment</key>
+          <string>XHC_ to XHC1</string>
+          <key>Disabled</key>
+          <false/>
+          <key>Find</key>
+          <data>
+          WEhDXw==
+          </data>
+          <key>Replace</key>
+          <data>
+          WEhDMQ==
+          </data>
+        </dict>
+        <dict>
+          <key>Comment</key>
           <string>SAT0 to SATA</string>
           <key>Find</key>
           <data>
@@ -59,7 +85,7 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>Set OSYS to 0x07DA</string>
+          <string>Set OSYS = 0x07DA</string>
           <key>Find</key>
           <data>
           RXAL0AdPU1k=
@@ -78,7 +104,7 @@
         <string>DMAR</string>
       </dict>
       <dict>
-        <key>TableId</key>
+        <key>Comment</key>
         <string>sensrhub</string>
         <key>Length</key>
         <string>671</string>
@@ -86,7 +112,7 @@
         <string>SSDT</string>
       </dict>
       <dict>
-        <key>TableId</key>
+        <key>Comment</key>
         <string>Ther_Rvp</string>
         <key>Length</key>
         <string>4522</string>
@@ -105,7 +131,7 @@
   <key>Boot</key>
   <dict>
     <key>Arguments</key>
-    <string>ngfxcompat=1 -v</string>
+    <string>darkwake=0 ngfxcompat=1 keepsyms=1 dart=0 debug=0x100 shikigva=40 -v</string>
     <key>DefaultVolume</key>
     <string>LastBootedVolume</string>
     <key>Timeout</key>
@@ -144,10 +170,8 @@
   </array>
   <key>GUI</key>
   <dict>
-    <key>ScreenResolution</key>
-		<string>1400x1050</string>
-		<key>Theme</key>
-		<string>embedded</string>
+    <key>Theme</key>
+		<string>Mavs Style</string>
     <key>Hide</key>
     <array>
       <string>Preboot</string>
