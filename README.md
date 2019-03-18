@@ -71,6 +71,8 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | HS10      | 10       |           |          |
 
 ## Chnagelog
+###### 18/03/2019
+* Updated kexts to newest versions
 ###### 20/11/2018
 * Updated kexts to newest versions
 * Recompiled `DSDT` with external references
