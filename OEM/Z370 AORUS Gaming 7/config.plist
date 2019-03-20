@@ -85,14 +85,14 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>Set OSYS = 0x07DA</string>
+          <string>Set OSYS = 0x07E0</string>
           <key>Find</key>
           <data>
           RXAL0AdPU1k=
           </data>
           <key>Replace</key>
           <data>
-          RXAL2gdPU1k=
+          RXAL4AdPU1k=
           </data>
         </dict>
       </array>
