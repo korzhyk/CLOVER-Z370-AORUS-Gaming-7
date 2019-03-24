@@ -11,17 +11,17 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 * Intel Core i7 8700K
 * Gigabyte Z370 AORUS Gaming 7
-* 4×8GB Samsung M378A1K43CB2-CRC (OC 3200MHz)
+* 4×8GB Samsung M378A1K43BB2-CRC (OC 3600MHz)
 * M.2 NVME MyDigitalSSD SBX 120GB (macOS)
 * PCI-e Broadcom BCM4360 WiFi ac + USB Bluetooth 4.0
 
 ## Before you start make sure you have
 
-* Working hardware 
+* Working hardware
 * Motherboard BIOS version [F11 RB][103]
 * Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own, if you are using a external AMD GPU use mac Model 18,3 in another cases use 18,1*
 
- 
+
 # Installation
 
 ## BIOS Settings
@@ -43,9 +43,9 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 ### EFI drivers
 
-* ApfsDriverLoader-64.efi - Must have to run 10.14+
+* ApfsDriverLoader-64.efi - Must have to run 10.13.6+
 * AptioMemoryFix-64.efi - Must have to work with native NVRAM
-* VBoxHfs-64.efi - Must have to run 10.13-
+* VBoxHfs-64.efi - Must have to run < 10.13.6
 * VirtualSmc.efi - Bundled with `VirtualSMC.kext`. Disabled in Clover, needed if you use File Vault 2 or [authrestart][6].
 
 ## Issues
@@ -71,6 +71,9 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | HS10      | 10       |           |          |
 
 ## Chnagelog
+###### 24/03/2019
+* Fixed DSDT from F12 BIOS
+* Updated EFI drivers
 ###### 18/03/2019
 * Updated kexts to newest versions
 ###### 20/11/2018
