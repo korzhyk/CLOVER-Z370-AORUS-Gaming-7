@@ -1,17 +1,17 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20180810 (64-bit version)
+ * AML/ASL+ Disassembler version 20181031 (32-bit version)
  * Copyright (c) 2000 - 2018 Intel Corporation
  *
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLoFsqYx.aml, Tue Nov 20 01:12:56 2018
+ * Disassembly of DSDT.aml, Tue Mar 19 22:26:00 2019
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x00029A77 (170615)
+ *     Length           0x0002CDD7 (183767)
  *     Revision         0x02
- *     Checksum         0xFF
+ *     Checksum         0xFE
  *     OEM ID           "ALASKA"
  *     OEM Table ID     "A M I"
  *     OEM Revision     0x01072009 (17244169)
@@ -53,6 +53,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     External (_PR_.PR00.TPSS, PkgObj)
     External (_PR_.TRPD, UnknownObj)
     External (_PR_.TRPF, UnknownObj)
+    External (_SB_.AWAC, DeviceObj)
+    External (_SB_.AWAC.WAST, IntObj)
     External (_SB_.IETM, DeviceObj)
     External (_SB_.PCI0.GFX0.ALSI, UnknownObj)
     External (_SB_.PCI0.GFX0.CBLV, UnknownObj)
@@ -166,6 +168,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     External (PC13, UnknownObj)
     External (PC14, UnknownObj)
     External (PC15, UnknownObj)
+    External (PCRR, MethodObj)    // 2 Arguments
+    External (PCRW, MethodObj)    // 3 Arguments
     External (RP05.PWRG, UnknownObj)
     External (RP05.RSTG, UnknownObj)
     External (RP05.SCLK, UnknownObj)
@@ -273,7 +277,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     Name (ROMS, 0xFFE00000)
     Name (VGAF, One)
     Name (UEMU, 0x5A5A)
-    OperationRegion (GNVS, SystemMemory, 0xBD9A0000, 0x0792)
+    OperationRegion (GNVS, SystemMemory, 0xBD8EE000, 0x07B6)
     Field (GNVS, AnyAcc, Lock, Preserve)
     {
         OSYS,   16,
@@ -1457,6 +1461,39 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         MCL0,   32,
         PSPE,   8,
         PBEN,   8,
+        WRTO,   8,
+        SD11,   8,
+        SD12,   8,
+        SD13,   8,
+        SD14,   8,
+        SD15,   8,
+        SD16,   8,
+        SD21,   8,
+        SD22,   8,
+        SD23,   8,
+        SD24,   8,
+        SD25,   8,
+        SD26,   8,
+        SD31,   8,
+        SD32,   8,
+        SD33,   8,
+        SD34,   8,
+        SD35,   8,
+        SD36,   8,
+        BTSE,   8,
+        BTBR,   8,
+        BED2,   8,
+        BED3,   8,
+        BTLE,   8,
+        BTL2,   8,
+        BTLL,   8,
+        POME,   8,
+        P193,   8,
+        PMTC,   8,
+        STAS,   8,
+        LSGN,   8,
+        PEP1,   32,
+        SRLD,   8,
         AES3,   8,
         T2SE,   8
     }
@@ -4372,6 +4409,27 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     0x0000000000000000, // Length
                     ,, _Y0F, AddressRangeMemory, TypeStatic)
             })
+            If ((TLUD >= 0x0404))
+            {
+                Device (SRRE)
+                {
+                    Name (_HID, EisaId ("PNP0C02") /* PNP Motherboard Resources */)  // _HID: Hardware ID
+                    Name (_UID, "SARESV")  // _UID: Unique ID
+                    Name (_STA, 0x03)  // _STA: Status
+                    Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
+                    {
+                        Name (BUF0, ResourceTemplate ()
+                        {
+                            Memory32Fixed (ReadOnly,
+                                0x40000000,         // Address Base
+                                0x00400000,         // Address Length
+                                )
+                        })
+                        Return (BUF0) /* \_SB_.PCI0.SRRE._CRS.BUF0 */
+                    }
+                }
+            }
+
             Name (EP_B, Zero)
             Name (MH_B, Zero)
             Name (PC_B, Zero)
@@ -12035,7 +12093,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         }
     }
 
-    Name (PNVB, 0xBD9A4018)
+    Name (PNVB, 0xBD8F2018)
     Name (PNVL, 0x0287)
     If ((ECR1 == One))
     {
@@ -12074,7 +12132,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                     }
                 }
-               
+
                 Arg3 = Buffer (One)
                 {
                      0x00                                             // .
@@ -13078,7 +13136,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             }
 
             DO30 = Zero
-           
+
             Return (DO30)
         }
 
@@ -13800,6 +13858,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         OperationRegion (PWMR, SystemMemory, PWRM, 0x0800)
         Field (PWMR, AnyAcc, NoLock, Preserve)
         {
+            ACWA,   32,
+            DCWA,   32,
+            ACET,   32,
+            DCET,   32,
             Offset (0xE0),
             Offset (0xE2),
             DWLE,   1,
@@ -13882,7 +13944,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     PMES = One
                     Notify (GLAN, 0x02) // Device Wake
                 }
-               
+
                 Return (Zero)
             }
         }
@@ -14040,7 +14102,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Notify (XHC, 0x02) // Device Wake
                 }
-               
+
                 Return (Zero)
             }
 
@@ -14118,7 +14180,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Sleep (0x0A)
                     }
                 }
-               
+
                 Return (Zero)
             }
 
@@ -14306,7 +14368,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         Sleep (0x0A)
                     }
                 }
-               
+
                 Return (Zero)
             }
 
@@ -14334,7 +14396,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS0X ()
                     }
-               
+
                     Return (Zero)
                 }
 
@@ -14349,7 +14411,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS2X ()
                     }
-               
+
                     Return (Zero)
                 }
 
@@ -14364,7 +14426,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         PS3X ()
                     }
-               
+
                     Return (Zero)
                 }
 
@@ -14782,7 +14844,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     Notify (XDCI, 0x02) // Device Wake
                 }
-               
+
                 Return (Zero)
             }
         }
@@ -14832,7 +14894,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     PMES = One
                     Notify (HDAS, 0x02) // Device Wake
                 }
-               
+
                 Return (Zero)
             }
 
@@ -15301,7 +15363,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
-               
+
                     Return (Zero)
                 }
 
@@ -15339,7 +15401,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
-               
+
                     Return (Zero)
                 }
 
@@ -15464,7 +15526,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
-               
+
                     Return (Zero)
                 }
             }
@@ -15599,7 +15661,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
-               
+
                     Return (Zero)
                 }
 
@@ -15637,7 +15699,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
-               
+
                     Return (Zero)
                 }
 
@@ -15765,7 +15827,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
-               
+
                     Return (Zero)
                 }
             }
@@ -15900,7 +15962,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Sleep (0x07D0)
                     NVD0 ()
                     ADBG (Concatenate ("RPONe: ", ToHexString (NRPN)))
-               
+
                     Return (Zero)
                 }
 
@@ -15938,7 +16000,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     RDCA (NCRN, 0x50, 0xFFFFFFFF, 0x10, One)
                     RDCA (NCRN, 0x50, 0xFFFFFFEF, Zero, One)
                     ISD3 = 0x03
-               
+
                     Return (Zero)
                 }
 
@@ -16063,7 +16125,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     ADBG (Concatenate ("CNRSe ", ToDecimalString (Timer)))
                     Debug = "[ACPI RST] Restore Remapped Device and Hidden RP context |complete"
-               
+
                     Return (Zero)
                 }
             }
@@ -16144,33 +16206,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
-                If ((CIOE == One))
-                {
-                    Return (0x0F)
-                }
-                Else
-                {
-                    Return (Zero)
-                }
+                Return (0x0F)
             }
 
-            Name (_HID, "INT343E")  // _HID: Hardware ID
-            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
+            If ((CIOE == One))
             {
-                Name (CBUF, ResourceTemplate ()
+                Name (_HID, "INT343E")  // _HID: Hardware ID
+                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
                 {
-                    Interrupt (ResourceConsumer, Level, ActiveLow, Shared, ,, _Y26)
+                    Name (CBUF, ResourceTemplate ()
                     {
-                        0x00000010,
-                    }
-                    Memory32Fixed (ReadWrite,
-                        0xFE400000,         // Address Base
-                        0x00010000,         // Address Length
-                        )
-                })
-                CreateDWordField (CBUF, \_SB.PCI0.CIO2._CRS._Y26._INT, CIOV)  // _INT: Interrupts
-                CIOV = CIOI /* \CIOI */
-                Return (CBUF) /* \_SB_.PCI0.CIO2._CRS.CBUF */
+                        Interrupt (ResourceConsumer, Level, ActiveLow, Shared, ,, _Y26)
+                        {
+                            0x00000010,
+                        }
+                        Memory32Fixed (ReadWrite,
+                            0xFE400000,         // Address Base
+                            0x00010000,         // Address Length
+                            )
+                    })
+                    CreateDWordField (CBUF, \_SB.PCI0.CIO2._CRS._Y26._INT, CIOV)  // _INT: Interrupts
+                    CIOV = CIOI /* \CIOI */
+                    Return (CBUF) /* \_SB_.PCI0.CIO2._CRS.CBUF */
+                }
+            }
+            Else
+            {
+                Name (_ADR, 0x00140003)  // _ADR: Address
             }
         }
 
@@ -16263,7 +16325,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 SLS0 = Zero
                 VMOF ()
             }
-               
+
             Return (Zero)
         }
     }
@@ -17220,7 +17282,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (Arg4)
                 }
             }
-           
+
             Arg3 = Buffer (One)
             {
                  0x00                                             // .
@@ -17347,7 +17409,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         SPED = 0x000F4240
                     }
                 }
-               
+
                 Return (Zero)
             }
 
@@ -17422,7 +17484,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     _CID = "INT343B"
                     CADR = 0x34
                 }
-               
+
                 Return (Zero)
             }
 
@@ -17670,8 +17732,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         SPED = 0x000F4240
                     }
+
                 }
-               
+
                 Return (Zero)
             }
 
@@ -17748,6 +17811,512 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         )
                 })
                 Return (SBUF) /* \_SB_.PCI0.I2C1.IMP3._CRS.SBUF */
+            }
+        }
+    }
+
+    If ((PMTC == Zero))
+    {
+        Scope (_SB.PCI0.I2C0)
+        {
+            Name (IBUS, Zero)
+            If ((P193 == One))
+            {
+                Device (PA01)
+                {
+                    Name (_HID, "MCHP1930")  // _HID: Hardware ID
+                    Name (_UID, One)  // _UID: Unique ID
+                    Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (((POME != Zero) && (PMTC == IBUS)))
+                        {
+                            Return (0x0F)
+                        }
+
+                        Return (Zero)
+                    }
+
+                    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                    {
+                        Name (RBUF, ResourceTemplate ()
+                        {
+                            I2cSerialBusV2 (0x0018, ControllerInitiated, 0x00061A80,
+                                AddressingMode7Bit, "\\_SB.PCI0.I2C0",
+                                0x00, ResourceConsumer, , Exclusive,
+                                )
+                        })
+                        Return (RBUF) /* \_SB_.PCI0.I2C0.PA01._CRS.RBUF */
+                    }
+
+                    Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                    {
+                        If ((Arg0 != ToUUID ("033771e0-1705-47b4-9535-d1bbe14d9a09")))
+                        {
+                            Return (Buffer (One)
+                            {
+                                 0x00                                             // .
+                            })
+                        }
+
+                        Switch (ToInteger (Arg2))
+                        {
+                            Case (Zero)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Return (Buffer (One)
+                                    {
+                                         0x03                                             // .
+                                    })
+                                }
+
+                                Break
+                            }
+                            Case (One)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Name (PBUF, Package (0x08)
+                                    {
+                                        "CPU_SA",
+                                        0x02,
+                                        "CPU_1",
+                                        0x02,
+                                        "CPU_2",
+                                        0x02,
+                                        "STORAGE",
+                                        0x0A
+                                    })
+                                    Return (PBUF) /* \_SB_.PCI0.I2C0.PA01._DSM.PBUF */
+                                }
+
+                                Break
+                            }
+
+                        }
+
+                        Return (Buffer (One)
+                        {
+                             0x00                                             // .
+                        })
+                    }
+                }
+
+                Device (PA02)
+                {
+                    Name (_HID, "MCHP1930")  // _HID: Hardware ID
+                    Name (_UID, 0x02)  // _UID: Unique ID
+                    Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (((POME != Zero) && (PMTC == IBUS)))
+                        {
+                            Return (0x0F)
+                        }
+
+                        Return (Zero)
+                    }
+
+                    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                    {
+                        Name (RBUF, ResourceTemplate ()
+                        {
+                            I2cSerialBusV2 (0x0019, ControllerInitiated, 0x00061A80,
+                                AddressingMode7Bit, "\\_SB.PCI0.I2C0",
+                                0x00, ResourceConsumer, , Exclusive,
+                                )
+                        })
+                        Return (RBUF) /* \_SB_.PCI0.I2C0.PA02._CRS.RBUF */
+                    }
+
+                    Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                    {
+                        If ((Arg0 != ToUUID ("033771e0-1705-47b4-9535-d1bbe14d9a09")))
+                        {
+                            Return (Buffer (One)
+                            {
+                                 0x00                                             // .
+                            })
+                        }
+
+                        Switch (ToInteger (Arg2))
+                        {
+                            Case (Zero)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Return (Buffer (One)
+                                    {
+                                         0x03                                             // .
+                                    })
+                                }
+
+                                Break
+                            }
+                            Case (One)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Name (PBUF, Package (0x08)
+                                    {
+                                        "DISPLAY_BKLT",
+                                        0x0A,
+                                        "MAINMEM_MEMORY",
+                                        0x02,
+                                        "MAINMEM_CPU",
+                                        0x02,
+                                        "WIFI",
+                                        0x0A
+                                    })
+                                    Return (PBUF) /* \_SB_.PCI0.I2C0.PA02._DSM.PBUF */
+                                }
+
+                                Break
+                            }
+
+                        }
+
+                        Return (Buffer (One)
+                        {
+                             0x00                                             // .
+                        })
+                    }
+                }
+
+                Device (PA03)
+                {
+                    Name (_HID, "MCHP1930")  // _HID: Hardware ID
+                    Name (_UID, 0x03)  // _UID: Unique ID
+                    Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (((POME != Zero) && (PMTC == IBUS)))
+                        {
+                            Return (0x0F)
+                        }
+
+                        Return (Zero)
+                    }
+
+                    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                    {
+                        Name (RBUF, ResourceTemplate ()
+                        {
+                            I2cSerialBusV2 (0x001A, ControllerInitiated, 0x00061A80,
+                                AddressingMode7Bit, "\\_SB.PCI0.I2C0",
+                                0x00, ResourceConsumer, , Exclusive,
+                                )
+                        })
+                        Return (RBUF) /* \_SB_.PCI0.I2C0.PA03._CRS.RBUF */
+                    }
+
+                    Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                    {
+                        If ((Arg0 != ToUUID ("033771e0-1705-47b4-9535-d1bbe14d9a09")))
+                        {
+                            Return (Buffer (One)
+                            {
+                                 0x00                                             // .
+                            })
+                        }
+
+                        Switch (ToInteger (Arg2))
+                        {
+                            Case (Zero)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Return (Buffer (One)
+                                    {
+                                         0x03                                             // .
+                                    })
+                                }
+
+                                Break
+                            }
+                            Case (One)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Name (PBUF, Package (0x08)
+                                    {
+                                        "DISPLAY_PANEL",
+                                        0x0A,
+                                        "GPU_1",
+                                        0x02,
+                                        "GPU_2",
+                                        0x02,
+                                        "SYSTEM_POWER",
+                                        0x02
+                                    })
+                                    Return (PBUF) /* \_SB_.PCI0.I2C0.PA03._DSM.PBUF */
+                                }
+
+                                Break
+                            }
+
+                        }
+
+                        Return (Buffer (One)
+                        {
+                             0x00                                             // .
+                        })
+                    }
+                }
+            }
+        }
+    }
+
+    If ((PMTC == One))
+    {
+        Scope (_SB.PCI0.I2C1)
+        {
+            Name (IBUS, One)
+            If ((P193 == One))
+            {
+                Device (PA01)
+                {
+                    Name (_HID, "MCHP1930")  // _HID: Hardware ID
+                    Name (_UID, One)  // _UID: Unique ID
+                    Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (((POME != Zero) && (PMTC == IBUS)))
+                        {
+                            Return (0x0F)
+                        }
+
+                        Return (Zero)
+                    }
+
+                    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                    {
+                        Name (RBUF, ResourceTemplate ()
+                        {
+                            I2cSerialBusV2 (0x0018, ControllerInitiated, 0x00061A80,
+                                AddressingMode7Bit, "\\_SB.PCI0.I2C1",
+                                0x00, ResourceConsumer, , Exclusive,
+                                )
+                        })
+                        Return (RBUF) /* \_SB_.PCI0.I2C1.PA01._CRS.RBUF */
+                    }
+
+                    Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                    {
+                        If ((Arg0 != ToUUID ("033771e0-1705-47b4-9535-d1bbe14d9a09")))
+                        {
+                            Return (Buffer (One)
+                            {
+                                 0x00                                             // .
+                            })
+                        }
+
+                        Switch (ToInteger (Arg2))
+                        {
+                            Case (Zero)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Return (Buffer (One)
+                                    {
+                                         0x03                                             // .
+                                    })
+                                }
+
+                                Break
+                            }
+                            Case (One)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Name (PBUF, Package (0x08)
+                                    {
+                                        "CPU_SA",
+                                        0x02,
+                                        "CPU_1",
+                                        0x02,
+                                        "CPU_2",
+                                        0x02,
+                                        "STORAGE",
+                                        0x0A
+                                    })
+                                    Return (PBUF) /* \_SB_.PCI0.I2C1.PA01._DSM.PBUF */
+                                }
+
+                                Break
+                            }
+
+                        }
+
+                        Return (Buffer (One)
+                        {
+                             0x00                                             // .
+                        })
+                    }
+                }
+
+                Device (PA02)
+                {
+                    Name (_HID, "MCHP1930")  // _HID: Hardware ID
+                    Name (_UID, 0x02)  // _UID: Unique ID
+                    Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (((POME != Zero) && (PMTC == IBUS)))
+                        {
+                            Return (0x0F)
+                        }
+
+                        Return (Zero)
+                    }
+
+                    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                    {
+                        Name (RBUF, ResourceTemplate ()
+                        {
+                            I2cSerialBusV2 (0x0019, ControllerInitiated, 0x00061A80,
+                                AddressingMode7Bit, "\\_SB.PCI0.I2C1",
+                                0x00, ResourceConsumer, , Exclusive,
+                                )
+                        })
+                        Return (RBUF) /* \_SB_.PCI0.I2C1.PA02._CRS.RBUF */
+                    }
+
+                    Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                    {
+                        If ((Arg0 != ToUUID ("033771e0-1705-47b4-9535-d1bbe14d9a09")))
+                        {
+                            Return (Buffer (One)
+                            {
+                                 0x00                                             // .
+                            })
+                        }
+
+                        Switch (ToInteger (Arg2))
+                        {
+                            Case (Zero)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Return (Buffer (One)
+                                    {
+                                         0x03                                             // .
+                                    })
+                                }
+
+                                Break
+                            }
+                            Case (One)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Name (PBUF, Package (0x08)
+                                    {
+                                        "DISPLAY_BKLT",
+                                        0x0A,
+                                        "MAINMEM_MEMORY",
+                                        0x02,
+                                        "MAINMEM_CPU",
+                                        0x02,
+                                        "WIFI",
+                                        0x0A
+                                    })
+                                    Return (PBUF) /* \_SB_.PCI0.I2C1.PA02._DSM.PBUF */
+                                }
+
+                                Break
+                            }
+
+                        }
+
+                        Return (Buffer (One)
+                        {
+                             0x00                                             // .
+                        })
+                    }
+                }
+
+                Device (PA03)
+                {
+                    Name (_HID, "MCHP1930")  // _HID: Hardware ID
+                    Name (_UID, 0x03)  // _UID: Unique ID
+                    Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (((POME != Zero) && (PMTC == IBUS)))
+                        {
+                            Return (0x0F)
+                        }
+
+                        Return (Zero)
+                    }
+
+                    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                    {
+                        Name (RBUF, ResourceTemplate ()
+                        {
+                            I2cSerialBusV2 (0x001A, ControllerInitiated, 0x00061A80,
+                                AddressingMode7Bit, "\\_SB.PCI0.I2C1",
+                                0x00, ResourceConsumer, , Exclusive,
+                                )
+                        })
+                        Return (RBUF) /* \_SB_.PCI0.I2C1.PA03._CRS.RBUF */
+                    }
+
+                    Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                    {
+                        If ((Arg0 != ToUUID ("033771e0-1705-47b4-9535-d1bbe14d9a09")))
+                        {
+                            Return (Buffer (One)
+                            {
+                                 0x00                                             // .
+                            })
+                        }
+
+                        Switch (ToInteger (Arg2))
+                        {
+                            Case (Zero)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Return (Buffer (One)
+                                    {
+                                         0x03                                             // .
+                                    })
+                                }
+
+                                Break
+                            }
+                            Case (One)
+                            {
+                                If ((Arg1 == Zero))
+                                {
+                                    Name (PBUF, Package (0x08)
+                                    {
+                                        "DISPLAY_PANEL",
+                                        0x0A,
+                                        "GPU_1",
+                                        0x02,
+                                        "GPU_2",
+                                        0x02,
+                                        "SYSTEM_POWER",
+                                        0x02
+                                    })
+                                    Return (PBUF) /* \_SB_.PCI0.I2C1.PA03._DSM.PBUF */
+                                }
+
+                                Break
+                            }
+
+                        }
+
+                        Return (Buffer (One)
+                        {
+                             0x00                                             // .
+                        })
+                    }
+                }
             }
         }
     }
@@ -20091,7 +20660,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         UAMS = (Arg0 && !PWRS)
         P_CS ()
-       
+
         Return (Zero)
     }
 
@@ -20511,7 +21080,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
 
                 VMEN = One
-               
+
                 Return (Zero)
             }
 
@@ -20533,7 +21102,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
 
                 VMEN = Zero
-               
+
                 Return (Zero)
             }
         }
@@ -22620,6 +23189,15 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
             }
         }
+
+        Method (_L72, 0, Serialized)  // _Lxx: Level-Triggered GPE
+        {
+            If (CondRefOf (\_SB.AWAC))
+            {
+                \_SB.AWAC.WAST = One
+                Notify (\_SB.AWAC, 0x02) // Device Wake
+            }
+        }
     }
 
     If ((CAMT == One))
@@ -22837,6 +23415,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -22861,6 +23447,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -23063,6 +23676,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP01.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -23249,6 +23911,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -23273,6 +23943,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -23475,6 +24172,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP02.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -23661,6 +24407,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -23685,6 +24439,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -23887,6 +24668,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP03.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -24073,6 +24903,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -24097,6 +24935,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -24299,6 +25164,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP04.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -24485,6 +25399,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -24509,6 +25431,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -24711,6 +25660,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP05.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -24897,6 +25895,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -24921,6 +25927,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -25123,6 +26156,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP06.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -25309,6 +26391,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -25333,6 +26423,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -25535,6 +26652,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP07.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -25721,6 +26887,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -25745,6 +26919,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -25947,6 +27148,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP08.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -26133,6 +27383,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -26157,6 +27415,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -26359,6 +27644,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP09.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -26545,6 +27879,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -26569,6 +27911,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -26771,6 +28140,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP10.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -26957,6 +28375,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -26981,6 +28407,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -27183,6 +28636,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP11.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -27369,6 +28871,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -27393,6 +28903,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -27595,6 +29132,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP12.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -27781,6 +29367,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -27805,6 +29399,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -28007,6 +29628,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP13.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -28193,6 +29863,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -28217,6 +29895,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -28419,6 +30124,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP14.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -28605,6 +30359,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -28629,6 +30391,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -28831,6 +30620,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP15.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -29017,6 +30855,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -29041,6 +30887,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -29243,6 +31116,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP16.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -29429,6 +31351,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -29453,6 +31383,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -29655,6 +31612,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP17.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -29841,6 +31847,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -29865,6 +31879,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -30067,6 +32108,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP18.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -30253,6 +32343,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -30277,6 +32375,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -30479,6 +32604,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (WGWS) /* \WGWS */
                 }
 
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP19.PXSX.WGDY */
+                }
+
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
                     If (PCIC (Arg0))
@@ -30665,6 +32839,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         {
                             Return (One)
                         }
+                        Case (0x25268086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x27238086)
+                        {
+                            Return (One)
+                        }
                         Default
                         {
                             Return (Zero)
@@ -30689,6 +32871,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             Return (One)
                         }
                         Case (0x097C8086)
+                        {
+                            Return (One)
+                        }
+                        Default
+                        {
+                            Return (Zero)
+                        }
+
+                    }
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Method (WWST, 0, Serialized)
+            {
+                If (CondRefOf (VDID))
+                {
+                    Switch (ToInteger (VDID))
+                    {
+                        Case (0x73608086)
+                        {
+                            Return (One)
+                        }
+                        Case (0x75608086)
                         {
                             Return (One)
                         }
@@ -30889,6 +33098,55 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Method (WOWG, 0, Serialized)
                 {
                     Return (WGWS) /* \WGWS */
+                }
+
+                Name (WGDY, Package (0x02)
+                {
+                    Zero,
+                    Package (0x13)
+                    {
+                        0x07,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80,
+                        0x80
+                    }
+                })
+                Method (WGDS, 0, Serialized)
+                {
+                    DerefOf (WGDY [One]) [One] = SD11 /* \SD11 */
+                    DerefOf (WGDY [One]) [0x02] = SD12 /* \SD12 */
+                    DerefOf (WGDY [One]) [0x03] = SD13 /* \SD13 */
+                    DerefOf (WGDY [One]) [0x04] = SD14 /* \SD14 */
+                    DerefOf (WGDY [One]) [0x05] = SD15 /* \SD15 */
+                    DerefOf (WGDY [One]) [0x06] = SD16 /* \SD16 */
+                    DerefOf (WGDY [One]) [0x07] = SD21 /* \SD21 */
+                    DerefOf (WGDY [One]) [0x08] = SD22 /* \SD22 */
+                    DerefOf (WGDY [One]) [0x09] = SD23 /* \SD23 */
+                    DerefOf (WGDY [One]) [0x0A] = SD24 /* \SD24 */
+                    DerefOf (WGDY [One]) [0x0B] = SD25 /* \SD25 */
+                    DerefOf (WGDY [One]) [0x0C] = SD26 /* \SD26 */
+                    DerefOf (WGDY [One]) [0x0D] = SD31 /* \SD31 */
+                    DerefOf (WGDY [One]) [0x0E] = SD32 /* \SD32 */
+                    DerefOf (WGDY [One]) [0x0F] = SD33 /* \SD33 */
+                    DerefOf (WGDY [One]) [0x10] = SD34 /* \SD34 */
+                    DerefOf (WGDY [One]) [0x11] = SD35 /* \SD35 */
+                    DerefOf (WGDY [One]) [0x12] = SD36 /* \SD36 */
+                    Return (WGDY) /* \_SB_.PCI0.RP20.PXSX.WGDY */
                 }
 
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
@@ -32748,7 +35006,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Name (_HID, "INT33A1" /* Intel Power Engine */)  // _HID: Hardware ID
             Name (_CID, EisaId ("PNP0D80") /* Windows-compatible System Power Management Controller */)  // _CID: Compatible ID
             Name (_UID, One)  // _UID: Unique ID
-            Name (DEVY, Package (0x42)
+            Name (DEVY, Package (0x4A)
             {
                 Package (0x03)
                 {
@@ -33762,6 +36020,126 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x03
                         }
                     }
+                },
+
+                Package (0x03)
+                {
+                    "\\_SB.PCI0.RP12",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x03
+                        }
+                    }
+                },
+
+                Package (0x03)
+                {
+                    "USB\\VID_8087&PID_0AC9&MI*",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x02
+                        }
+                    }
+                },
+
+                Package (0x03)
+                {
+                    "\\_SB.PCI0.RP10",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x03
+                        }
+                    }
+                },
+
+                Package (0x03)
+                {
+                    "Reserved For TBT RP",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x03
+                        }
+                    }
+                },
+
+                Package (0x03)
+                {
+                    "Reserved For TBT xHci",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x03
+                        }
+                    }
+                },
+
+                Package (0x03)
+                {
+                    "Reserved For Multi TBT RP",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x03
+                        }
+                    }
+                },
+
+                Package (0x03)
+                {
+                    "Reserved For Multi TBT xHci",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x03
+                        }
+                    }
+                },
+
+                Package (0x03)
+                {
+                    "\\_SB.PCI0.CIO2",
+                    Zero,
+                    Package (0x02)
+                    {
+                        Zero,
+                        Package (0x02)
+                        {
+                            0xFF,
+                            0x03
+                        }
+                    }
                 }
             })
             Name (BCCD, Package (0x1A)
@@ -34641,6 +37019,33 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             }
                         }
 
+                        If (((OSYS >= 0x07DF) && (WRTO != Zero)))
+                        {
+                            If (^^PCI0.RP12.PXSX.WWST ())
+                            {
+                                If ((WRTO == One))
+                                {
+                                    DerefOf (DEVY [0x42]) [One] = One
+                                }
+                                Else
+                                {
+                                    DerefOf (DEVY [0x43]) [One] = One
+                                }
+                            }
+
+                            If (^^PCI0.RP10.PXSX.WWST ())
+                            {
+                                If ((WRTO == One))
+                                {
+                                    DerefOf (DEVY [0x44]) [One] = One
+                                }
+                                Else
+                                {
+                                    DerefOf (DEVY [0x43]) [One] = One
+                                }
+                            }
+                        }
+
                         If (((PEPC & 0x00200000) != Zero))
                         {
                             DerefOf (DEVY [0x37]) [One] = One
@@ -34711,7 +37116,34 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             DerefOf (DEVY [0x0B]) [One] = Zero
                         }
 
-                        If (((PEPC & 0x10) == Zero)){}
+                        If (((PEPC & 0x10) != Zero))
+                        {
+                            Local0 = Zero
+                            If ((TBSE > Zero))
+                            {
+                                If ((TBSE < 0x0A))
+                                {
+                                    Local1 = Concatenate ("RP0", ToDecimalString (TBSE))
+                                    Local0 = One
+                                }
+                                ElseIf ((TBSE < 0x19))
+                                {
+                                    Local1 = Concatenate ("RP", ToDecimalString (TBSE))
+                                    Local0 = One
+                                }
+                            }
+
+                            If ((Local0 == One))
+                            {
+                                DerefOf (DEVY [0x45]) [Zero] = Concatenate ("\\_SB.PCI0.", Local1
+                                    )
+                                DerefOf (DEVY [0x45]) [One] = One
+                                DerefOf (DEVY [0x46]) [Zero] = Concatenate (DerefOf (
+                                    DerefOf (DEVY [0x45]) [Zero]), ".PXSX.TBDU.XHC")
+                                DerefOf (DEVY [0x46]) [One] = One
+                            }
+                        }
+
                         If (((PEPC & 0x20) == Zero))
                         {
                             DerefOf (DEVY [0x0C]) [One] = Zero
@@ -35191,6 +37623,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             }
                         }
 
+                        If (((PEP1 & One) != Zero))
+                        {
+                            DerefOf (DEVY [0x49]) [One] = One
+                        }
+
                         Return (DEVY) /* \_SB_.PEPD.DEVY */
                     }
 
@@ -35241,6 +37678,27 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                      0x00                                             // .
                 })
             }
+        }
+    }
+
+    Scope (_SB)
+    {
+        Method (BTRK, 1, Serialized)
+        {
+            If ((GBTK != Zero))
+            {
+                SGOV (GBTK, Arg0)
+            }
+        }
+
+        Method (GBTR, 0, NotSerialized)
+        {
+            If ((GBTK != Zero))
+            {
+                Return (GGOV (GBTK))
+            }
+
+            Return (Zero)
         }
     }
 
@@ -39465,6 +41923,188 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         Return (Zero)
     }
 
+    Scope (_SB)
+    {
+        Device (AWAC)
+        {
+            Name (_HID, "ACPI000E" /* Time and Alarm Device */)  // _HID: Hardware ID
+            Name (WAST, Zero)
+            Name (WTTR, Zero)
+            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+            {
+                Return (GPRW (0x72, 0x04))
+            }
+
+            Method (_STA, 0, NotSerialized)  // _STA: Status
+            {
+//                If ((STAS == Zero))
+//                {
+//                    Return (0x0F)
+//                }
+//                Else
+//                {
+//                    Return (Zero)
+//                }
+//
+// Disable this device due to incompatible _GCP result
+// details here: https://pikeralpha.wordpress.com/2017/07/02/applesmcrtc-kext-panics/
+//
+		Return (Zero)
+            }
+
+            Method (_GCP, 0, NotSerialized)  // _GCP: Get Capabilities
+            {
+                Return (0xB7)
+            }
+
+            OperationRegion (RTCM, SystemCMOS, Zero, 0x3F)
+            Field (RTCM, ByteAcc, Lock, Preserve)
+            {
+                SEC,    8,
+                Offset (0x02),
+                MIN,    8,
+                Offset (0x04),
+                HOR,    8,
+                Offset (0x07),
+                DAY,    8,
+                MON,    8,
+                YEAR,   8,
+                Offset (0x32),
+                CNTY,   8
+            }
+
+            Method (_GRT, 0, NotSerialized)  // _GRT: Get Real Time
+            {
+                Local0 = Buffer (0x10){}
+                CreateWordField (Local0, Zero, Y)
+                CreateByteField (Local0, 0x02, M)
+                CreateByteField (Local0, 0x03, D)
+                CreateByteField (Local0, 0x04, H)
+                CreateByteField (Local0, 0x05, MIN1)
+                CreateByteField (Local0, 0x06, S)
+                CreateByteField (Local0, 0x07, V)
+                CreateWordField (Local0, 0x0A, TZ)
+                CreateByteField (Local0, 0x0C, DL)
+                FromBCD (YEAR, Local5)
+                FromBCD (CNTY, Local6)
+                Y = ((Local6 * 0x64) + Local5)
+                FromBCD (MON, M) /* \_SB_.AWAC._GRT.M___ */
+                FromBCD (DAY, D) /* \_SB_.AWAC._GRT.D___ */
+                FromBCD (HOR, H) /* \_SB_.AWAC._GRT.H___ */
+                FromBCD (MIN, MIN1) /* \_SB_.AWAC._GRT.MIN1 */
+                FromBCD (SEC, S) /* \_SB_.AWAC._GRT.S___ */
+                TZ = 0x07FF
+                DL = Zero
+                V = One
+                Return (Local0)
+            }
+
+            Method (_SRT, 1, NotSerialized)  // _SRT: Set Real Time
+            {
+                CreateWordField (Arg0, Zero, Y)
+                CreateByteField (Arg0, 0x02, M)
+                CreateByteField (Arg0, 0x03, D)
+                CreateByteField (Arg0, 0x04, H)
+                CreateByteField (Arg0, 0x05, MIN1)
+                CreateByteField (Arg0, 0x06, S)
+                Divide (Y, 0x64, Local5, Local4)
+                ToBCD (Local4, CNTY) /* \_SB_.AWAC.CNTY */
+                ToBCD (Local5, YEAR) /* \_SB_.AWAC.YEAR */
+                ToBCD (M, MON) /* \_SB_.AWAC.MON_ */
+                ToBCD (D, DAY) /* \_SB_.AWAC.DAY_ */
+                ToBCD (H, HOR) /* \_SB_.AWAC.HOR_ */
+                ToBCD (MIN1, MIN) /* \_SB_.AWAC.MIN_ */
+                ToBCD (S, SEC) /* \_SB_.AWAC.SEC_ */
+                Return (Zero)
+            }
+
+            Method (_GWS, 1, Serialized)  // _GWS: Get Wake Status
+            {
+                Local0 = Zero
+                If ((Arg0 == Zero))
+                {
+                    If (((ACWA == 0xFFFFFFFF) && (One & WTTR)))
+                    {
+                        Local0 |= One
+                        WTTR ^= One /* \_SB_.AWAC.WTTR */
+                    }
+                }
+                ElseIf (((DCWA == 0xFFFFFFFF) && (0x02 & WTTR)))
+                {
+                    Local0 |= One
+                    WTTR ^= 0x02 /* \_SB_.AWAC.WTTR */
+                }
+
+                If (WAST)
+                {
+                    Local0 |= 0x02
+                    WAST = Zero
+                }
+
+                Return (Local0)
+            }
+
+            Method (_CWS, 1, NotSerialized)  // _CWS: Clear Wake Alarm Status
+            {
+                Return (Zero)
+            }
+
+            Method (_STP, 2, NotSerialized)  // _STP: Set Expired Timer Wake Policy
+            {
+                If ((Arg0 == Zero))
+                {
+                    ACET = Arg1
+                }
+                Else
+                {
+                    DCET = Arg1
+                }
+
+                Return (Zero)
+            }
+
+            Method (_STV, 2, Serialized)  // _STV: Set Timer Value
+            {
+                If ((Arg0 == Zero))
+                {
+                    ACWA = Arg1
+                    WTTR |= One /* \_SB_.AWAC.WTTR */
+                }
+                Else
+                {
+                    DCWA = Arg1
+                    WTTR |= 0x02 /* \_SB_.AWAC.WTTR */
+                }
+
+                Return (Zero)
+            }
+
+            Method (_TIP, 1, NotSerialized)  // _TIP: Expired Timer Wake Policy
+            {
+                If ((Arg0 == Zero))
+                {
+                    Return (ACET) /* \ACET */
+                }
+                Else
+                {
+                    Return (DCET) /* \DCET */
+                }
+            }
+
+            Method (_TIV, 1, NotSerialized)  // _TIV: Timer Values
+            {
+                If ((Arg0 == Zero))
+                {
+                    Return (ACWA) /* \ACWA */
+                }
+                Else
+                {
+                    Return (DCWA) /* \DCWA */
+                }
+            }
+        }
+    }
+
     Scope (_SB.PCI0.RP01)
     {
         Name (LTRZ, Zero)
@@ -40276,6 +42916,20 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 IRQNoFlags ()
                     {8}
             })
+//
+// Enable RTC for macOS is important
+//
+//            Method (_STA, 0, NotSerialized)  // _STA: Status
+//            {
+//                If ((STAS == One))
+//                {
+//                    Return (0x0F)
+//                }
+//                Else
+//                {
+//                    Return (Zero)
+//                }
+//            }
         }
 
         Device (TIMR)
