@@ -272,8 +272,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     Name (SS2, Zero)
     Name (SS3, One)
     Name (SS4, One)
-    Name (IOST, 0x0000)
-    Name (TOPM, 0x00000000)
+    Name (IOST, Zero)
+    Name (TOPM, Zero)
     Name (ROMS, 0xFFE00000)
     Name (VGAF, One)
     Name (UEMU, 0x5A5A)
@@ -4488,169 +4488,169 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Local0 = GPCL ()
-                CreateWordField (BUF0, \_SB.PCI0._Y00._MAX, PBMX)  // _MAX: Maximum Base Address
+                CreateWordField (BUF0, ^_Y00._MAX, PBMX)  // _MAX: Maximum Base Address
                 PBMX = ((Local0 >> 0x14) - 0x02)
-                CreateWordField (BUF0, \_SB.PCI0._Y00._LEN, PBLN)  // _LEN: Length
+                CreateWordField (BUF0, ^_Y00._LEN, PBLN)  // _LEN: Length
                 PBLN = ((Local0 >> 0x14) - One)
                 If (PM1L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y01._LEN, C0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y01._LEN, C0LN)  // _LEN: Length
                     C0LN = Zero
                 }
 
                 If ((PM1L == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y01._RW, C0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y01._RW, C0RW)  // _RW_: Read-Write Status
                     C0RW = Zero
                 }
 
                 If (PM1H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y02._LEN, C4LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y02._LEN, C4LN)  // _LEN: Length
                     C4LN = Zero
                 }
 
                 If ((PM1H == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y02._RW, C4RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y02._RW, C4RW)  // _RW_: Read-Write Status
                     C4RW = Zero
                 }
 
                 If (PM2L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y03._LEN, C8LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y03._LEN, C8LN)  // _LEN: Length
                     C8LN = Zero
                 }
 
                 If ((PM2L == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y03._RW, C8RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y03._RW, C8RW)  // _RW_: Read-Write Status
                     C8RW = Zero
                 }
 
                 If (PM2H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y04._LEN, CCLN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y04._LEN, CCLN)  // _LEN: Length
                     CCLN = Zero
                 }
 
                 If ((PM2H == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y04._RW, CCRW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y04._RW, CCRW)  // _RW_: Read-Write Status
                     CCRW = Zero
                 }
 
                 If (PM3L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y05._LEN, D0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y05._LEN, D0LN)  // _LEN: Length
                     D0LN = Zero
                 }
 
                 If ((PM3L == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y05._RW, D0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y05._RW, D0RW)  // _RW_: Read-Write Status
                     D0RW = Zero
                 }
 
                 If (PM3H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y06._LEN, D4LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y06._LEN, D4LN)  // _LEN: Length
                     D4LN = Zero
                 }
 
                 If ((PM3H == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y06._RW, D4RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y06._RW, D4RW)  // _RW_: Read-Write Status
                     D4RW = Zero
                 }
 
                 If (PM4L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y07._LEN, D8LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y07._LEN, D8LN)  // _LEN: Length
                     D8LN = Zero
                 }
 
                 If ((PM4L == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y07._RW, D8RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y07._RW, D8RW)  // _RW_: Read-Write Status
                     D8RW = Zero
                 }
 
                 If (PM4H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y08._LEN, DCLN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y08._LEN, DCLN)  // _LEN: Length
                     DCLN = Zero
                 }
 
                 If ((PM4H == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y08._RW, DCRW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y08._RW, DCRW)  // _RW_: Read-Write Status
                     DCRW = Zero
                 }
 
                 If (PM5L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y09._LEN, E0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y09._LEN, E0LN)  // _LEN: Length
                     E0LN = Zero
                 }
 
                 If ((PM5L == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y09._RW, E0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y09._RW, E0RW)  // _RW_: Read-Write Status
                     E0RW = Zero
                 }
 
                 If (PM5H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0A._LEN, E4LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0A._LEN, E4LN)  // _LEN: Length
                     E4LN = Zero
                 }
 
                 If ((PM5H == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0A._RW, E4RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0A._RW, E4RW)  // _RW_: Read-Write Status
                     E4RW = Zero
                 }
 
                 If (PM6L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0B._LEN, E8LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0B._LEN, E8LN)  // _LEN: Length
                     E8LN = Zero
                 }
 
                 If ((PM6L == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0B._RW, E8RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0B._RW, E8RW)  // _RW_: Read-Write Status
                     E8RW = Zero
                 }
 
                 If (PM6H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0C._LEN, ECLN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0C._LEN, ECLN)  // _LEN: Length
                     ECLN = Zero
                 }
 
                 If ((PM6H == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0C._RW, ECRW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0C._RW, ECRW)  // _RW_: Read-Write Status
                     ECRW = Zero
                 }
 
                 If (PM0H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0D._LEN, F0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0D._LEN, F0LN)  // _LEN: Length
                     F0LN = Zero
                 }
 
                 If ((PM0H == One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0D._RW, F0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0D._RW, F0RW)  // _RW_: Read-Write Status
                     F0RW = Zero
                 }
 
-                CreateDWordField (BUF0, \_SB.PCI0._Y0E._MIN, M1MN)  // _MIN: Minimum Base Address
-                CreateDWordField (BUF0, \_SB.PCI0._Y0E._MAX, M1MX)  // _MAX: Maximum Base Address
-                CreateDWordField (BUF0, \_SB.PCI0._Y0E._LEN, M1LN)  // _LEN: Length
+                CreateDWordField (BUF0, ^_Y0E._MIN, M1MN)  // _MIN: Minimum Base Address
+                CreateDWordField (BUF0, ^_Y0E._MAX, M1MX)  // _MAX: Maximum Base Address
+                CreateDWordField (BUF0, ^_Y0E._LEN, M1LN)  // _LEN: Length
                 M1LN = M32L /* External reference */
                 M1MN = M32B /* External reference */
                 M1MX = ((M1MN + M1LN) - One)
@@ -4658,14 +4658,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     If ((M64L == Zero))
                     {
-                        CreateQWordField (BUF0, \_SB.PCI0._Y0F._LEN, MSLN)  // _LEN: Length
+                        CreateQWordField (BUF0, ^_Y0F._LEN, MSLN)  // _LEN: Length
                         MSLN = Zero
                     }
                     Else
                     {
-                        CreateQWordField (BUF0, \_SB.PCI0._Y0F._LEN, M2LN)  // _LEN: Length
-                        CreateQWordField (BUF0, \_SB.PCI0._Y0F._MIN, M2MN)  // _MIN: Minimum Base Address
-                        CreateQWordField (BUF0, \_SB.PCI0._Y0F._MAX, M2MX)  // _MAX: Maximum Base Address
+                        CreateQWordField (BUF0, ^_Y0F._LEN, M2LN)  // _LEN: Length
+                        CreateQWordField (BUF0, ^_Y0F._MIN, M2MN)  // _MIN: Minimum Base Address
+                        CreateQWordField (BUF0, ^_Y0F._MAX, M2MX)  // _MAX: Maximum Base Address
                         M2LN = M64L /* External reference */
                         M2MN = M64B /* External reference */
                         M2MX = ((M2MN + M2LN) - One)
@@ -4968,9 +4968,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         If (((SP1O < 0x03F0) && (SP1O > 0xF0)))
                         {
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y10._MIN, GPI0)  // _MIN: Minimum Base Address
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y10._MAX, GPI1)  // _MAX: Maximum Base Address
-                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y10._LEN, GPIL)  // _LEN: Length
+                            CreateWordField (CRS, ^_Y10._MIN, GPI0)  // _MIN: Minimum Base Address
+                            CreateWordField (CRS, ^_Y10._MAX, GPI1)  // _MAX: Maximum Base Address
+                            CreateByteField (CRS, ^_Y10._LEN, GPIL)  // _LEN: Length
                             GPI0 = SP1O /* \SP1O */
                             GPI1 = SP1O /* \SP1O */
                             GPIL = 0x02
@@ -4978,9 +4978,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                         If (IO1B)
                         {
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y11._MIN, GP10)  // _MIN: Minimum Base Address
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y11._MAX, GP11)  // _MAX: Maximum Base Address
-                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y11._LEN, GPL1)  // _LEN: Length
+                            CreateWordField (CRS, ^_Y11._MIN, GP10)  // _MIN: Minimum Base Address
+                            CreateWordField (CRS, ^_Y11._MAX, GP11)  // _MAX: Maximum Base Address
+                            CreateByteField (CRS, ^_Y11._LEN, GPL1)  // _LEN: Length
                             GP10 = IO1B /* \IO1B */
                             GP11 = IO1B /* \IO1B */
                             GPL1 = IO1L /* \IO1L */
@@ -4988,9 +4988,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                         If (IO2B)
                         {
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y12._MIN, GP20)  // _MIN: Minimum Base Address
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y12._MAX, GP21)  // _MAX: Maximum Base Address
-                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y12._LEN, GPL2)  // _LEN: Length
+                            CreateWordField (CRS, ^_Y12._MIN, GP20)  // _MIN: Minimum Base Address
+                            CreateWordField (CRS, ^_Y12._MAX, GP21)  // _MAX: Maximum Base Address
+                            CreateByteField (CRS, ^_Y12._LEN, GPL2)  // _LEN: Length
                             GP20 = IO2B /* \IO2B */
                             GP21 = IO2B /* \IO2B */
                             GPL2 = IO2L /* \IO2L */
@@ -4998,9 +4998,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                         If (IO3B)
                         {
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y13._MIN, GP30)  // _MIN: Minimum Base Address
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y13._MAX, GP31)  // _MAX: Maximum Base Address
-                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y13._LEN, GPL3)  // _LEN: Length
+                            CreateWordField (CRS, ^_Y13._MIN, GP30)  // _MIN: Minimum Base Address
+                            CreateWordField (CRS, ^_Y13._MAX, GP31)  // _MAX: Maximum Base Address
+                            CreateByteField (CRS, ^_Y13._LEN, GPL3)  // _LEN: Length
                             GP30 = IO3B /* \IO3B */
                             GP31 = IO3B /* \IO3B */
                             GPL3 = IO3L /* \IO3L */
@@ -5218,11 +5218,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         DMA (Compatibility, NotBusMaster, Transfer8, _Y15)
                             {}
                     })
-                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y14._INT, IRQM)  // _INT: Interrupts
-                    CreateByteField (CRS1, \_SB.PCI0.LPCB.SIO1._Y15._DMA, DMAM)  // _DMA: Direct Memory Access
-                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y16._MIN, IO11)  // _MIN: Minimum Base Address
-                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y16._MAX, IO12)  // _MAX: Maximum Base Address
-                    CreateByteField (CRS1, \_SB.PCI0.LPCB.SIO1._Y16._LEN, LEN1)  // _LEN: Length
+                    CreateWordField (CRS1, _Y14._INT, IRQM)  // _INT: Interrupts
+                    CreateByteField (CRS1, _Y15._DMA, DMAM)  // _DMA: Direct Memory Access
+                    CreateWordField (CRS1, _Y16._MIN, IO11)  // _MIN: Minimum Base Address
+                    CreateWordField (CRS1, _Y16._MAX, IO12)  // _MAX: Maximum Base Address
+                    CreateByteField (CRS1, _Y16._LEN, LEN1)  // _LEN: Length
                     Name (CRS2, ResourceTemplate ()
                     {
                         IO (Decode16,
@@ -5242,14 +5242,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         DMA (Compatibility, NotBusMaster, Transfer8, _Y18)
                             {}
                     })
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y17._INT, IRQE)  // _INT: Interrupts
-                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y18._DMA, DMAE)  // _DMA: Direct Memory Access
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y19._MIN, IO21)  // _MIN: Minimum Base Address
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y19._MAX, IO22)  // _MAX: Maximum Base Address
-                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y19._LEN, LEN2)  // _LEN: Length
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1A._MIN, IO31)  // _MIN: Minimum Base Address
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1A._MAX, IO32)  // _MAX: Maximum Base Address
-                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1A._LEN, LEN3)  // _LEN: Length
+                    CreateWordField (CRS2, _Y17._INT, IRQE)  // _INT: Interrupts
+                    CreateByteField (CRS2, _Y18._DMA, DMAE)  // _DMA: Direct Memory Access
+                    CreateWordField (CRS2, _Y19._MIN, IO21)  // _MIN: Minimum Base Address
+                    CreateWordField (CRS2, _Y19._MAX, IO22)  // _MAX: Maximum Base Address
+                    CreateByteField (CRS2, _Y19._LEN, LEN2)  // _LEN: Length
+                    CreateWordField (CRS2, _Y1A._MIN, IO31)  // _MIN: Minimum Base Address
+                    CreateWordField (CRS2, _Y1A._MAX, IO32)  // _MAX: Maximum Base Address
+                    CreateByteField (CRS2, _Y1A._LEN, LEN3)  // _LEN: Length
                     Method (DCRS, 2, NotSerialized)
                     {
                         ENFG (CGLD (Arg0))
@@ -12058,24 +12058,24 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             })
             Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y1B._BAS, MBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y1B._BAS, MBR0)  // _BAS: Base Address
                 MBR0 = GMHB ()
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y1C._BAS, DBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y1C._BAS, DBR0)  // _BAS: Base Address
                 DBR0 = GDMB ()
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y1D._BAS, EBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y1D._BAS, EBR0)  // _BAS: Base Address
                 EBR0 = GEPB ()
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y1E._BAS, XBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y1E._BAS, XBR0)  // _BAS: Base Address
                 XBR0 = GPCB ()
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y1E._LEN, XSZ0)  // _LEN: Length
+                CreateDWordField (BUF0, ^_Y1E._LEN, XSZ0)  // _LEN: Length
                 XSZ0 = GPCL ()
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y1F._BAS, SXRA)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y1F._BAS, SXRA)  // _BAS: Base Address
                 SXRA = SXRB /* \SXRB */
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y1F._LEN, SXRL)  // _LEN: Length
+                CreateDWordField (BUF0, ^_Y1F._LEN, SXRL)  // _LEN: Length
                 SXRL = SXRS /* \SXRS */
                 If (!HPTE)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y20._BAS, HBAS)  // _BAS: Base Address
-                    CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y20._LEN, HLEN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y20._BAS, HBAS)  // _BAS: Base Address
+                    CreateDWordField (BUF0, ^_Y20._LEN, HLEN)  // _LEN: Length
                     HBAS = HPTB /* \HPTB */
                     HLEN = 0x0400
                 }
@@ -13270,14 +13270,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0xFF,               // Length
                         _Y24)
                 })
-                CreateWordField (BUF0, \_SB.PCI0.IOTR._CRS._Y21._MIN, AMI0)  // _MIN: Minimum Base Address
-                CreateWordField (BUF0, \_SB.PCI0.IOTR._CRS._Y21._MAX, AMA0)  // _MAX: Maximum Base Address
-                CreateWordField (BUF1, \_SB.PCI0.IOTR._CRS._Y22._MIN, AMI1)  // _MIN: Minimum Base Address
-                CreateWordField (BUF1, \_SB.PCI0.IOTR._CRS._Y22._MAX, AMA1)  // _MAX: Maximum Base Address
-                CreateWordField (BUF2, \_SB.PCI0.IOTR._CRS._Y23._MIN, AMI2)  // _MIN: Minimum Base Address
-                CreateWordField (BUF2, \_SB.PCI0.IOTR._CRS._Y23._MAX, AMA2)  // _MAX: Maximum Base Address
-                CreateWordField (BUF3, \_SB.PCI0.IOTR._CRS._Y24._MIN, AMI3)  // _MIN: Minimum Base Address
-                CreateWordField (BUF3, \_SB.PCI0.IOTR._CRS._Y24._MAX, AMA3)  // _MAX: Maximum Base Address
+                CreateWordField (BUF0, _Y21._MIN, AMI0)  // _MIN: Minimum Base Address
+                CreateWordField (BUF0, _Y21._MAX, AMA0)  // _MAX: Maximum Base Address
+                CreateWordField (BUF1, _Y22._MIN, AMI1)  // _MIN: Minimum Base Address
+                CreateWordField (BUF1, _Y22._MAX, AMA1)  // _MAX: Maximum Base Address
+                CreateWordField (BUF2, _Y23._MIN, AMI2)  // _MIN: Minimum Base Address
+                CreateWordField (BUF2, _Y23._MAX, AMA2)  // _MAX: Maximum Base Address
+                CreateWordField (BUF3, _Y24._MIN, AMI3)  // _MIN: Minimum Base Address
+                CreateWordField (BUF3, _Y24._MAX, AMA3)  // _MAX: Maximum Base Address
                 AMI0 = ITA0 /* \ITA0 */
                 AMA0 = ITA0 /* \ITA0 */
                 AMI1 = ITA1 /* \ITA1 */
@@ -14939,9 +14939,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 ADBG ("HDAS _INI")
                 If ((OSYS >= 0x07D6))
                 {
-                    CreateQWordField (NBUF, \_SB.PCI0.HDAS._Y25._MIN, NBAS)  // _MIN: Minimum Base Address
-                    CreateQWordField (NBUF, \_SB.PCI0.HDAS._Y25._MAX, NMAS)  // _MAX: Maximum Base Address
-                    CreateQWordField (NBUF, \_SB.PCI0.HDAS._Y25._LEN, NLEN)  // _LEN: Length
+                    CreateQWordField (NBUF, ^_Y25._MIN, NBAS)  // _MIN: Minimum Base Address
+                    CreateQWordField (NBUF, ^_Y25._MAX, NMAS)  // _MAX: Maximum Base Address
+                    CreateQWordField (NBUF, ^_Y25._LEN, NLEN)  // _LEN: Length
                     NBAS = NHLA /* \NHLA */
                     NMAS = (NHLA + (NHLL - One))
                     NLEN = NHLL /* \NHLL */
@@ -16188,15 +16188,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     If ((DerefOf (Arg0 [Zero]) == One))
                     {
                         ADBG (Concatenate ("POFF GPIO=", ToHexString (DerefOf (Arg0 [0x02]))))
-                        SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^
-                            One))
+                        SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^ One))
                     }
 
                     If ((DerefOf (Arg0 [Zero]) == 0x02))
                     {
                         ADBG (Concatenate ("POFF IOEX=", ToHexString (DerefOf (Arg0 [0x02]))))
-                        ^^GEXP.SGEP (DerefOf (Arg0 [One]), DerefOf (Arg0 [0x02]), (
-                            DerefOf (Arg0 [0x03]) ^ One))
+                        ^^GEXP.SGEP (DerefOf (Arg0 [One]), DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^ One))
                     }
                 }
             }
@@ -16225,7 +16223,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x00010000,         // Address Length
                             )
                     })
-                    CreateDWordField (CBUF, \_SB.PCI0.CIO2._CRS._Y26._INT, CIOV)  // _INT: Interrupts
+                    CreateDWordField (CBUF, _Y26._INT, CIOV)  // _INT: Interrupts
                     CIOV = CIOI /* \CIOI */
                     Return (CBUF) /* \_SB_.PCI0.CIO2._CRS.CBUF */
                 }
@@ -16253,7 +16251,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x00000012,
                     }
                 })
-                CreateDWordField (RBUF, \_SB.PCI0.TERM._CRS._Y27._INT, IRQN)  // _INT: Interrupts
+                CreateDWordField (RBUF, _Y27._INT, IRQN)  // _INT: Interrupts
                 IRQN = TIRQ /* \TIRQ */
                 Return (RBUF) /* \_SB_.PCI0.TERM._CRS.RBUF */
             }
@@ -16391,9 +16389,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     0x00000014,
                 }
             })
-            CreateDWordField (RBUF, \_SB.PCI0.LCRS._Y28._BAS, BVAL)  // _BAS: Base Address
-            CreateDWordField (RBUF, \_SB.PCI0.LCRS._Y28._LEN, BLEN)  // _LEN: Length
-            CreateDWordField (RBUF, \_SB.PCI0.LCRS._Y29._INT, IRQN)  // _INT: Interrupts
+            CreateDWordField (RBUF, _Y28._BAS, BVAL)  // _BAS: Base Address
+            CreateDWordField (RBUF, _Y28._LEN, BLEN)  // _LEN: Length
+            CreateDWordField (RBUF, _Y29._INT, IRQN)  // _INT: Interrupts
             BVAL = Arg1
             IRQN = Arg2
             If ((Arg0 == 0x04))
@@ -16441,8 +16439,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x00001000,         // Address Length
                         _Y2A)
                 })
-                CreateDWordField (BUFF, \_SB.PCI0.SIRC.ADDB._Y2A._BAS, ADDR)  // _BAS: Base Address
-                CreateDWordField (BUFF, \_SB.PCI0.SIRC.ADDB._Y2A._LEN, LENG)  // _LEN: Length
+                CreateDWordField (BUFF, _Y2A._BAS, ADDR)  // _BAS: Base Address
+                CreateDWordField (BUFF, _Y2A._LEN, LENG)  // _LEN: Length
                 Local0 = Buffer (0x02)
                     {
                          0x79, 0x00                                       // y.
@@ -16549,12 +16547,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x0000000E,
                     }
                 })
-                CreateDWordField (RBUF, \_SB.PCI0.GPI0._CRS._Y2B._BAS, COM0)  // _BAS: Base Address
-                CreateDWordField (RBUF, \_SB.PCI0.GPI0._CRS._Y2C._BAS, COM1)  // _BAS: Base Address
-                CreateDWordField (RBUF, \_SB.PCI0.GPI0._CRS._Y2D._INT, IRQN)  // _INT: Interrupts
+                CreateDWordField (RBUF, _Y2B._BAS, COM0)  // _BAS: Base Address
+                CreateDWordField (RBUF, _Y2C._BAS, COM1)  // _BAS: Base Address
+                CreateDWordField (RBUF, _Y2D._INT, IRQN)  // _INT: Interrupts
                 COM0 = (SBRG + 0x00AF0000)
                 COM1 = (SBRG + 0x00AE0000)
-                CreateDWordField (RBUF, \_SB.PCI0.GPI0._CRS._Y2E._BAS, COM3)  // _BAS: Base Address
+                CreateDWordField (RBUF, _Y2E._BAS, COM3)  // _BAS: Base Address
                 COM3 = (SBRG + 0x00AC0000)
                 IRQN = SGIR /* \SGIR */
                 Return (RBUF) /* \_SB_.PCI0.GPI0._CRS.RBUF */
@@ -17349,10 +17347,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x0000
                     }
             })
-            CreateWordField (SBFB, \_SB.PCI0.I2C0.TPD0._Y2F._ADR, BADR)  // _ADR: Address
-            CreateDWordField (SBFB, \_SB.PCI0.I2C0.TPD0._Y2F._SPE, SPED)  // _SPE: Speed
+            CreateWordField (SBFB, _Y2F._ADR, BADR)  // _ADR: Address
+            CreateDWordField (SBFB, _Y2F._SPE, SPED)  // _SPE: Speed
             CreateWordField (SBFG, 0x17, INT1)
-            CreateDWordField (SBFI, \_SB.PCI0.I2C0.TPD0._Y30._INT, INT2)  // _INT: Interrupts
+            CreateDWordField (SBFI, _Y30._INT, INT2)  // _INT: Interrupts
             Method (_INI, 0, NotSerialized)  // _INI: Initialize
             {
                 If ((OSYS < 0x07DC))
@@ -17504,9 +17502,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x00000000,
                     }
                 })
-                CreateWordField (SBFB, \_SB.PCI0.I2C0.HDAC._CRS._Y31._ADR, ADR)  // _ADR: Address
+                CreateWordField (SBFB, _Y31._ADR, ADR)  // _ADR: Address
                 ADR = CADR /* \_SB_.PCI0.I2C0.HDAC.CADR */
-                CreateDWordField (SBFI, \_SB.PCI0.I2C0.HDAC._CRS._Y32._INT, AINT)  // _INT: Interrupts
+                CreateDWordField (SBFI, _Y32._INT, AINT)  // _INT: Interrupts
                 AINT = INUM (0x02040016)
                 If ((HAID == One))
                 {
@@ -17547,7 +17545,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x00000000,
                     }
                 })
-                CreateDWordField (SBFI, \_SB.PCI0.I2C0.UCM1._CRS._Y33._INT, GINT)  // _INT: Interrupts
+                CreateDWordField (SBFI, _Y33._INT, GINT)  // _INT: Interrupts
                 GINT = INUM (UCG1)
                 Return (ConcatenateResTemplate (SBFB, SBFI))
             }
@@ -17585,7 +17583,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x00000000,
                     }
                 })
-                CreateDWordField (SBFI, \_SB.PCI0.I2C0.UCM2._CRS._Y34._INT, GINT)  // _INT: Interrupts
+                CreateDWordField (SBFI, _Y34._INT, GINT)  // _INT: Interrupts
                 GINT = INUM (UCG2)
                 Return (ConcatenateResTemplate (SBFB, SBFI))
             }
@@ -17632,9 +17630,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     0x00000000,
                 }
             })
-            CreateWordField (SBFB, \_SB.PCI0.I2C1.TPL1._Y35._ADR, BADR)  // _ADR: Address
-            CreateDWordField (SBFB, \_SB.PCI0.I2C1.TPL1._Y35._SPE, SPED)  // _SPE: Speed
-            CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPL1._Y36._INT, INT2)  // _INT: Interrupts
+            CreateWordField (SBFB, _Y35._ADR, BADR)  // _ADR: Address
+            CreateDWordField (SBFB, _Y35._SPE, SPED)  // _SPE: Speed
+            CreateDWordField (SBFI, _Y36._INT, INT2)  // _INT: Interrupts
             CreateWordField (SBFG, 0x17, INT1)
             Method (_INI, 0, NotSerialized)  // _INI: Initialize
             {
@@ -18417,16 +18415,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x0000
                         }
                 })
-                CreateDWordField (BBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y37._SPE, SPEX)  // _SPE: Speed
-                CreateByteField (BBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y37._PHA, PHAX)  // _PHA: Clock Phase
+                CreateDWordField (BBUF, _Y37._SPE, SPEX)  // _SPE: Speed
+                CreateByteField (BBUF, _Y37._PHA, PHAX)  // _PHA: Clock Phase
                 CreateWordField (BBUF, 0x3B, SPIN)
                 CreateWordField (GBUF, 0x17, GPIN)
-                CreateDWordField (IBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y38._INT, IPIN)  // _INT: Interrupts
-                CreateBitField (IBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y38._LL, ILVL)  // _LL_: Low Level
-                CreateBitField (IBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y38._HE, ITRG)  // _HE_: High-Edge
-                CreateField (GBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y39._POL, 0x02, GLVL)  // _POL: Polarity
-                CreateBitField (GBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y39._MOD, GTRG)  // _MOD: Mode
-                CreateBitField (BBUF, \_SB.PCI0.SPI1.FPNT._CRS._Y37._DPL, SCSP)  // _DPL: Device Selection Polarity
+                CreateDWordField (IBUF, _Y38._INT, IPIN)  // _INT: Interrupts
+                CreateBitField (IBUF, _Y38._LL, ILVL)  // _LL_: Low Level
+                CreateBitField (IBUF, _Y38._HE, ITRG)  // _HE_: High-Edge
+                CreateField (GBUF, _Y39._POL, 0x02, GLVL)  // _POL: Polarity
+                CreateBitField (GBUF, _Y39._MOD, GTRG)  // _MOD: Mode
+                CreateBitField (BBUF, _Y37._DPL, SCSP)  // _DPL: Device Selection Polarity
                 CreateWordField (UBUF, 0x17, UPIN)
                 SPIN = GNUM (GFPS)
                 GPIN = GNUM (GFPI)
@@ -18593,7 +18591,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         0x00000000,
                     }
                 })
-                CreateDWordField (SBFI, \_SB.PCI0.UA00.BTH0._CRS._Y3A._INT, INT4)  // _INT: Interrupts
+                CreateDWordField (SBFI, _Y3A._INT, INT4)  // _INT: Interrupts
                 CreateWordField (SBFI, 0x3C, WAK4)
                 CreateWordField (SBFI, 0x64, KIL4)
                 INT4 = INUM (GBTI)
@@ -20983,7 +20981,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             Name (_HID, EisaId ("INT0E0C"))  // _HID: Hardware ID
             Name (_STR, Unicode ("Enclave Page Cache 1.0"))  // _STR: Description String
-            Name (_MLS, Package (0x01)  // _MLS: Multiple Language String
+            Name (_MLS, Package (One)  // _MLS: Multiple Language String
             {
                 Package (0x02)
                 {
@@ -21003,9 +21001,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             })
             Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
             {
-                CreateQWordField (RBUF, \_SB.EPC._Y3B._MIN, EMIN)  // _MIN: Minimum Base Address
-                CreateQWordField (RBUF, \_SB.EPC._Y3B._MAX, EMAX)  // _MAX: Maximum Base Address
-                CreateQWordField (RBUF, \_SB.EPC._Y3B._LEN, ELEN)  // _LEN: Length
+                CreateQWordField (RBUF, ^_Y3B._MIN, EMIN)  // _MIN: Minimum Base Address
+                CreateQWordField (RBUF, ^_Y3B._MAX, EMAX)  // _MAX: Maximum Base Address
+                CreateQWordField (RBUF, ^_Y3B._LEN, ELEN)  // _LEN: Length
                 EMIN = \_PR.EMNA /* External reference */
                 ELEN = \_PR.ELNG /* External reference */
                 EMAX = ((\_PR.EMNA + \_PR.ELNG) - One)
@@ -23560,7 +23558,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -24056,7 +24054,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -24552,7 +24550,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -25048,7 +25046,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -25544,7 +25542,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -26040,7 +26038,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -26536,7 +26534,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -27032,7 +27030,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -27528,7 +27526,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -28024,7 +28022,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -28520,7 +28518,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -29016,7 +29014,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -29512,7 +29510,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -30008,7 +30006,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -30504,7 +30502,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -31000,7 +30998,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -31496,7 +31494,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -31992,7 +31990,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -32488,7 +32486,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -32984,7 +32982,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     }
                 }
 
-                Name (_PRR, Package (0x01)  // _PRR: Power Resource for Reset
+                Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
                 {
                     WRST
                 })
@@ -33264,7 +33262,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     {
         Method (WHIT, 0, NotSerialized)
         {
-            Return (Package (0x01)
+            Return (Package (One)
             {
                 Package (0x05)
                 {
@@ -33293,14 +33291,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -33311,14 +33309,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -33330,14 +33328,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             If ((((S0ID == One) || (OSYS >= 0x07DF)) && (
                 (PEPC & 0x03) != Zero)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -33348,10 +33346,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If ((OSYS == 0x07DD))
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
 
-            Return (Package (0x01)
+            Return (Package (One)
             {
                 PEPD
             })
@@ -33362,7 +33360,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     {
         Scope (_SB.PCI0.I2C0)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33370,7 +33368,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.I2C1)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33378,7 +33376,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.I2C2)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33386,7 +33384,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.I2C3)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33394,7 +33392,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.I2C4)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33402,7 +33400,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.I2C5)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33410,7 +33408,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.SPI0)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33418,7 +33416,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.SPI1)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33426,7 +33424,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.UA00)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33434,7 +33432,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.UA01)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33442,7 +33440,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.UA02)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33450,7 +33448,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.HECI)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33458,7 +33456,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
         Scope (_SB.PCI0.GLAN)
         {
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PEPD
             })
@@ -33471,14 +33469,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -33489,14 +33487,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If ((S0ID == One))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -33512,14 +33510,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                         (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
                     }
                 }
 
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
 
             OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33573,14 +33571,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33633,14 +33631,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33693,14 +33691,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33755,14 +33753,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                         (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
                     }
                 }
 
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
 
             OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33816,14 +33814,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33876,14 +33874,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33936,14 +33934,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -33998,14 +33996,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                         (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
                     }
                 }
 
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
 
             OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34059,14 +34057,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34119,14 +34117,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34179,14 +34177,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34239,14 +34237,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34299,14 +34297,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34359,14 +34357,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34419,14 +34417,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34479,14 +34477,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34539,14 +34537,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34599,14 +34597,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34659,14 +34657,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 If ((((S0ID == One) || (OSYS >= 0x07DF)) && ((
                     (PEPC & 0x0400) == 0x0400) || ((PEPC & 0x0800) == 0x0800))))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
             }
 
-            Return (Package (0x00){})
+            Return (Package (Zero){})
         }
 
         OperationRegion (PCCX, PCI_Config, 0x09, 0x04)
@@ -34716,14 +34714,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34734,14 +34732,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34752,14 +34750,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34771,14 +34769,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             ADBG ("PR03 DEP Call")
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34789,14 +34787,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34807,14 +34805,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34825,14 +34823,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34843,14 +34841,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34861,14 +34859,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34879,14 +34877,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34897,14 +34895,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34915,14 +34913,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34933,14 +34931,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34951,14 +34949,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34969,14 +34967,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -34987,14 +34985,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If (((S0ID == One) || (OSYS >= 0x07DF)))
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     \_SB.PEPD
                 })
             }
             Else
             {
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
         }
     }
@@ -36147,7 +36145,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36175,7 +36173,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT0",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36203,7 +36201,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT1",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36231,7 +36229,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT2",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36259,7 +36257,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT3",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36287,7 +36285,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.VOL0",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36315,7 +36313,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP01.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36343,7 +36341,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP02.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36371,7 +36369,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP03.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36399,7 +36397,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP04.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36427,7 +36425,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP05.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36455,7 +36453,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP06.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36483,7 +36481,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP07.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36511,7 +36509,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP08.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36539,7 +36537,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP09.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36567,7 +36565,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP10.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36595,7 +36593,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP11.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36623,7 +36621,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP12.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36651,7 +36649,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP13.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36679,7 +36677,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP14.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36707,7 +36705,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP15.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36735,7 +36733,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP16.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36763,7 +36761,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP17.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36791,7 +36789,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP18.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36819,7 +36817,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP19.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36847,7 +36845,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.RP20.PXSX",
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -36899,7 +36897,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     {
                         If ((S0ID == Zero))
                         {
-                            Return (Package (0x00){})
+                            Return (Package (Zero){})
                         }
 
                         If (((PEPC & 0x00100000) != Zero))
@@ -37717,7 +37715,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x00, ResourceConsumer, _Y3C, Exclusive,
                             )
                     })
-                    CreateWordField (IIC0, \_SB.PCI0.IICB._Y3C._ADR, DAD0)  // _ADR: Address
+                    CreateWordField (IIC0, _Y3C._ADR, DAD0)  // _ADR: Address
                     DAD0 = Arg0
                     Return (IIC0) /* \_SB_.PCI0.IICB.IIC0 */
                 }
@@ -37730,7 +37728,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x00, ResourceConsumer, _Y3D, Exclusive,
                             )
                     })
-                    CreateWordField (IIC1, \_SB.PCI0.IICB._Y3D._ADR, DAD1)  // _ADR: Address
+                    CreateWordField (IIC1, _Y3D._ADR, DAD1)  // _ADR: Address
                     DAD1 = Arg0
                     Return (IIC1) /* \_SB_.PCI0.IICB.IIC1 */
                 }
@@ -37743,7 +37741,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x00, ResourceConsumer, _Y3E, Exclusive,
                             )
                     })
-                    CreateWordField (IIC2, \_SB.PCI0.IICB._Y3E._ADR, DAD2)  // _ADR: Address
+                    CreateWordField (IIC2, _Y3E._ADR, DAD2)  // _ADR: Address
                     DAD2 = Arg0
                     Return (IIC2) /* \_SB_.PCI0.IICB.IIC2 */
                 }
@@ -37756,7 +37754,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x00, ResourceConsumer, _Y3F, Exclusive,
                             )
                     })
-                    CreateWordField (IIC3, \_SB.PCI0.IICB._Y3F._ADR, DAD3)  // _ADR: Address
+                    CreateWordField (IIC3, _Y3F._ADR, DAD3)  // _ADR: Address
                     DAD3 = Arg0
                     Return (IIC3) /* \_SB_.PCI0.IICB.IIC3 */
                 }
@@ -37769,7 +37767,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x00, ResourceConsumer, _Y40, Exclusive,
                             )
                     })
-                    CreateWordField (IIC4, \_SB.PCI0.IICB._Y40._ADR, DAD4)  // _ADR: Address
+                    CreateWordField (IIC4, _Y40._ADR, DAD4)  // _ADR: Address
                     DAD4 = Arg0
                     Return (IIC4) /* \_SB_.PCI0.IICB.IIC4 */
                 }
@@ -37782,7 +37780,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                             0x00, ResourceConsumer, _Y41, Exclusive,
                             )
                     })
-                    CreateWordField (IIC5, \_SB.PCI0.IICB._Y41._ADR, DAD5)  // _ADR: Address
+                    CreateWordField (IIC5, _Y41._ADR, DAD5)  // _ADR: Address
                     DAD5 = Arg0
                     Return (IIC5) /* \_SB_.PCI0.IICB.IIC5 */
                 }
@@ -38038,7 +38036,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                         Default
                         {
-                            Return (Package (0x01)
+                            Return (Package (One)
                             {
                                 DSC0
                             })
@@ -38049,7 +38047,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((C0TP > One))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         CLP0
                     })
@@ -38112,7 +38110,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                         Default
                         {
-                            Return (Package (0x01)
+                            Return (Package (One)
                             {
                                 DSC1
                             })
@@ -38123,7 +38121,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((C1TP > One))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         CLP1
                     })
@@ -38186,7 +38184,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                         Default
                         {
-                            Return (Package (0x01)
+                            Return (Package (One)
                             {
                                 DSC2
                             })
@@ -38197,7 +38195,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((C2TP > One))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         CLP2
                     })
@@ -38260,7 +38258,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                         Default
                         {
-                            Return (Package (0x01)
+                            Return (Package (One)
                             {
                                 DSC3
                             })
@@ -38271,14 +38269,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                 If ((C3TP > One))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         CLP3
                     })
                 }
             }
 
-            Return (Package (0x01)
+            Return (Package (One)
             {
                 PCI0
             })
@@ -38833,7 +38831,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     If ((C0IB == 0x02))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C2
                         })
@@ -38841,14 +38839,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     If ((C0IB == 0x03))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C3
                         })
                     }
                 }
 
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PCI0
                 })
@@ -38905,7 +38903,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -38999,7 +38997,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     If ((C1IB == 0x02))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C2
                         })
@@ -39007,14 +39005,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     If ((C1IB == 0x03))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C3
                         })
                     }
                 }
 
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PCI0
                 })
@@ -39071,7 +39069,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -39165,7 +39163,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     If ((C2IB == 0x02))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C2
                         })
@@ -39173,14 +39171,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     If ((C2IB == 0x03))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C3
                         })
                     }
                 }
 
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PCI0
                 })
@@ -39237,7 +39235,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -39331,7 +39329,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 {
                     If ((C3IB == 0x02))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C2
                         })
@@ -39339,14 +39337,14 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
                     If ((C3IB == 0x03))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             I2C3
                         })
                     }
                 }
 
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     PCI0
                 })
@@ -39403,7 +39401,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -39511,7 +39509,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
                 Else
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PCI0
                     })
@@ -39553,7 +39551,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -39992,7 +39990,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
                 Else
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PCI0
                     })
@@ -40034,7 +40032,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -40473,7 +40471,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
                 Else
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PCI0
                     })
@@ -40515,7 +40513,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -40954,7 +40952,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                 }
                 Else
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PCI0
                     })
@@ -40996,7 +40994,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
 
             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
             {
-                Name (PLDB, Package (0x01)
+                Name (PLDB, Package (One)
                 {
                     Buffer (0x14)
                     {
@@ -41422,11 +41420,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Name (_CID, "INT3471")  // _CID: Compatible ID
             Name (_DDN, "IMX135-CRDG2")  // _DDN: DOS Device Name
             Name (_UID, "0")  // _UID: Unique ID
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 PMIC
             })
-            Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
+            Name (_PLD, Package (One)  // _PLD: Physical Location of Device
             {
                 ToPLD (
                     PLD_Revision           = 0x2,
@@ -41586,11 +41584,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Name (_CID, "INT3474")  // _CID: Compatible ID
             Name (_DDN, "OV2740-CRDG2")  // _DDN: DOS Device Name
             Name (_UID, "0")  // _UID: Unique ID
-            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
                 ^^I2C2.PMIC
             })
-            Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
+            Name (_PLD, Package (One)  // _PLD: Physical Location of Device
             {
                 ToPLD (
                     PLD_Revision           = 0x2,
@@ -41705,7 +41703,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             Name (_CID, "INT3472")  // _CID: Compatible ID
             Name (_DDN, "PMIC-CRDG2")  // _DDN: DOS Device Name
             Name (_UID, "0")  // _UID: Unique ID
-            Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
+            Name (_PLD, Package (One)  // _PLD: Physical Location of Device
             {
                 ToPLD (
                     PLD_Revision           = 0x2,
@@ -41844,7 +41842,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     Return (^^PCI0.LPCB.H_EC.IWCR) /* \_SB_.PCI0.LPCB.H_EC.IWCR */
                 }
 
-                Return (Package (0x00){})
+                Return (Package (Zero){})
             }
 
             Method (PSRC, 0, NotSerialized)
@@ -42624,7 +42622,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             {
                 If (HPTE)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0.LPCB.HPET._Y42._BAS, HPT0)  // _BAS: Base Address
+                    CreateDWordField (BUF0, ^_Y42._BAS, HPT0)  // _BAS: Base Address
                     HPT0 = HPTB /* \HPTB */
                 }
 
@@ -43462,12 +43460,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         {
             If ((AMDT == One))
             {
-                CreateDWordField (CRST, \_SB.TPM._Y43._BAS, MTFB)  // _BAS: Base Address
-                CreateDWordField (CRST, \_SB.TPM._Y43._LEN, LTFB)  // _LEN: Length
+                CreateDWordField (CRST, ^_Y43._BAS, MTFB)  // _BAS: Base Address
+                CreateDWordField (CRST, ^_Y43._LEN, LTFB)  // _LEN: Length
                 MTFB = TPMB /* \TPMB */
                 LTFB = 0x1000
-                CreateDWordField (CRST, \_SB.TPM._Y44._BAS, MTFC)  // _BAS: Base Address
-                CreateDWordField (CRST, \_SB.TPM._Y44._LEN, LTFC)  // _LEN: Length
+                CreateDWordField (CRST, ^_Y44._BAS, MTFC)  // _BAS: Base Address
+                CreateDWordField (CRST, ^_Y44._LEN, LTFC)  // _LEN: Length
                 MTFC = TPMC /* \TPMC */
                 LTFC = 0x1000
                 Return (CRST) /* \_SB_.TPM_.CRST */
@@ -43476,23 +43474,23 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
             {
                 If ((DTPT == One))
                 {
-                    CreateDWordField (CRSD, \_SB.TPM._Y45._BAS, MTFE)  // _BAS: Base Address
-                    CreateDWordField (CRSD, \_SB.TPM._Y45._LEN, LTFE)  // _LEN: Length
+                    CreateDWordField (CRSD, ^_Y45._BAS, MTFE)  // _BAS: Base Address
+                    CreateDWordField (CRSD, ^_Y45._LEN, LTFE)  // _LEN: Length
                     MTFE = 0xFED40000
                     LTFE = 0x5000
                     Return (CRSD) /* \_SB_.TPM_.CRSD */
                 }
                 ElseIf ((TTPF == One))
                 {
-                    CreateDWordField (CRSI, \_SB.TPM._Y46._BAS, MTFD)  // _BAS: Base Address
-                    CreateDWordField (CRSI, \_SB.TPM._Y46._LEN, LTFD)  // _LEN: Length
+                    CreateDWordField (CRSI, ^_Y46._BAS, MTFD)  // _BAS: Base Address
+                    CreateDWordField (CRSI, ^_Y46._LEN, LTFD)  // _LEN: Length
                     MTFD = 0xFED40000
                     LTFD = 0x5000
                     Return (CRSI) /* \_SB_.TPM_.CRSI */
                 }
                 ElseIf ((TTPF == Zero))
                 {
-                    CreateDWordField (CRST, \_SB.TPM._Y43._BAS, MTFF)  // _BAS: Base Address
+                    CreateDWordField (CRST, ^_Y43._BAS, MTFF)  // _BAS: Base Address
                     MTFF = FTPM /* \FTPM */
                     Return (CRST) /* \_SB_.TPM_.CRST */
                 }
@@ -43631,7 +43629,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                     })
                     If ((_STA () == Zero))
                     {
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             Zero
                         })
