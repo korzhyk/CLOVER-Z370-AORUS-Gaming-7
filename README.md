@@ -71,6 +71,8 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | HS10      | 10       |           |          |
 
 ## Chnagelog
+###### 26/03/2019
+* Add new F13RB bios with `CFG lock` option (MSR 0xE2)
 ###### 24/03/2019
 * Fixed DSDT from F12 BIOS
 * Updated EFI drivers
@@ -87,9 +89,9 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * Updated table of [USB mapping](#usb-ports-mapping)
 * Updated README
 ###### 16/11/2018
-* Added new F11 BIOS version with `CFG Lock` option.
+* Added new F11 BIOS version with `CFG Lock` option (MSR 0xE2)
 ###### 7/10/2018
-* Rewrited audio `layout-id` injection.
+* Rewrited audio `layout-id` injection
 ###### 13/09/2018
 * The initial push to GitHub
 
