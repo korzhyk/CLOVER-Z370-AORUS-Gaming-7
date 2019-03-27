@@ -4,21 +4,21 @@
   <img src="./misc/system.png" alt="System specs">
 </p>
 
-*Mojave nVidia webdriver not avaliable yet :cry:*
+*Mojave nVidia webdriver not avaliable yet :cry:* :idea: But you can use a High Sierra, why not?
 This is light configuration to run macOS smoothly. I didn't get any kernel panics science after macOS install.
 
 ## Hardware configuration
 
 * Intel Core i7 8700K
 * Gigabyte Z370 AORUS Gaming 7
-* 4×8GB Samsung M378A1K43BB2-CRC (OC 3600MHz)
+* 4×8GB Samsung M378A1K43BB2-CRC (no OC *due to issues with USB ejection after sleep*)
 * M.2 NVME MyDigitalSSD SBX 120GB (macOS)
 * PCI-e Broadcom BCM4360 WiFi ac + USB Bluetooth 4.0
 
 ## Before you start make sure you have
 
 * Working hardware
-* Motherboard BIOS version [F11 RB][103]
+* Motherboard BIOS version [F13RB][104]
 * Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own, if you are using a external AMD GPU use mac Model 18,3 in another cases use 18,1*
 
 
@@ -43,15 +43,16 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 ### EFI drivers
 
-* ApfsDriverLoader-64.efi - Must have to run 10.13.6+
-* AptioMemoryFix-64.efi - Must have to work with native NVRAM
+* ApfsDriverLoader.efi - Must have to run 10.13.6+
+* AptioMemoryFix.efi - Must have to work with native NVRAM
 * VBoxHfs-64.efi - Must have to run < 10.13.6
-* VirtualSmc.efi - Bundled with `VirtualSMC.kext`. Disabled in Clover, needed if you use File Vault 2 or [authrestart][6].
+* VirtualSmc.efi - Bundled with `VirtualSMC.kext`. Needed if you use File Vault 2 or [authrestart][6].
 
 ## Issues
 
 1. There is an issue with USB drives after sleep: the system warns about not properly unmounted storage device. This happens when I overclock the memory modules. And, I need two times mouse clicks to get the desktop (but this resolved by boot arg `darkwake=0`).
 2. The limit of USB ports is `15` but it counts not only physical but also protocol based. So if one physical port can be used by two protocols such as 3.0 (SS) and 2.0 (HS), in this way in system he actually own two of fifteen addresses (eg. HS01/SS01). You can see the real USB mapping in this [picture][102]. Due to these limits I didn't enable a `HS08` port in `SSDT-8-USBx.aml` table, but if you need this USB 2.0 header to work, you can drop the USB 3.0 protocol on another port. And keep in mind USB 3.1 ports such as Type-C, Type-A and header provided by ASMedia controller.
+3. Front panel with audio jack not working. Really need help.
 
 ## USB ports mapping
 
@@ -71,8 +72,11 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | HS10      | 10       |           |          |
 
 ## Chnagelog
+###### 27/03/2019
+* Add new DSDT compatible with [F13RB][104] bios
+* Update config to use with High Sierra with nvidia GPU
 ###### 26/03/2019
-* Add new F13RB bios with `CFG lock` option (MSR 0xE2)
+* Add new [F13RB][104] bios with `CFG lock` option (MSR 0xE2)
 ###### 24/03/2019
 * Fixed DSDT from F12 BIOS
 * Updated EFI drivers
@@ -83,7 +87,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * Recompiled `DSDT` with external references
 * Config can be used with only iGPU card, external GPU is disabled via `WhateverGreen.kext`
 ###### 19/11/2018
-* Updated ACPI-tables to [F11 BIOS][103] version
+* Updated ACPI-tables to [F11RB][103] bios version
 * Use SSDT to enable working ports
 * Removed `Legacy_USB3.kext`
 * Updated table of [USB mapping](#usb-ports-mapping)
@@ -104,4 +108,5 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 [101]: ./misc/system.png
 [102]: ./misc/physical-usb-ports.png
-[103]: ./misc/Z370AORUSGaming7_CFG-Lock.F11
+[103]: ./misc/Z370AOG7_F11RB.zip
+[104]: ./misc/Z370AOG7_F13RB.zip
