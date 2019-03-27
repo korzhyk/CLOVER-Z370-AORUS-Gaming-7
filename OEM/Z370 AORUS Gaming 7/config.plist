@@ -137,7 +137,7 @@
   <key>Boot</key>
   <dict>
     <key>Arguments</key>
-    <string>darkwake=0 -wegnoegpu</string>
+    <string>darkwake=0 ngfxcompat=1</string>
     <key>DefaultVolume</key>
     <string>LastBootedVolume</string>
     <key>Timeout</key>
@@ -170,10 +170,6 @@
       <true/>
     </dict>
   </dict>
-  <key>DisableDrivers</key>
-  <array>
-    <string>VirtualSmc</string>
-  </array>
   <key>GUI</key>
   <dict>
     <key>Hide</key>
