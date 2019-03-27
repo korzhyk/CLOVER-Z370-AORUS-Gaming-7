@@ -3,3 +3,4 @@ SMBIOS.plist
 
 # macOS related
 .DS_Store
+._*
