@@ -104,6 +104,12 @@
         <string>DMAR</string>
       </dict>
       <dict>
+        <key>Signature</key>
+        <string>SSDT</string>
+        <key>TableId</key>
+        <string>Cpu0Ist</string>
+      </dict>
+      <dict>
         <key>Comment</key>
         <string>sensrhub</string>
         <key>Length</key>
