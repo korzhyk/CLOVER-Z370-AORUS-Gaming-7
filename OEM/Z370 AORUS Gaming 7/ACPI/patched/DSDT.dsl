@@ -277,7 +277,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
     Name (ROMS, 0xFFE00000)
     Name (VGAF, One)
     Name (UEMU, 0x5A5A)
-    OperationRegion (GNVS, SystemMemory, 0xBD8EE000, 0x07B6)
+    OperationRegion (GNVS, SystemMemory, 0xBD8F0000, 0x07B6)
     Field (GNVS, AnyAcc, Lock, Preserve)
     {
         OSYS,   16,
@@ -8584,7 +8584,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
                         }
                         Else
                         {
-                            Return (HPCE) /* \_SB_.PCI0.RP07.HPCE */
+                            Return (HPCE) /* \_SB_.PCI0.RP06.HPCE */
                         }
                     }
                 }
@@ -12093,7 +12093,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x01072009)
         }
     }
 
-    Name (PNVB, 0xBD8F2018)
+    Name (PNVB, 0xBD8F4018)
     Name (PNVL, 0x0287)
     If ((ECR1 == One))
     {
