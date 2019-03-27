@@ -47,16 +47,16 @@
         </dict>
         <dict>
           <key>Comment</key>
-          <string>XHC_ to XHC1</string>
+          <string>GUPC method return 00,ff,00,00 to 00,03,00,00</string>
           <key>Disabled</key>
-          <true/>
+          <false/>
           <key>Find</key>
           <data>
-          WEhDXw==
+          AAr/AAA=
           </data>
           <key>Replace</key>
           <data>
-          WEhDMQ==
+          AAoDAAA=
           </data>
         </dict>
         <dict>
