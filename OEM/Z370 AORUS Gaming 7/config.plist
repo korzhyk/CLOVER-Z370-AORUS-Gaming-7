@@ -4,6 +4,8 @@
 <dict>
   <key>ACPI</key>
   <dict>
+    <key>FixHeaders</key>
+    <true/>
     <key>DSDT</key>
     <dict>
       <key>Fixes</key>
@@ -14,42 +16,14 @@
         <true/>
         <key>FixRegions</key>
         <true/>
-        <key>FixShutdown</key>
-        <true/>
-        <key>FixWak</key>
-        <true/>
       </dict>
       <key>Patches</key>
       <array>
         <dict>
-          <key>Comment</key>
-          <string>_DSM to ZDSM</string>
-          <key>Find</key>
-          <data>
-          X0RTTQ==
-          </data>
-          <key>Replace</key>
-          <data>
-          WkRTTQ==
-          </data>
-        </dict>
-        <dict>
-          <key>Comment</key>
-          <string>XDSM to _DSM</string>
-          <key>Find</key>
-          <data>
-          WERTTQ==
-          </data>
-          <key>Replace</key>
-          <data>
-          X0RTTQ==
-          </data>
-        </dict>
-        <dict>
-          <key>Comment</key>
-          <string>GUPC method return 00,ff,00,00 to 00,03,00,00</string>
           <key>Disabled</key>
           <false/>
+          <key>Comment</key>
+          <string>GUPC method return 00,ff,00,00 to 00,03,00,00</string>
           <key>Find</key>
           <data>
           AAr/AAA=
@@ -60,6 +34,8 @@
           </data>
         </dict>
         <dict>
+          <key>Disabled</key>
+          <false/>
           <key>Comment</key>
           <string>SAT0 to SATA</string>
           <key>Find</key>
@@ -69,30 +45,6 @@
           <key>Replace</key>
           <data>
           U0FUQQ==
-          </data>
-        </dict>
-        <dict>
-          <key>Comment</key>
-          <string>PPMC to PMCR</string>
-          <key>Find</key>
-          <data>
-          UFBNQw==
-          </data>
-          <key>Replace</key>
-          <data>
-          UE1DUg==
-          </data>
-        </dict>
-        <dict>
-          <key>Comment</key>
-          <string>Set OSYS = 0x07E0</string>
-          <key>Find</key>
-          <data>
-          RXAL0AdPU1k=
-          </data>
-          <key>Replace</key>
-          <data>
-          RXAL4AdPU1k=
           </data>
         </dict>
       </array>
@@ -111,6 +63,14 @@
       </dict>
       <dict>
         <key>Comment</key>
+        <string>hdas</string>
+        <key>Length</key>
+        <string>321</string>
+        <key>Signature</key>
+        <string>SSDT</string>
+      </dict>
+      <dict>
+        <key>Comment</key>
         <string>sensrhub</string>
         <key>Length</key>
         <string>671</string>
@@ -126,18 +86,11 @@
         <string>SSDT</string>
       </dict>
     </array>
-    <key>FixHeaders</key>
-    <true/>
-    <key>SSDT</key>
-    <dict>
-      <key>PluginType</key>
-      <true/>
-    </dict>
   </dict>
   <key>Boot</key>
   <dict>
     <key>Arguments</key>
-    <string>darkwake=0 ngfxcompat=1</string>
+    <string>ngfxcompat=1</string>
     <key>DefaultVolume</key>
     <string>LastBootedVolume</string>
     <key>Timeout</key>
@@ -152,11 +105,22 @@
     </dict>
     <key>Properties</key>
     <dict>
+      <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+      <dict>
+        <key>AAPL,ig-platform-id</key>
+        <data>
+        AwASWQ==
+        </data>
+        <key>device-id</key>
+        <data>
+        ElkAAA==
+        </data>
+      </dict>
       <key>PciRoot(0x0)/Pci(0x1f,0x3)</key>
       <dict>
         <key>layout-id</key>
         <data>
-        AQAAAA==
+          AQAAAA==
         </data>
       </dict>
     </dict>
@@ -191,8 +155,6 @@
       <false/>
     </dict>
   </dict>
-  <key>KernelAndKextPatches</key>
-  <dict/>
   <key>RtVariables</key>
   <dict>
     <key>BooterConfig</key>
