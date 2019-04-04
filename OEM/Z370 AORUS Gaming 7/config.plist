@@ -10,10 +10,6 @@
     <dict>
       <key>Fixes</key>
       <dict>
-        <key>DeleteUnused</key>
-        <true/>
-        <key>FixMutex</key>
-        <true/>
         <key>FixRegions</key>
         <true/>
       </dict>
