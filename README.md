@@ -71,7 +71,26 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 | HS09      | 9        |           |          |
 | HS10      | 10       |           |          |
 
+## How to install *modded* BIOS
+
+:exclamation: Backup current profile to USB disk.
+1. You need a `FPT.efi` from `Intel CSME System Tools v11` and in UEFI shell (you can use Clover shell aswell)
+```
+FPT.efi --savemac -f mod_Z370AOG7.F13RB
+```
+2. After this operation you must clear CMOS *just press button with black key next to DRAM slots*
+
+3. To use `Intel® ME v11.8.60.3561` you must flash firmware from `Intel® Management(ME) 11.8.60.3561 (Firmware)`
+```
+FWUpdLcl64.exe -allowsv -f 11.8.60.3561.bin
+```
+
 ## Chnagelog
+###### 4/04/2019
+* Added modded BIOS with latest drivers and microcodes
+###### 1/04/2019
+* Rewrite and cleanup in DSDT
+* Inject devices properties through SSDT
 ###### 27/03/2019
 * Add new DSDT compatible with [F13RB][104] bios
 * Update config to use with High Sierra with nvidia GPU
