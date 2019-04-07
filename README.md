@@ -28,7 +28,8 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * *MIT* → Advanced Frequency Settings → Advanced CPU Core Settings → CFG Lock : **Disabled**
 * *Peripherals* → USB Configuration → XHCI Hand-off : **Enabled**
 * *Peripherals* → USB Configuration → Port 60/64 Emulation : **Disabled**
-* *Peripherals* → Initial Display Output : **PCIe 1 Slot** *(Only if using external AMD GPU)*
+* *Peripherals* → Initial Display Output : **PCIe 1 Slot** *(Only if using external GPU)*
+* *Chipset* → IOAPIC 24-119 Entries : **Disabled**
 
 ## What's behind the scenes
 
