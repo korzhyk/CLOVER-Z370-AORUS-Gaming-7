@@ -35,7 +35,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 ### Kexts
 
-* [AppleALC.kext][2] - Enabling audio, with layout inject `1`
+* [AppleALC.kext][2] - Enabling audio, with layout inject `16`
 * AtherosE2200Ethernet.kext - Atheros driver for Ethernet
 * IntelMausiEthernet.kext - Another intel driver for Ethernet
 * [Lilu.kext][3] - Just a f\*ckin great patcher, dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
