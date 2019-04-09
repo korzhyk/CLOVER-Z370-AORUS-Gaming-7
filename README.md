@@ -38,7 +38,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 * [AppleALC.kext][2] - Enabling audio, with layout inject `16`
 * AtherosE2200Ethernet.kext - Atheros driver for Ethernet
 * IntelMausiEthernet.kext - Another intel driver for Ethernet
-* [Lilu.kext][3] - Just a f\*ckin great patcher, dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
+* [Lilu.kext][3] - Dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
 * SMCProcessor.kext - Kext for processor sensors, bundled with `VirtualSMC.kext`
 * [VirtualSMC.kext][4] - A advanced replacement of FakeSMC, almost like native mac SMC.
 * [WhateverGreen.kext][5] - Need for GPU support
