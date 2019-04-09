@@ -19,7 +19,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 * Working hardware
 * Motherboard BIOS version [F13RB][104]
-* Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own, if you are using a external AMD GPU use mac Model 18,3 in another cases use 18,1*
+* Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own, if you are using a external GPU use mac Model 18,3 in another cases use 18,1*
 
 
 # Installation
