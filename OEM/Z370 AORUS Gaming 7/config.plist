@@ -59,7 +59,7 @@
       </dict>
       <dict>
         <key>Comment</key>
-        <string>hdas</string>
+        <string>HDAS | SSDT-7</string>
         <key>Length</key>
         <string>321</string>
         <key>Signature</key>
@@ -67,7 +67,7 @@
       </dict>
       <dict>
         <key>Comment</key>
-        <string>sensrhub</string>
+        <string>sensrhub | SSDT-8</string>
         <key>Length</key>
         <string>671</string>
         <key>Signature</key>
@@ -75,7 +75,7 @@
       </dict>
       <dict>
         <key>Comment</key>
-        <string>Ther_Rvp</string>
+        <string>Ther_Rvp | SSDT-4</string>
         <key>Length</key>
         <string>4522</string>
         <key>Signature</key>
