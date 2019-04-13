@@ -87,6 +87,9 @@ FWUpdLcl64.exe -allowsv -f 11.8.60.3561.bin
 ```
 
 ## Chnagelog
+###### 11/04/2019
+* Removed drop of set SSDT tables, only keep DMAR drop (Vd-T)
+* Clover config disable generate C and P states, so we can use states provided by BIOS
 ###### 7/04/2019
 * Changed layout-id to 16
 * Removed audio issue
