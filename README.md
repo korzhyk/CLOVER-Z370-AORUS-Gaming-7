@@ -74,6 +74,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 ## How to install *modded* BIOS
 
+:exclamation: This is not required for using macOS. Only [F13RB][104] is enought.
 :exclamation: Backup current profile to USB disk.
 1. You need a `FPT.efi` from `Intel CSME System Tools v11` and in UEFI shell (you can use Clover shell aswell)
 ```
