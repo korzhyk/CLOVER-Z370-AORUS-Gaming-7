@@ -86,6 +86,10 @@ FWUpdLcl64.exe -allowsv -f 11.8.60.3561.bin
 ```
 
 ## Chnagelog
+###### 1/06/2019
+* Modded BIOS updated CPU microcodes
+* Modded BIOS updated `EFI IRST RAID for SATA v17.3.0.4057`
+* Modded BIOS updated `EFI Intel Gigabit UNDI v0.0.23` and `OROM Intel Boot Agent CL v0.1.14`
 ###### 4/04/2019
 * Added modded BIOS with latest drivers and microcodes
 ###### 1/04/2019
