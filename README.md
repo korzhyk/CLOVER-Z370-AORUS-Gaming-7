@@ -19,7 +19,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 * Working hardware
 * Motherboard BIOS version [F13RB][104]
-* Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own, if you are using a external AMD GPU use mac Model 18,3 in another cases use 18,1*
+* Fresh Clover with generated SMBIOS.plist *this file contains serial number so you must [genenerate][1] your own, if you are using a external GPU use mac Model 18,3 in another cases use 18,1*
 
 
 # Installation
@@ -27,16 +27,18 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 ## BIOS Settings
 * *MIT* → Advanced Frequency Settings → Advanced CPU Core Settings → CFG Lock : **Disabled**
 * *Peripherals* → USB Configuration → XHCI Hand-off : **Enabled**
-* *Peripherals* → Initial Display Output : **PCIe 1 Slot** *(Only if using external AMD GPU)*
+* *Peripherals* → USB Configuration → Port 60/64 Emulation : **Disabled**
+* *Peripherals* → Initial Display Output : **PCIe 1 Slot** *(Only if using external GPU)*
+* *Chipset* → IOAPIC 24-119 Entries : **Disabled**
 
 ## What's behind the scenes
 
 ### Kexts
 
-* [AppleALC.kext][2] - Enabling audio, with layout inject `1`
+* [AppleALC.kext][2] - Enabling audio, with layout inject `16`
 * AtherosE2200Ethernet.kext - Atheros driver for Ethernet
 * IntelMausiEthernet.kext - Another intel driver for Ethernet
-* [Lilu.kext][3] - Just a f\*ckin great patcher, dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
+* [Lilu.kext][3] - Dependency of `AppleALC.kext`, *`VirtualSMC.kext`* and `WhateverGreen.kext`
 * SMCProcessor.kext - Kext for processor sensors, bundled with `VirtualSMC.kext`
 * [VirtualSMC.kext][4] - A advanced replacement of FakeSMC, almost like native mac SMC.
 * [WhateverGreen.kext][5] - Need for GPU support
@@ -51,8 +53,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 ## Issues
 
 1. There is an issue with USB drives after sleep: the system warns about not properly unmounted storage device. This happens when I overclock the memory modules. And, I need two times mouse clicks to get the desktop (but this resolved by boot arg `darkwake=0`).
-2. The limit of USB ports is `15` but it counts not only physical but also protocol based. So if one physical port can be used by two protocols such as 3.0 (SS) and 2.0 (HS), in this way in system he actually own two of fifteen addresses (eg. HS01/SS01). You can see the real USB mapping in this [picture][102]. Due to these limits I didn't enable a `HS08` port in [SSDT-10-USBx.aml](/OEM/Z370%20AORUS%20Gaming%207/ACPI/patched/SSDT-10-USBx.dsl) table, but if you need this USB 2.0 header to work, you can drop the USB 3.0 protocol on another port. And keep in mind USB 3.1 ports such as Type-C, Type-A and header provided by ASMedia controller.
-3. Front panel with audio jack not working. Really need help.
+2. The limit of USB ports is `15` but it counts not only physical but also protocol based. So if one physical port can be used by two protocols such as 3.0 (SS) and 2.0 (HS), in this way in system he actually own two of fifteen addresses (eg. HS01/SS01). You can see the real USB mapping in this [picture][102]. Due to these limits I didn't enable a `HS08` port in [SSDT-10-EXT.aml](OEM/Z370%20AORUS%20Gaming%207/ACPI/patched/SSDT-10-EXT.dsl#L98) table, but if you need this USB 2.0 header to work, you can drop the USB 3.0 protocol on another port. And keep in mind USB 3.1 ports such as Type-C, Type-A and header provided by ASMedia controller.
 
 ## USB ports mapping
 
@@ -73,6 +74,7 @@ This is light configuration to run macOS smoothly. I didn't get any kernel panic
 
 ## How to install *modded* BIOS
 
+:exclamation: This is not required for using macOS. Only [F13RB][104] is enought (can be flashed via Q-Flash BIOS utility).
 :exclamation: Backup current profile to USB disk.
 1. You need a `FPT.efi` from `Intel CSME System Tools v11` and in UEFI shell (you can use Clover shell aswell)
 ```
@@ -90,6 +92,12 @@ FWUpdLcl64.exe -allowsv -f 11.8.60.3561.bin
 * Modded BIOS updated CPU microcodes
 * Modded BIOS updated `EFI IRST RAID for SATA v17.3.0.4057`
 * Modded BIOS updated `EFI Intel Gigabit UNDI v0.0.23` and `OROM Intel Boot Agent CL v0.1.14`
+###### 11/04/2019
+* Removed drop of set SSDT tables, only keep DMAR drop (Vd-T)
+* Clover config disable generate C and P states, so we can use states provided by BIOS
+###### 7/04/2019
+* Changed layout-id to 16
+* Removed audio issue
 ###### 4/04/2019
 * Added modded BIOS with latest drivers and microcodes
 ###### 1/04/2019

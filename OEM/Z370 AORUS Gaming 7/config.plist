@@ -51,37 +51,17 @@
         <key>Signature</key>
         <string>DMAR</string>
       </dict>
-      <dict>
-        <key>Signature</key>
-        <string>SSDT</string>
-        <key>TableId</key>
-        <string>Cpu0Ist</string>
-      </dict>
-      <dict>
-        <key>Comment</key>
-        <string>hdas</string>
-        <key>Length</key>
-        <string>321</string>
-        <key>Signature</key>
-        <string>SSDT</string>
-      </dict>
-      <dict>
-        <key>Comment</key>
-        <string>sensrhub</string>
-        <key>Length</key>
-        <string>671</string>
-        <key>Signature</key>
-        <string>SSDT</string>
-      </dict>
-      <dict>
-        <key>Comment</key>
-        <string>Ther_Rvp</string>
-        <key>Length</key>
-        <string>4522</string>
-        <key>Signature</key>
-        <string>SSDT</string>
-      </dict>
     </array>
+    <key>SSDT</key>
+    <dict>
+      <key>Generate</key>
+      <dict>
+        <key>CStates</key>
+        <false/>
+        <key>PStates</key>
+        <false/>
+      </dict>
+    </dict>
   </dict>
   <key>Boot</key>
   <dict>
@@ -116,7 +96,7 @@
       <dict>
         <key>layout-id</key>
         <data>
-          AQAAAA==
+          EAAAAA==
         </data>
       </dict>
     </dict>
